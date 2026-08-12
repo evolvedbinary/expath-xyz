@@ -20,48 +20,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.expath</groupId>
-        <artifactId>expath-parent</artifactId>
-        <version>1.9.1</version>
+        <groupId>xyz.expath.cg</groupId>
+        <artifactId>expath-cg-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>expath-cg-parent</relativePath>
     </parent>
 
-    <groupId>xyz.expath.cg</groupId>
     <artifactId>expath-cg</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>EXPath Community Group</name>
     <description>Specifications developed by the EXPath Community Group</description>
-    <url>https://github.com/evolvedbinary/expath-xyz</url>
-    <inceptionYear>2026</inceptionYear>
-
-    <organization>
-        <name>EXPath Community Group</name>
-        <url>https://www.expath.xyz</url>
-    </organization>
-
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <developers>
-        <developer>
-            <name>Adam Retter</name>
-            <organization>Evolved Binary</organization>
-            <url>https://www.evolvedbinary.com</url>
-            <email>adam@evolvedbinary.com</email>
-        </developer>
-        <developer>
-            <name>Younes Bahloul</name>
-            <organization>Evolved Binary</organization>
-            <url>https://www.evolvedbinary.com</url>
-            <email>younes@evolvedbinary.com</email>
-        </developer>
-    </developers>
 
     <scm>
         <connection>scm:git:https://github.com/evolvedbinary/expath-xyz.git</connection>
@@ -72,31 +41,24 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.6.3</version>
-                <executions>
-                    <execution>
-                        <id>enforce-versions</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <requireJavaVersion>
-                                    <version>8</version>
-                                </requireJavaVersion>
-                                <requireMavenVersion>
-                                    <version>3.9.0</version>
-                                </requireMavenVersion>
-                            </rules>
-                            <fail>true</fail>
-                        </configuration>
-                    </execution>
-                </executions>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <configuration>
+                    <licenseSets>
+                        <licenseSet>
+                            <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
+                            <includes>
+                                <include>pom.xml</include>
+                            </includes>
+                        </licenseSet>
+                    </licenseSets>
+                </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <modules>
+        <module>expath-cg-parent</module>
+    </modules>
 
 </project>
