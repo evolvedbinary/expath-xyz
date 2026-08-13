@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright © 2026 EXPath Community Group (public-expath@w3.org)
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>xyz.expath.cg</groupId>
+        <artifactId>expath-cg-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../expath-cg-parent</relativePath>
+    </parent>
+
+    <artifactId>expath-xyz-website</artifactId>
+    <packaging>pom</packaging>
+
+    <name>EXPath Community Group - EXPath XYZ Website</name>
+    <description>The expath.xyz website</description>
+
+    <scm>
+        <connection>scm:git:https://github.com/evolvedbinary/expath-xyz.git</connection>
+        <developerConnection>scm:git:https://github.com/evolvedbinary/expath-xyz.git</developerConnection>
+        <url>scm:git:https://github.com/evolvedbinary/expath-xyz.git</url>
+    </scm>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>expath-cg-distribution</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+
+                    <!-- Copy static website files (HTML, CSS) -->
+                    <execution>
+                        <id>copy-static-website</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/src/main/html</directory>
+                                </resource>
+                                <resource>
+                                    <directory>${project.basedir}/src/main/css</directory>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${project.build.directory}/website</outputDirectory>
+                        </configuration>
+                    </execution>
+
+                    <!-- Copy generated spec HTML files from each module -->
+                    <execution>
+                        <id>copy-specs</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/../expath-cg-distribution/target/expath-cg-distribution-${project.version}</directory>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${project.build.directory}/website/specs</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,178 @@
+/**
+ * Copyright © 2026 EXPath Community Group (public-expath@w3.org)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+:root {
+  --bg: #F3F5F2;          
+  --ink: #1F2A24;         /* headings */
+  --ink-soft: #46564D;    /*  body */
+  --accent: #3D6B63;      /* links & sidebar */
+  --accent-tint: #E3EBE8; /* hover backgrounds */
+  --rule: #C7D2CC;        /* dividers */
+
+  --font-display: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', serif;
+  --font-body: Optima, 'Segoe UI', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0 auto;
+  max-width: 60rem;        
+  padding: 3rem 1.5rem 5rem;
+  background: var(--bg);
+  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+header h1 {
+  font-family: var(--font-display);
+  font-size: 2.75rem;
+  font-weight: 400;         
+  color: var(--ink);
+  margin: 0 0 0.35rem;
+  letter-spacing: -0.01em;
+}
+
+header p {
+  margin: 0 0 0.5rem;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+}
+
+nav {
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+  gap: 0 1.25rem;
+}
+
+nav li {
+  position: relative;
+}
+
+nav a {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+}
+
+main h2 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+  margin: 0 0 2rem;
+}
+
+article {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  padding: 0;
+}
+
+.spec-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.spec-meta {
+  flex: 0 0 270px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 1rem 0;
+}
+
+article:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+article h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--ink);
+  margin: 0 0 0.4rem;
+}
+
+article h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+article blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1rem;
+  margin: 0;
+}
+
+article p.latest,
+article p.draft {
+  padding-left: 1rem;
+  margin: 0 0 0.3rem;
+  font-size: 0.90rem;
+}
+
+article ul {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0 0 0 1rem;
+}
+
+article li {
+  font-family: var(--font-body);
+  font-size: 0.90rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
+  padding: 0.15rem 0;
+}
+
+a {
+  color: var(--accent);
+}
+
+a:hover {
+  background: var(--accent-tint);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
