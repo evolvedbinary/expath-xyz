@@ -1,0 +1,22 @@
+<catalog xmlns="http://www.w3.org/2010/09/qt-fots-catalog" test-suite="EXPATH" version="0.1">
+  <environment name="empty"/>
+  <test-set name="mongodb-api-aggregate" file="mongodb-api-aggregate.xml"/>
+  <test-set name="mongodb-api-close" file="mongodb-api-close.xml"/>
+  <test-set name="mongodb-api-command" file="mongodb-api-command.xml"/>
+  <test-set name="mongodb-api-connect" file="mongodb-api-connect.xml"/>
+  <test-set name="mongodb-api-count" file="mongodb-api-count.xml"/>
+  <test-set name="mongodb-api-drop-database" file="mongodb-api-drop-database.xml"/>
+  <test-set name="mongodb-api-eval" file="mongodb-api-eval.xml"/>
+  <test-set name="mongodb-api-find" file="mongodb-api-find.xml"/>
+  <test-set name="mongodb-api-find-one" file="mongodb-api-find-one.xml"/>
+  <test-set name="mongodb-api-find-and-modify" file="mongodb-api-find-and-modify.xml"/>
+  <test-set name="mongodb-api-find-and-remove" file="mongodb-api-find-and-remove.xml"/>
+  <test-set name="mongodb-api-group" file="mongodb-api-group.xml"/>
+  <test-set name="mongodb-api-insert" file="mongodb-api-insert.xml"/>
+  <test-set name="mongodb-api-list-collections" file="mongodb-api-list-collections.xml"/>
+  <test-set name="mongodb-api-list-databases" file="mongodb-api-list-databases.xml"/>
+  <test-set name="mongodb-api-map-reduce" file="mongodb-api-map-reduce.xml"/>
+  <test-set name="mongodb-api-save" file="mongodb-api-save.xml"/>
+  <test-set name="mongodb-api-update" file="mongodb-api-update.xml"/>
+  <test-set name="mongodb-api-errors" file="mongodb-api-errors.xml"/>
+</catalog>
