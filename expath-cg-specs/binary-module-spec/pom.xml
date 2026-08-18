@@ -33,4 +33,48 @@
     <name>EXPath Specification - Binary Module</name>
     <description>EXPath specification for a module of binary functions</description>
 
+    <contributors>
+        <contributor>
+            <name>John Lumley</name>
+            <email>john@saxonica.com</email>
+            <organization>Saxonica Ltd</organization>
+            <roles>
+                <role>Editor</role>
+            </roles>
+        </contributor>
+        <contributor>
+            <name>Jirka Kosek</name>
+            <email>jirka@kosek.cz</email>
+            <roles>
+                <role>Editor</role>
+            </roles>
+        </contributor>
+    </contributors>
+
+    <scm>
+        <connection>scm:git:https://github.com/evolvedbinary/expath-xyz.git</connection>
+        <developerConnection>scm:git:https://github.com/evolvedbinary/expath-xyz.git</developerConnection>
+        <url>scm:git:https://github.com/evolvedbinary/expath-xyz.git</url>
+    </scm>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <configuration>
+                    <licenseSets>
+                        <licenseSet>
+                            <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
+                            <excludes>
+                                <exclude>src/main/expathspec/**</exclude>
+                                <exclude>src/test/qt3/**</exclude>
+                            </excludes>
+                        </licenseSet>
+                    </licenseSets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
