@@ -33,4 +33,64 @@
     <name>EXPath Specification - Archive Module</name>
     <description>EXPath specification for a module of archive functions</description>
 
+    <contributors>
+        <contributor>
+            <name>John Lumley</name>
+            <email>john@saxonica.com</email>
+            <organization>Saxonica Ltd</organization>
+            <roles>
+                <role>Editor</role>
+            </roles>
+        </contributor>
+        <contributor>
+            <name>Christian Grün</name>
+            <email>christian.gruen@gmail.com</email>
+            <organization>BaseX GmbH</organization>
+            <roles>
+                <role>Contributor</role>
+            </roles>
+        </contributor>
+        <contributor>
+            <name>Matthias Brantner</name>
+            <email>>matthias.brantner@28msec.com</email>
+            <organization>28msec GmbH</organization>
+            <roles>
+                <role>Contributor</role>
+            </roles>
+        </contributor>
+        <contributor>
+            <name>Florent Georges</name>
+            <organization>H2O Consulting</organization>
+            <roles>
+                <role>Contributor</role>
+            </roles>
+        </contributor>
+    </contributors>
+
+    <scm>
+        <connection>scm:git:https://github.com/evolvedbinary/expath-xyz.git</connection>
+        <developerConnection>scm:git:https://github.com/evolvedbinary/expath-xyz.git</developerConnection>
+        <url>scm:git:https://github.com/evolvedbinary/expath-xyz.git</url>
+    </scm>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <configuration>
+                    <licenseSets>
+                        <licenseSet>
+                            <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
+                            <excludes>
+                                <exclude>src/main/expathspec/**</exclude>
+                                <exclude>src/test/qt3/**</exclude>
+                            </excludes>
+                        </licenseSet>
+                    </licenseSets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
