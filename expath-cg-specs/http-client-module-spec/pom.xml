@@ -33,4 +33,47 @@
     <name>EXPath Specification - HTTP Client Module</name>
     <description>EXPath specification for a module of HTTP client functions</description>
 
+    <contributors>
+        <contributor>
+            <name>Florent Georges</name>
+            <organization>H2O Consulting</organization>
+            <organizationUrl>https://h2o.consulting</organizationUrl>
+            <roles>
+                <role>Editor</role>
+            </roles>
+        </contributor>
+    </contributors>
+
+    <scm>
+        <connection>scm:git:https://github.com/evolvedbinary/expath-xyz.git</connection>
+        <developerConnection>scm:git:https://github.com/evolvedbinary/expath-xyz.git</developerConnection>
+        <url>scm:git:https://github.com/evolvedbinary/expath-xyz.git</url>
+    </scm>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/respec</directory>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <configuration>
+                    <licenseSets>
+                        <licenseSet>
+                            <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
+                            <excludes>
+                                <exclude>src/main/respec/**</exclude>
+                            </excludes>
+                        </licenseSet>
+                    </licenseSets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
