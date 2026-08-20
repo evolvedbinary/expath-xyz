@@ -2,7 +2,7 @@
 
 <?oxygen RNGSchema="http://expath.org/ns/xmlspec/xmlspec.rnc" type="compact"?>
 
-<spec xmlns:spec="http://expath.org/ns/xmlspec" role="editors-copy">
+<spec xmlns:spec="http://expath.org/ns/xmlspec" role="editors-copy" w3c-doctype="cr">
    <header>
       <title>Cryptographic Module</title>
       <w3c-designation>w3c-designation</w3c-designation>

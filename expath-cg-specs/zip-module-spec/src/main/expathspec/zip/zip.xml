@@ -2,7 +2,7 @@
 
 <?oxygen RNGSchema="http://www.w3.org/XML/1998/06/schema/xmlspec.rng" type="xml"?>
 
-<spec role="editors-copy" xmlns:ex="http://expath.org/ns/xmlspec">
+<spec role="editors-copy" w3c-doctype="cr" xmlns:ex="http://expath.org/ns/xmlspec">
    <header>
       <title>ZIP Module</title>
       <w3c-designation>w3c-designation</w3c-designation>

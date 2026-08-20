@@ -2,7 +2,7 @@
 
 <?oxygen RNGSchema="http://expath.org/ns/xmlspec/xmlspec.rnc"?>
 
-<spec role="editors-copy" xmlns:spec="http://expath.org/ns/xmlspec" spec:w3c="true">
+<spec role="editors-copy" w3c-doctype="cr" xmlns:spec="http://expath.org/ns/xmlspec" spec:w3c="true">
    <header>
       <title>Packaging System</title>
       <w3c-designation>w3c-designation</w3c-designation>
