@@ -33,4 +33,39 @@
     <name>EXPath Specification - Geospatial Module</name>
     <description>EXPath specification for a module of Geospatial API functions</description>
 
+    <contributors>
+        <contributor>
+            <name>Peter Rushforth</name>
+            <organization>geofunctions.org</organization>
+            <roles>
+                <role>Editor</role>
+            </roles>
+        </contributor>
+    </contributors>
+
+    <scm>
+        <connection>scm:git:https://github.com/evolvedbinary/expath-xyz.git</connection>
+        <developerConnection>scm:git:https://github.com/evolvedbinary/expath-xyz.git</developerConnection>
+        <url>scm:git:https://github.com/evolvedbinary/expath-xyz.git</url>
+    </scm>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <configuration>
+                    <licenseSets>
+                        <licenseSet>
+                            <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
+                            <excludes>
+                                <exclude>src/main/expathspec/**</exclude>
+                            </excludes>
+                        </licenseSet>
+                    </licenseSets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
