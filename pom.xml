@@ -59,6 +59,7 @@
 
     <modules>
         <module>expath-cg-parent</module>
+        <module>expath-cg-schemas</module>
         <module>expath-cg-specs</module>
     </modules>
 
