@@ -39,6 +39,7 @@
     </scm>
 
     <modules>
+        <module>w3c-xml-schema</module>
         <module>w3c-xmlspec-schema</module>
         <module>w3c-xpath-functions-schema</module>
         <module>expath-expathspec-schema</module>
