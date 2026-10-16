@@ -33,4 +33,59 @@
     <name>EXPath Specification - HTTP Client 2 Module</name>
     <description>Second EXPath specification for a module of HTTP client functions</description>
 
+    <contributors>
+        <contributor>
+            <name>Christian Grün</name>
+            <email>christian.gruen@gmail.com</email>
+            <url>https://christian-gruen.de</url>
+            <organization>BaseX GmbH</organization>
+            <organizationUrl>https://basex.org</organizationUrl>
+            <roles>
+                <role>Editor</role>
+            </roles>
+        </contributor>
+        <contributor>
+            <name>Adam Retter</name>
+            <email>adam@evolvedbinary.com</email>
+            <url>https://adamretter.org.uk</url>
+            <organization>Evolved Binary</organization>
+            <organizationUrl>https://evolvedbinary.com</organizationUrl>
+            <roles>
+                <role>Editor</role>
+            </roles>
+        </contributor>
+    </contributors>
+
+    <scm>
+        <connection>scm:git:https://github.com/evolvedbinary/expath-xyz.git</connection>
+        <developerConnection>scm:git:https://github.com/evolvedbinary/expath-xyz.git</developerConnection>
+        <url>scm:git:https://github.com/evolvedbinary/expath-xyz.git</url>
+    </scm>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/respec</directory>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <configuration>
+                    <licenseSets>
+                        <licenseSet>
+                            <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
+                            <excludes>
+                                <exclude>src/main/respec/**</exclude>
+                            </excludes>
+                        </licenseSet>
+                    </licenseSets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
