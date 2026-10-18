@@ -62,6 +62,7 @@
         <module>expath-cg-catalog</module>
         <module>expath-cg-schemas</module>
         <module>expath-cg-specs</module>
+        <module>expath-cg-transforms</module>
     </modules>
 
 </project>

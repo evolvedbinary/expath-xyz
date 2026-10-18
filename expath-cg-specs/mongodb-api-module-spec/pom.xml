@@ -58,6 +58,7 @@
 
     <properties>
         <xml.input.dir>${project.basedir}/src/main/expathspec</xml.input.dir>
+        <xml.output.dir>${project.build.directory}/generated-resources/respec</xml.output.dir>
     </properties>
 
     <build>
@@ -105,6 +106,31 @@
                             </validationSets>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>transform</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>transform</goal>
+                        </goals>
+                        <configuration>
+                            <transformationSets>
+                                <transformationSet>
+                                    <dir>${xml.input.dir}</dir>
+                                    <includes>
+                                        <include>**/mongodb-api.xml</include>
+                                    </includes>
+                                    <stylesheet>resource:xmlspec-respec.xslt</stylesheet>
+                                    <fileMappers>
+                                        <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+                                            <targetExtension>.xhtml</targetExtension>
+                                        </fileMapper>
+                                    </fileMappers>
+                                    <outputDir>${xml.output.dir}</outputDir>
+                                    <addedToClasspath>true</addedToClasspath>
+                                </transformationSet>
+                            </transformationSets>
+                        </configuration>
+                    </execution>
                 </executions>
                 <dependencies>
                     <dependency>
@@ -122,7 +148,34 @@
                         <artifactId>w3c-xmlspec-schema</artifactId>
                         <version>${project.version}</version>
                     </dependency>
+                    <dependency>
+                        <groupId>${project.groupId}</groupId>
+                        <artifactId>expathspec-to-respec-transform</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
                 </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>nu.validator</groupId>
+                <artifactId>vnu-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>validate-output</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>validate</goal>
+                        </goals>
+                        <configuration>
+                            <filesets>
+                                <fileset>
+                                    <directory>${xml.output.dir}</directory>
+                                    <glob>**/mongodb-api.xhtml</glob>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

@@ -82,12 +82,17 @@
                 <plugin>
                     <groupId>com.evolvedbinary.maven.mojohaus</groupId>
                     <artifactId>xml-maven-plugin</artifactId>
-                    <version>1.2.3-RC2</version>
+                    <version>1.2.3-RC3</version>
                     <dependencies>
                         <dependency>
                             <groupId>org.relaxng</groupId>
                             <artifactId>jing</artifactId>
                             <version>${jing.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>net.sf.saxon</groupId>
+                            <artifactId>Saxon-HE</artifactId>
+                            <version>${saxon.version}</version>
                         </dependency>
                     </dependencies>
                 </plugin>
