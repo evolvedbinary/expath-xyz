@@ -79,6 +79,18 @@
                     <artifactId>license-maven-plugin</artifactId>
                     <version>4.6</version>
                 </plugin>
+                <plugin>
+                    <groupId>com.evolvedbinary.maven.mojohaus</groupId>
+                    <artifactId>xml-maven-plugin</artifactId>
+                    <version>1.2.3-RC2</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.relaxng</groupId>
+                            <artifactId>jing</artifactId>
+                            <version>${jing.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
             </plugins>
         </pluginManagement>
 

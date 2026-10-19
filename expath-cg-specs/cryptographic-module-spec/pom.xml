@@ -55,6 +55,10 @@
         <url>scm:git:https://github.com/evolvedbinary/expath-xyz.git</url>
     </scm>
 
+    <properties>
+        <xml.input.dir>${project.basedir}/src/main/expathspec</xml.input.dir>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -70,6 +74,53 @@
                         </licenseSet>
                     </licenseSets>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.evolvedbinary.maven.mojohaus</groupId>
+                <artifactId>xml-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>validate</goal>
+                        </goals>
+                        <configuration>
+                            <catalogs>
+                                <catalog>resource:catalog.xml</catalog>
+                            </catalogs>
+                            <validationSets>
+                                <validationSet>
+                                    <dir>${xml.input.dir}</dir>
+                                    <includes>
+                                        <include>**/cryptographic.xml</include>
+                                    </includes>
+                                    <systemId>resource:expathspec/xmlspec.rnc</systemId>
+                                    <schemaLanguage>http://www.iana.org/assignments/media-types/application/relax-ng-compact-syntax</schemaLanguage>
+                                    <schemaFactory>com.thaiopensource.relaxng.jaxp.CompactSyntaxSchemaFactory</schemaFactory>
+                                </validationSet>
+                            </validationSets>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>${project.groupId}</groupId>
+                        <artifactId>expath-cg-catalog</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>${project.groupId}</groupId>
+                        <artifactId>expath-expathspec-schema</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>${project.groupId}</groupId>
+                        <artifactId>w3c-xmlspec-schema</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
