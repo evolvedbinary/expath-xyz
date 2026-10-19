@@ -1,5 +1,7 @@
 # EXPath Community Group (xyz)
 
+[![Build Status](https://dl.circleci.com/status-badge/img/gh/evolvedbinary/expath-xyz/tree/main.svg?style=svg&circle-token=CCIPRJ_EHEg67sM6v9RsrHwtwcy8Z_c0b1abbb13893a289bc33687459c7969e03dfb2b)](https://dl.circleci.com/status-badge/redirect/gh/evolvedbinary/expath-xyz/tree/main)
+
 Repository (reboot) for the [W3C EXPath Community Group](http://w3.org/community/expath/).
 
 Specifications may be written in either [W3C ReSpec](https://github.com/speced/respec) (preferred) or the legacy EXPath Spec (an extension of [XMLSpec](https://www.w3.org/2002/xmlspec/)).
