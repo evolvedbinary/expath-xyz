@@ -5,10 +5,6 @@
   xsi:schemaLocation="http://www.w3.org/xpath-functions/spec/namespace fos.xsd"
   xmlns:ex="http://expath.org/ns/xmlspec"
   xmlns:fos="http://www.w3.org/xpath-functions/spec/namespace">
-  <fos:global-variables>
-    <fos:variable name="x"/>
-  </fos:global-variables>
-
   <fos:function name="part" prefix="bin">
     <fos:signatures>
       <fos:proto name="part" return-type="xs:base64Binary?">

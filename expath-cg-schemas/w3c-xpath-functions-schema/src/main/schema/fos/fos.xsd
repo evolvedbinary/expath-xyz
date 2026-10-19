@@ -18,7 +18,8 @@
   <xs:element name="functions">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="fos:global-variables"/>
+        <!-- NOTE(AR) Still targeting QT 3.1 but many modules have no global variables; influenced by: https://github.com/qt4cg/qtspecs/commit/c208af1caf1792f82ed81c852e0a5d782a1b6832 -->
+        <xs:element ref="fos:global-variables" minOccurs="0"/>
         <xs:element ref="fos:function" maxOccurs="unbounded"/>
       </xs:sequence>
     </xs:complexType>

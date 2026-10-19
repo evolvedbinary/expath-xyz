@@ -98,7 +98,7 @@
       <div2 id="type">
         <head>Binary type</head>
         <p>The principal binary type within this module is <code>xs:base64Binary</code>.</p>
-        <p>Conversion to and from <code>xs:hexBinary</code> can be performed by casting with
+        <p>Conversion to and from <ex:type>xs:hexBinary</ex:type> can be performed by casting with
             <ex:function>xs:hexBinary()</ex:function> and
             <ex:function>xs:base64Binary()</ex:function>.</p>
         <note>
@@ -109,7 +109,7 @@
         <p>An item of type <code>xs:base64Binary</code> can be <emph>empty</emph>, i.e. contain no
           data, (in the same way that items of type <code>xs:string</code> can contain no
           characters.) Where 'data' arguments to functions that return binary data are optional
-          (i.e. <code><emph>$arg as type</emph>?</code>) and any of those optional arguments is set
+          (i.e. <code><phrase><emph>$arg as type</emph>?</phrase></code>) and any of those optional arguments is set
           to the empty sequence, in general an empty sequence is returned, rather than an empty item
           of type <code>xs:base64Binary</code>. </p>
       </div2>
@@ -141,7 +141,7 @@
           <p>Generating PDF files from SVG graphical data.</p>
         </item>
       </ulist>
-      <div2 id="example–JPEG">
+      <div2 id="example-JPEG">
         <head>Example – finding JPEG size</head>
         <p>As an example, the following code reads the binary form of a JPEG image file, searches
           for the 'Start of Frame/DCT' segment, and unpacks the relevant binary sections to integers
@@ -236,23 +236,23 @@
       <ulist>
         <item>
           <p>
-            <ex:function><a href="http://expath.org/spec/file#d3e541"
-              >file:append-binary</a></ex:function>($file as <ex:type>xs:string</ex:type>, $value as
+            <ex:function><loc href="http://expath.org/spec/file#d3e541"
+              >file:append-binary</loc></ex:function>($file as <ex:type>xs:string</ex:type>, $value as
               <ex:type>xs:base64Binary</ex:type>) as <ex:type>empty-sequence()</ex:type>. Appends a
             Base64 item as binary to a file.</p>
         </item>
         <item>
           <p>
-            <ex:function><a href="http://expath.org/spec/file#d3e954"
-              >file:read-binary</a></ex:function>($file as <ex:type>xs:string</ex:type>) as
+            <ex:function><loc href="http://expath.org/spec/file#d3e954"
+              >file:read-binary</loc></ex:function>($file as <ex:type>xs:string</ex:type>) as
               <ex:type>xs:base64Binary</ex:type>. Returns the content of a file in its Base64
             representation. A function signature with an offset and size is available to read part
             of a file.</p>
         </item>
         <item>
           <p>
-            <ex:function><a href="http://expath.org/spec/file#d3e1359"
-              >file:write-binary</a></ex:function>($file as <ex:type>xs:string</ex:type>, $value as
+            <ex:function><loc href="http://expath.org/spec/file#d3e1359"
+              >file:write-binary</loc></ex:function>($file as <ex:type>xs:string</ex:type>, $value as
               <ex:type>xs:base64Binary</ex:type>) as <ex:type>empty-sequence()</ex:type>. Writes a
             Base64 item as binary to a file. A function signature with an offset is available to write part
             of a file. </p>

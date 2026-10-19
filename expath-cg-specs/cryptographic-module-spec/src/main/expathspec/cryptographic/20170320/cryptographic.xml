@@ -505,10 +505,10 @@
                </item>
                <item>
                   <p><code>$parameters</code> represents the parameters needed for the current operation. More details about this parameter can be found at
-                  <specref ref="explanations-about-parameters-parameter-of-crypto:encrypt"/>.</p>
+                  <specref ref="explanations-about-parameters-parameter-of-crypto-encrypt"/>.</p>
                </item>
             </ulist>
-			<div3 id="explanations-about-parameters-parameter-of-crypto:encrypt">
+			<div3 id="explanations-about-parameters-parameter-of-crypto-encrypt">
 				<head>Explanations about <code>$parameters</code> parameter</head>
 	 			<table border="1" frame="border">
 				  <caption>The <code>$parameters</code> parameter of <code>crypto:encrypt</code></caption>
@@ -567,10 +567,10 @@
                </item>
                <item>
                   <p><code>$parameters</code> represents the parameters needed for the current operation. More details about this parameter can be found at
-                  <specref ref="explanations-about-parameters-parameter-of-crypto:decrypt"/>.</p>                  
+                  <specref ref="explanations-about-parameters-parameter-of-crypto-decrypt"/>.</p>                  
                </item>
             </ulist>
-			<div3 id="explanations-about-parameters-parameter-of-crypto:decrypt">
+			<div3 id="explanations-about-parameters-parameter-of-crypto-decrypt">
 				<head>Explanations about <code>$parameters</code> parameter</head>
 	 			<table border="1" frame="border">
 				  <caption>The <code>$parameters</code> parameter of <code>crypto:decrypt</code></caption>

@@ -286,11 +286,11 @@ dir/
                         serialization parameter defined in <bibref ref="xserial"/>, as defined for
                         the XPath 2.1 function <code>fn:serialize()</code><bibref ref="fo11"
                         />.</termdef></p>
-                  <p><note>For the <code>method</code> attribute, the EXPath ZIP specification
+                  <note><p>For the <code>method</code> attribute, the EXPath ZIP specification
                         differs from XPath 2.1 in that it defines additional values,
                            <code>'base64'</code> and <code>'hex'</code>. These values are used to
                         indicate that their respective binary encoded schemes are to be decoded and
-                        then saved as a binary file entry.</note></p>
+                        then saved as a binary file entry.</p></note>
                </item>
             </ulist>
          </div2>            

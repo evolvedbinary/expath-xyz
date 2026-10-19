@@ -171,24 +171,24 @@
             <eg>
 <ex:function>file:last-modified</ex:function>($path as <ex:type>xs:string</ex:type>) as <ex:type>xs:dateTime</ex:type></eg>
             <p>Returns <code>xs:dateTime</code> representing the last modification time.</p>
-            <p>
-               <div><bibref ref="errFILE0001"/> is raised if <code>$path</code> does not
-                  exist.</div>
-               <div><bibref ref="errFILE9999"/> is raised if any other error occurs.</div>
-            </p>
+            <ulist>
+               <item><p><bibref ref="errFILE0001"/> is raised if <code>$path</code> does not
+                  exist.</p></item>
+               <item><p><bibref ref="errFILE9999"/> is raised if any other error occurs.</p></item>
+            </ulist>
          </div2>
          <div2>
             <head><code>file:size</code></head>
             <eg>
 <ex:function>file:size</ex:function>($file as <ex:type>xs:string</ex:type>) as <ex:type>xs:integer</ex:type></eg>
             <p>Returns the byte size of a file as integer.</p>
-            <p>
-               <div><bibref ref="errFILE0001"/> is raised if <code>$path</code> does not
-                  exist.</div>
-               <div><bibref ref="errFILE0004"/> is raised if <code>$path</code> points to a
-                  directory.</div>
-               <div><bibref ref="errFILE9999"/> is raised if any other error occurs.</div>
-            </p>
+            <ulist>
+               <item><p><bibref ref="errFILE0001"/> is raised if <code>$path</code> does not
+                   exist.</p></item>
+               <item><p><bibref ref="errFILE0004"/> is raised if <code>$path</code> points to a
+                  directory.</p></item>
+               <item><p><bibref ref="errFILE9999"/> is raised if any other error occurs.</p></item>
+            </ulist>
          </div2>
       </div1>
 
@@ -212,13 +212,13 @@
                   <bibref ref="ser30"/>. In contrast to fn:serialize, the encoding stage will not be
                skipped by this function.</p>
             <p>The function returns the empty sequence if the operation is successful.</p>
-            <p>
-               <div><bibref ref="errFILE0003"/> is raised if the parent directory of
-                     <code>$file</code> does not exist.</div>
-               <div><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
-                  directory.</div>
-               <div><bibref ref="errFILE9999"/> is raised if any other error occurs.</div>
-            </p>
+            <ulist>
+               <item><p><bibref ref="errFILE0003"/> is raised if the parent directory of
+                     <code>$file</code> does not exist.</p></item>
+               <item><p><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
+                  directory.</p></item>
+               <item><p><bibref ref="errFILE9999"/> is raised if any other error occurs.</p></item>
+            </ulist>
          </div2>
          <div2>
             <head><code>file:append-text</code></head>
@@ -233,15 +233,15 @@
             <p>The optional parameter <code>$encoding</code>, if not provided, is considered to be
                   <code>UTF-8</code>.</p>
             <p>The function returns the empty sequence if the operation is successful.</p>
-            <p>
-               <div><bibref ref="errFILE0003"/> is raised if the parent directory of
-                     <code>$file</code> does not exist.</div>
-               <div><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
-                  directory.</div>
-               <div><bibref ref="errFILE0005"/> is raised if <code>$encoding</code> is invalid or
-                  not supported by the implementation.</div>
-               <div><bibref ref="errFILE9999"/> is raised if any other error occurs.</div>
-            </p>
+            <ulist>
+               <item><p><bibref ref="errFILE0003"/> is raised if the parent directory of
+                     <code>$file</code> does not exist.</p></item>
+               <item><p><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
+                  directory.</p></item>
+               <item><p><bibref ref="errFILE0005"/> is raised if <code>$encoding</code> is invalid or
+                  not supported by the implementation.</p></item>
+               <item><p><bibref ref="errFILE9999"/> is raised if any other error occurs.</p></item>
+            </ulist>
          </div2>
          <div2>
             <head><code>file:append-text-lines</code></head>
@@ -257,15 +257,15 @@
             <p>The optional parameter <code>$encoding</code>, if not provided, is considered to be
                   <code>UTF-8</code>.</p>
             <p>The function returns the empty sequence if the operation is successful.</p>
-            <p>
-               <div><bibref ref="errFILE0003"/> is raised if the parent directory of
-                     <code>$file</code> does not exist.</div>
-               <div><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
-                  directory.</div>
-               <div><bibref ref="errFILE0005"/> is raised if <code>$encoding</code> is invalid or
-                  not supported by the implementation.</div>
-               <div><bibref ref="errFILE9999"/> is raised if any other error occurs.</div>
-            </p>
+            <ulist>
+               <item><p><bibref ref="errFILE0003"/> is raised if the parent directory of
+                     <code>$file</code> does not exist.</p></item>
+               <item><p><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
+                  directory.</p></item>
+               <item><p><bibref ref="errFILE0005"/> is raised if <code>$encoding</code> is invalid or
+                  not supported by the implementation.</p></item>
+               <item><p><bibref ref="errFILE9999"/> is raised if any other error occurs.</p></item>
+            </ulist>
          </div2>
          <div2>
             <head><code>file:append-binary</code></head>
@@ -275,13 +275,13 @@
             <p>Appends a Base64 item as binary to a file. If the file pointed by <code>$file</code>
                does not exist, a new file will be created.</p>
             <p>The function returns the empty sequence if the operation is successful.</p>
-            <p>
-               <div><bibref ref="errFILE0003"/> is raised if the parent directory of
-                     <code>$file</code> does not exist.</div>
-               <div><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
-                  directory.</div>
-               <div><bibref ref="errFILE9999"/> is raised if any other error occurs.</div>
-            </p>
+            <ulist>
+               <item><p><bibref ref="errFILE0003"/> is raised if the parent directory of
+                     <code>$file</code> does not exist.</p></item>
+               <item><p><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
+                  directory.</p></item>
+               <item><p><bibref ref="errFILE9999"/> is raised if any other error occurs.</p></item>
+            </ulist>
          </div2>
          <div2>
             <head><code>file:copy</code></head>
@@ -290,36 +290,36 @@
           $target as <ex:type>xs:string</ex:type>) as <ex:type>empty-sequence()</ex:type></eg>
             <p>Copies a file or a directory given a source and a target path/URI. The following
                cases may occur if <code>$source</code> points to a file:</p>
-            <ol type="a">
-               <li> if <code>$target</code> does not exist, it will be created.</li>
-               <li> if <code>$target</code> is a file, it will be overwritten.</li>
-               <li> if <code>$target</code> is a directory, the file will be created in that
+            <olist role="a">
+               <item><p>if <code>$target</code> does not exist, it will be created.</p></item>
+               <item><p>if <code>$target</code> is a file, it will be overwritten.</p></item>
+               <item><p>if <code>$target</code> is a directory, the file will be created in that
                   directory with the name of the source file. If a file already exists, it will be
-                  overwritten.</li>
-            </ol>
+                  overwritten.</p></item>
+            </olist>
             <p>The following cases may occur if <code>$source</code> points to a directory:</p>
-            <ol type="a">
-               <li> if <code>$target</code> does not exist, it will be created as directory, and all
+            <olist role="a">
+               <item><p>if <code>$target</code> does not exist, it will be created as directory, and all
                   files of the source directory are copied to this directory with their existing
-                  local names.</li>
-               <li> if <code>$target</code> is a directory, all files are copied from the source
-                  into the target directory. If a file already exists, it will be overwritten.</li>
-            </ol>
+                  local names.</p></item>
+               <item><p>if <code>$target</code> is a directory, all files are copied from the source
+                  into the target directory. If a file already exists, it will be overwritten.</p></item>
+            </olist>
             <p>Other cases will raise one of the errors listed below.</p>
             <p>The function returns the empty sequence if the operation is successful. If an error
                occurs during the operation, no rollback to the original state will be possible </p>
-            <p>
-               <div><bibref ref="errFILE0001"/> is raised if the <code>$source</code> path does not
-                  exist.</div>
-               <div><bibref ref="errFILE0002"/> is raised if <code>$source</code> points to a
-                  directory and <code>$target</code> points to an existing file.</div>
-               <div><bibref ref="errFILE0003"/> is raised if the parent directory of
-                     <code>$source</code> does not exist.</div>
-               <div><bibref ref="errFILE0004"/> is raised if <code>$source</code> points to a file
+            <ulist>
+               <item><p><bibref ref="errFILE0001"/> is raised if the <code>$source</code> path does not
+                  exist.</p></item>
+               <item><p><bibref ref="errFILE0002"/> is raised if <code>$source</code> points to a
+                  directory and <code>$target</code> points to an existing file.</p></item>
+               <item><p><bibref ref="errFILE0003"/> is raised if the parent directory of
+                     <code>$source</code> does not exist.</p></item>
+               <item><p><bibref ref="errFILE0004"/> is raised if <code>$source</code> points to a file
                   and <code>$target</code> points to a directory, in which a subdirectory exists
-                  with the name of the source file.</div>
-               <div><bibref ref="errFILE9999"/> is raised if any other error occurs.</div>
-            </p>
+                  with the name of the source file.</p></item>
+               <item><p><bibref ref="errFILE9999"/> is raised if any other error occurs.</p></item>
+            </ulist>
          </div2>
          <div2>
             <head><code>file:create-dir</code></head>
@@ -328,11 +328,11 @@
             <p>Creates a directory, or does nothing if the directory already exists. The operation
                will create all non-existing parent directories.</p>
             <p>The function returns the empty sequence if the operation is successful.</p>
-            <p>
-               <div><bibref ref="errFILE0002"/> is raised if the specified path, or any of its
-                  parent directories, points to an existing file.</div>
-               <div><bibref ref="errFILE9999"/> is raised if any other error occurs.</div>
-            </p>
+            <ulist>
+               <item><p><bibref ref="errFILE0002"/> is raised if the specified path, or any of its
+                  parent directories, points to an existing file.</p></item>
+               <item><p><bibref ref="errFILE9999"/> is raised if any other error occurs.</p></item>
+            </ulist>
          </div2>
          <div2>
             <head><code>file:delete</code></head>
@@ -344,13 +344,13 @@
             <p>If the optional parameter <code>$recursive</code> is set to <code>true()</code>,
                sub-directories will be deleted as well.</p>
             <p>The function returns the empty sequence if the operation is successful.</p>
-            <p>
-               <div><bibref ref="errFILE0001"/> is raised if <code>$path</code> does not
-                  exist.</div>
-               <div><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
-                  non-empty directory.</div>
-               <div><bibref ref="errFILE9999"/> is raised if any other error occurs.</div>
-            </p>
+            <ulist>
+               <item><p><bibref ref="errFILE0001"/> is raised if <code>$path</code> does not
+                  exist.</p></item>
+               <item><p><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
+                  non-empty directory.</p></item>
+               <item><p><bibref ref="errFILE9999"/> is raised if any other error occurs.</p></item>
+            </ulist>
          </div2>
          <div2>
             <head><code>file:list</code></head>
@@ -370,16 +370,16 @@
             <p>The optional <code>$pattern</code> parameter defines a name pattern in the glob
                syntax. If this is provided, only the paths of the files and directories whose names
                are matching the pattern will be returned.</p>
-            <p>An implementation must support at least the following glob syntax for the pattern: <ul>
-                  <li><code>*</code> for matching any number of unknown characters and</li>
-                  <li><code>?</code> for matching one unknown character.</li>
-               </ul>
+            <p>An implementation must support at least the following glob syntax for the pattern: <ulist>
+                  <item><p><code>*</code> for matching any number of unknown characters and</p></item>
+                  <item><p><code>?</code> for matching one unknown character.</p></item>
+               </ulist>
             </p>
-            <p>
-               <div><bibref ref="errFILE0003"/> is raised <code>$dir</code> does not point to an
-                  existing directory.</div>
-               <div><bibref ref="errFILE9999"/> is raised if any other error occurs.</div>
-            </p>
+            <ulist>
+               <item><p><bibref ref="errFILE0003"/> is raised <code>$dir</code> does not point to an
+                  existing directory.</p></item>
+               <item><p><bibref ref="errFILE9999"/> is raised if any other error occurs.</p></item>
+            </ulist>
          </div2>
          <div2>
             <head><code>file:move</code></head>
@@ -388,49 +388,49 @@
           $target as <ex:type>xs:string</ex:type>) as <ex:type>empty-sequence()</ex:type></eg>
             <p>Moves a file or a directory given a source and a target path/URI. The following cases
                may occur if <code>$source</code> points to a file:</p>
-            <ol type="a">
-               <li> if <code>$target</code> does not exist, it will be created.</li>
-               <li> if <code>$target</code> is a file, it will be overwritten.</li>
-               <li> if <code>$target</code> is a directory, the file will be created in that
+            <olist role="a">
+               <item><p>if <code>$target</code> does not exist, it will be created.</p></item>
+               <item><p>if <code>$target</code> is a file, it will be overwritten.</p></item>
+               <item><p>if <code>$target</code> is a directory, the file will be created in that
                   directory with the name of the source file. If a file already exists, it will be
-                  overwritten.</li>
-            </ol>
+                  overwritten.</p></item>
+            </olist>
             <p>The following cases may occur if <code>$source</code> points to a directory:</p>
-            <ol type="a">
-               <li> if <code>$target</code> does not exist, it will be created as directory, and all
+            <olist role="a">
+               <item><p>if <code>$target</code> does not exist, it will be created as directory, and all
                   files of the source directory are moved to this directory with their existing
-                  local names.</li>
-               <li> if <code>$target</code> is a directory, all files are moved from the source into
-                  the target directory. If a file already exists, it will be overwritten.</li>
-            </ol>
+                  local names.</p></item>
+               <item><p>if <code>$target</code> is a directory, all files are moved from the source into
+                  the target directory. If a file already exists, it will be overwritten.</p></item>
+            </olist>
             <p>Other cases will raise one of the errors listed below.</p>
             <p>The function returns the empty sequence if the operation is successful. If an error
                occurs during the operation, no rollback to the original state will be possible </p>
-            <p>
-               <div><bibref ref="errFILE0001"/> is raised if the <code>$source</code> path does not
-                  exist.</div>
-               <div><bibref ref="errFILE0002"/> is raised if <code>$source</code> points to a
-                  directory and <code>$target</code> points to an existing file.</div>
-               <div><bibref ref="errFILE0003"/> is raised if the parent directory of
-                     <code>$source</code> does not exist.</div>
-               <div><bibref ref="errFILE0004"/> is raised if <code>$source</code> points to a file
+            <ulist>
+               <item><p><bibref ref="errFILE0001"/> is raised if the <code>$source</code> path does not
+                  exist.</p></item>
+               <item><p><bibref ref="errFILE0002"/> is raised if <code>$source</code> points to a
+                  directory and <code>$target</code> points to an existing file.</p></item>
+               <item><p><bibref ref="errFILE0003"/> is raised if the parent directory of
+                     <code>$source</code> does not exist.</p></item>
+               <item><p><bibref ref="errFILE0004"/> is raised if <code>$source</code> points to a file
                   and <code>$target</code> points to a directory, in which a subdirectory exists
-                  with the name of the source file.</div>
-               <div><bibref ref="errFILE9999"/> is raised if any other error occurs.</div>
-            </p>
+                  with the name of the source file.</p></item>
+               <item><p><bibref ref="errFILE9999"/> is raised if any other error occurs.</p></item>
+            </ulist>
          </div2>
          <div2>
             <head><code>file:read-binary</code></head>
             <eg>
 <ex:function>file:read-binary</ex:function>($file as <ex:type>xs:string</ex:type>) as <ex:type>xs:base64Binary</ex:type></eg>
             <p>Returns the content of a file in its Base64 representation.</p>
-            <p>
-               <div><bibref ref="errFILE0001"/> is raised if <code>$file</code> does not
-                  exist.</div>
-               <div><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
-                  directory.</div>
-               <div><bibref ref="errFILE9999"/> is raised if any other error occurs.</div>
-            </p>
+            <ulist>
+               <item><p><bibref ref="errFILE0001"/> is raised if <code>$file</code> does not
+                  exist.</p></item>
+               <item><p><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
+                  directory.</p></item>
+               <item><p><bibref ref="errFILE9999"/> is raised if any other error occurs.</p></item>
+            </ulist>
          </div2>
          <div2>
             <head><code>file:read-text</code></head>
@@ -441,15 +441,15 @@
             <p>Returns the content of a file in its string representation.</p>
             <p>The optional parameter <code>$encoding</code>, if not provided, is considered to be
                   <code>UTF-8</code>.</p>
-            <p>
-               <div><bibref ref="errFILE0001"/> is raised if <code>$file</code> does not
-                  exist.</div>
-               <div><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
-                  directory.</div>
-               <div><bibref ref="errFILE0005"/> is raised if <code>$encoding</code> is invalid or
-                  not supported by the implementation.</div>
-               <div><bibref ref="errFILE9999"/> is raised if any other error occurs.</div>
-            </p>
+            <ulist>
+               <item><p><bibref ref="errFILE0001"/> is raised if <code>$file</code> does not
+                  exist.</p></item>
+               <item><p><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
+                  directory.</p></item>
+               <item><p><bibref ref="errFILE0005"/> is raised if <code>$encoding</code> is invalid or
+                  not supported by the implementation.</p></item>
+               <item><p><bibref ref="errFILE9999"/> is raised if any other error occurs.</p></item>
+            </ulist>
          </div2>
          <div2>
             <head><code>file:read-text-lines</code></head>
@@ -463,15 +463,15 @@
                   <code>UTF-8</code>.</p>
             <p>The newline handling is the same as for the <code>fn:unparsed-text-lines</code>
                function in <bibref ref="fo30"/>.</p>
-            <p>
-               <div><bibref ref="errFILE0001"/> is raised if <code>$file</code> does not
-                  exist.</div>
-               <div><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
-                  directory.</div>
-               <div><bibref ref="errFILE0005"/> is raised if <code>$encoding</code> is invalid or
-                  not supported by the implementation.</div>
-               <div><bibref ref="errFILE9999"/> is raised if any other error occurs.</div>
-            </p>
+            <ulist>
+               <item><p><bibref ref="errFILE0001"/> is raised if <code>$file</code> does not
+                  exist.</p></item>
+               <item><p><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
+                  directory.</p></item>
+               <item><p><bibref ref="errFILE0005"/> is raised if <code>$encoding</code> is invalid or
+                  not supported by the implementation.</p></item>
+               <item><p><bibref ref="errFILE9999"/> is raised if any other error occurs.</p></item>
+            </ulist>
          </div2>
          <div2>
             <head><code>file:write</code></head>
@@ -490,13 +490,13 @@
                   <bibref ref="ser30"/>. In contrast to fn:serialize, the encoding stage will not be
                skipped by this function.</p>
             <p>The function returns the empty sequence if the operation is successful.</p>
-            <p>
-               <div><bibref ref="errFILE0003"/> is raised if the parent directory of
-                     <code>$file</code> does not exist.</div>
-               <div><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
-                  directory.</div>
-               <div><bibref ref="errFILE9999"/> is raised if any other error occurs.</div>
-            </p>
+            <ulist>
+               <item><p><bibref ref="errFILE0003"/> is raised if the parent directory of
+                     <code>$file</code> does not exist.</p></item>
+               <item><p><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
+                  directory.</p></item>
+               <item><p><bibref ref="errFILE9999"/> is raised if any other error occurs.</p></item>
+            </ulist>
          </div2>
          <div2>
             <head><code>file:write-text</code></head>
@@ -511,15 +511,15 @@
             <p>The optional parameter <code>$encoding</code>, if not provided, is considered to be
                   <code>UTF-8</code>.</p>
             <p>The function returns the empty sequence if the operation is successful.</p>
-            <p>
-               <div><bibref ref="errFILE0003"/> is raised if the parent directory of
-                     <code>$file</code> does not exist.</div>
-               <div><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
-                  directory.</div>
-               <div><bibref ref="errFILE0005"/> is raised if <code>$encoding</code> is invalid or
-                  not supported by the implementation.</div>
-               <div><bibref ref="errFILE9999"/> is raised if any other error occurs.</div>
-            </p>
+            <ulist>
+               <item><p><bibref ref="errFILE0003"/> is raised if the parent directory of
+                     <code>$file</code> does not exist.</p></item>
+               <item><p><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
+                  directory.</p></item>
+               <item><p><bibref ref="errFILE0005"/> is raised if <code>$encoding</code> is invalid or
+                  not supported by the implementation.</p></item>
+               <item><p><bibref ref="errFILE9999"/> is raised if any other error occurs.</p></item>
+            </ulist>
          </div2>
          <div2>
             <head><code>file:write-text-lines</code></head>
@@ -534,15 +534,15 @@
             <p>The optional parameter <code>$encoding</code>, if not provided, is considered to be
                   <code>UTF-8</code>.</p>
             <p>The function returns the empty sequence if the operation is successful.</p>
-            <p>
-               <div><bibref ref="errFILE0003"/> is raised if the parent directory of
-                     <code>$file</code> does not exist.</div>
-               <div><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
-                  directory.</div>
-               <div><bibref ref="errFILE0005"/> is raised if <code>$encoding</code> is invalid or
-                  not supported by the implementation.</div>
-               <div><bibref ref="errFILE9999"/> is raised if any other error occurs.</div>
-            </p>
+            <ulist>
+               <item><p><bibref ref="errFILE0003"/> is raised if the parent directory of
+                     <code>$file</code> does not exist.</p></item>
+               <item><p><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
+                  directory.</p></item>
+               <item><p><bibref ref="errFILE0005"/> is raised if <code>$encoding</code> is invalid or
+                  not supported by the implementation.</p></item>
+               <item><p><bibref ref="errFILE9999"/> is raised if any other error occurs.</p></item>
+            </ulist>
          </div2>
          <div2>
             <head><code>file:write-binary</code></head>
@@ -552,13 +552,13 @@
             <p>Writes a Base64 items as binary to a file. If <code>$file</code> already exists, it
                will be overwritten.</p>
             <p>The function returns the empty sequence if the operation is successful.</p>
-            <p>
-               <div><bibref ref="errFILE0003"/> is raised if the parent directory of
-                     <code>$file</code> does not exist.</div>
-               <div><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
-                  directory.</div>
-               <div><bibref ref="errFILE9999"/> is raised if any other error occurs.</div>
-            </p>
+            <ulist>
+               <item><p><bibref ref="errFILE0003"/> is raised if the parent directory of
+                     <code>$file</code> does not exist.</p></item>
+               <item><p><bibref ref="errFILE0004"/> is raised if <code>$file</code> points to a
+                  directory.</p></item>
+               <item><p><bibref ref="errFILE9999"/> is raised if any other error occurs.</p></item>
+            </ulist>
          </div2>
       </div1>
 
@@ -599,10 +599,10 @@
                path representation. A canonical path is both absolute and unique and thus contains
                no redirections such as references to parent directories or symbolic links.</p>
             <p>No path existence check is made.</p>
-            <p>
-               <div><bibref ref="errFILE9999"/> is raised if an error occurs while trying to obtain
-                  the native path.</div>
-            </p>
+            <ulist>
+               <item><p><bibref ref="errFILE9999"/> is raised if an error occurs while trying to obtain
+                  the native path.</p></item>
+            </ulist>
          </div2>
          <div2>
             <head><code>file:path-to-uri</code></head>

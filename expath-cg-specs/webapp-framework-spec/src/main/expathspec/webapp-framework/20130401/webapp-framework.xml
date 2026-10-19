@@ -27,7 +27,7 @@
       <authlist>
          <author role="editor">
             <name>Florent Georges</name>
-            <affiliation><loc href="http://h2oconsulting.be/">H2O Consulting</loc></affiliation>
+            <affiliation>H2O Consulting</affiliation>
          </author>
       </authlist>
       <!--
@@ -1147,9 +1147,9 @@ web:parse-header-value('text/html,application/xhtml+xml,application/xml;q=0.9,*/
       </div1>
    </body>
    <back>
-      <div1 id="expath-pkg.xsd">
+      <div1 id="webapp-framework.xsd">
          <head>Webapp schema</head>
-         <eg><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="schema/webapp.xsd" parse="text"/></eg>
+         <eg><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../../../schema/webapp-framework/webapp-framework.xsd" parse="text"/></eg>
       </div1>
       <div1 id="references">
          <head>References</head>

@@ -19,9 +19,11 @@
       </fos:rules>
    </fos:function>
    <fos:function name="is-dir" prefix="file">
-      <fos:proto name="is-dir" return-type="xs:boolean">
-         <fos:arg type="xs:string" name="path"/>
-      </fos:proto>
+       <fos:signatures>
+          <fos:proto name="is-dir" return-type="xs:boolean">
+             <fos:arg type="xs:string" name="path"/>
+          </fos:proto>
+       </fos:signatures>
       <fos:summary>
          <p>Tests if <code>$path</code> points to a directory. On UNIX-based systems the root and
                    the volume roots are considered directories.</p>

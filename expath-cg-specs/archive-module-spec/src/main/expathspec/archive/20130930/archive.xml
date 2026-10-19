@@ -265,9 +265,9 @@ declare function content:title() as xs:string
          <div2 id="example.jar">
             <head>Examining a JAR file</head>
             <p>JAR files contain class code and definitions for Java classes, in entries whose names
-               are <code><emph>path/classname</emph>.class</code>. Local classes (classes defined
+               are <code><phrase><emph>path/classname</emph>.class</phrase></code>. Local classes (classes defined
                within a class) have separate code entries with a classname
-                     <code><emph>outerclass</emph>$<emph>innerclass</emph></code>. To find all the
+               <code><phrase><emph>outerclass</emph>$<emph>innerclass</emph></phrase></code>. To find all the
                main package-qualified classes the following XPath should suffice: </p>
             <eg xml:space="preserve"><![CDATA[
 for $e in arch:entries(file:read-binary("lib/saxon9-sql.jar"))[ends-with(.,'.class') and not(contains(.,'$'))] 
@@ -409,23 +409,22 @@ for $e in arch:entries(file:read-binary("lib/saxon9-sql.jar"))[ends-with(.,'.cla
          <ulist>
             <item>
                <p>
-                  <ex:function><a href="http://expath.org/spec/file#d3e954"
-                     >file:read-binary</a></ex:function>($file as <ex:type>xs:string</ex:type>) as
+                  <ex:function><loc href="http://expath.org/spec/file#d3e954"
+                     >file:read-binary</loc></ex:function>($file as <ex:type>xs:string</ex:type>) as
                      <ex:type>xs:base64Binary</ex:type>. Returns the content of a file in its Base64
                   representation.</p>
             </item>
             <item>
                <p>
-                  <ex:function><a href="http://expath.org/spec/file#d3e1359"
-                     >file:write-binary</a></ex:function>($file as <ex:type>xs:string</ex:type>,
+                  <ex:function><loc href="http://expath.org/spec/file#d3e1359"
+                     >file:write-binary</loc></ex:function>($file as <ex:type>xs:string</ex:type>,
                   $value as <ex:type>xs:base64Binary</ex:type>) as
-                     <ex:type>empty-sequence()</ex:type>. Writes a Base64 item as binary to a file.
-               </p>
+                     <ex:type>empty-sequence()</ex:type>. Writes a Base64 item as binary to a file.</p>
             </item>
          </ulist>
          <note>
-            <p>There may be some desire for some convenience functions <code>arch:write($file as
-                     <ex:type>xs:string</ex:type>,....) as empty-sequence()</code> which does
+            <p>There may be some desire for some convenience functions <code><phrase><ex:function>arch:write</ex:function></phrase>($file as
+               <phrase><ex:type>xs:string</ex:type></phrase>,....) as <phrase><ex:type>empty-sequence()</ex:type></phrase></code> which does
                creation and file writing as one action.</p>
          </note>
       </div1>
