@@ -63,6 +63,7 @@
         <module>expath-cg-schemas</module>
         <module>expath-cg-specs</module>
         <module>expath-cg-transforms</module>
+        <module>expath-cg-distribution</module>
     </modules>
 
 </project>
