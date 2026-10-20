@@ -41,7 +41,6 @@
   <main>
     <h2>Specifications</h2>
     <!--
-      <hr/>                                    
       <article id="{spec/@id}">
         <div class="spec-main">
           <h3><a href="{spec/@href}">{spec/@title}</a></h3>
@@ -55,6 +54,7 @@
           </ul>
         </div>
       </article>
+      <hr/>
     -->
   </main>
 

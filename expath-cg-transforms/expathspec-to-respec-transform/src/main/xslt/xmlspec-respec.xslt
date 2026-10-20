@@ -43,6 +43,42 @@
     <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
       <head>
         <meta charset="utf-8" />
+        <xsl:if test="header/pubdate">
+          <meta name="date">
+            <xsl:attribute name="content">
+              <xsl:value-of select="normalize-space(header/pubdate/year)"/>
+              <xsl:text>-</xsl:text>
+              <xsl:choose>
+                <xsl:when test="normalize-space(header/pubdate/month) = 'January'">01</xsl:when>
+                <xsl:when test="normalize-space(header/pubdate/month) = 'February'">02</xsl:when>
+                <xsl:when test="normalize-space(header/pubdate/month) = 'March'">03</xsl:when>
+                <xsl:when test="normalize-space(header/pubdate/month) = 'April'">04</xsl:when>
+                <xsl:when test="normalize-space(header/pubdate/month) = 'May'">05</xsl:when>
+                <xsl:when test="normalize-space(header/pubdate/month) = 'June'">06</xsl:when>
+                <xsl:when test="normalize-space(header/pubdate/month) = 'July'">07</xsl:when>
+                <xsl:when test="normalize-space(header/pubdate/month) = 'August'">08</xsl:when>
+                <xsl:when test="normalize-space(header/pubdate/month) = 'September'">09</xsl:when>
+                <xsl:when test="normalize-space(header/pubdate/month) = 'October'">10</xsl:when>
+                <xsl:when test="normalize-space(header/pubdate/month) = 'November'">11</xsl:when>
+                <xsl:when test="normalize-space(header/pubdate/month) = 'December'">12</xsl:when>
+                <xsl:otherwise>
+                  <xsl:value-of select="normalize-space(header/pubdate/month)"/>
+                </xsl:otherwise>
+              </xsl:choose>
+              <xsl:text>-</xsl:text>
+              <xsl:value-of select="format-number(number(header/pubdate/day), '00')"/>
+            </xsl:attribute>
+          </meta>
+        </xsl:if>
+
+        <meta name="specStatus">
+          <xsl:attribute name="content">
+            <xsl:choose>
+              <xsl:when test="@w3c-doctype='wd'">CG-FINAL</xsl:when>
+              <xsl:when test="@w3c-doctype='cr'">CG-DRAFT</xsl:when>
+            </xsl:choose>
+          </xsl:attribute>
+        </meta>
         <title><xsl:value-of select="header/title"/></title>
         
         <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer="defer"></script>
