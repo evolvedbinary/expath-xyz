@@ -91,6 +91,36 @@
                         </dependency>
                     </dependencies>
                 </plugin>
+                <plugin>
+                    <groupId>nu.validator</groupId>
+                    <artifactId>vnu-maven-plugin</artifactId>
+                    <version>1.0.0</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>nu.validator</groupId>
+                            <artifactId>validator</artifactId>
+                            <version>20.7.2</version>
+                            <exclusions>
+                                <exclusion>
+                                    <groupId>org.eclipse.jetty</groupId>
+                                    <artifactId>jetty-server</artifactId>
+                                </exclusion>
+                                <exclusion>
+                                    <groupId>org.eclipse.jetty</groupId>
+                                    <artifactId>jetty-http</artifactId>
+                                </exclusion>
+                                <exclusion>
+                                    <groupId>org.eclipse.jetty</groupId>
+                                    <artifactId>jetty-servlets</artifactId>
+                                </exclusion>
+                                <exclusion>
+                                    <groupId>org.eclipse.jetty</groupId>
+                                    <artifactId>jetty-io</artifactId>
+                                </exclusion>
+                            </exclusions>
+                        </dependency>
+                    </dependencies>
+                </plugin>
             </plugins>
         </pluginManagement>
 

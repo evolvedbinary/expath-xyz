@@ -62,6 +62,10 @@
         <url>scm:git:https://github.com/evolvedbinary/expath-xyz.git</url>
     </scm>
 
+    <properties>
+        <respec.input.dir>${project.basedir}/src/main/respec</respec.input.dir>
+    </properties>
+
     <build>
         <resources>
             <resource>
@@ -84,6 +88,28 @@
                         </licenseSet>
                     </licenseSets>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>nu.validator</groupId>
+                <artifactId>vnu-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>validate</goal>
+                        </goals>
+                        <configuration>
+                            <filesets>
+                                <fileset>
+                                    <directory>${respec.input.dir}</directory>
+                                    <glob>**/http-client-2.html</glob>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
