@@ -63,7 +63,7 @@
     </scm>
 
     <properties>
-        <respec.input.dir>${project.basedir}/src/main/respec</respec.input.dir>
+        <xml.input.dir>${project.basedir}/src/main/respec</xml.input.dir>
     </properties>
 
     <build>
@@ -103,8 +103,8 @@
                         <configuration>
                             <filesets>
                                 <fileset>
-                                    <directory>${respec.input.dir}</directory>
-                                    <glob>**/http-client-2.html</glob>
+                                    <directory>${xml.input.dir}</directory>
+                                    <glob>**/http-client-2.xhtml</glob>
                                 </fileset>
                             </filesets>
                         </configuration>
