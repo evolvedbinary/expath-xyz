@@ -2,7 +2,7 @@
 <?oxygen RNGSchema="http://expath.org/ns/xmlspec/xmlspec.rnc" type="compact"?>
 <spec role="editors-copy" w3c-doctype="wd" xmlns:ex="http://expath.org/ns/xmlspec">
    <header>
-      <title>Geo Module</title>
+      <title role="geospatial">Geo Module</title>
       <subtitle>A geospatial API</subtitle>
       <w3c-designation>w3c-designation</w3c-designation>
       <w3c-doctype>EXPath Candidate</w3c-doctype>

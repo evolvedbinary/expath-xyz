@@ -2,7 +2,7 @@
 <spec role="editors-copy" w3c-doctype="cr" xmlns:ex="http://expath.org/ns/xmlspec"
   xmlns:xlink="http://www.w3.org/1999/xlink">
   <header>
-    <title>File Module</title>
+    <title role="file">File Module</title>
     <subtitle>EXPath Candidate Module</subtitle>
     <w3c-designation>w3c-designation</w3c-designation>
     <w3c-doctype>Candidate</w3c-doctype>

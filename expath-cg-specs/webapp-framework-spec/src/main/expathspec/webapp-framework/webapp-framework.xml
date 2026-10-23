@@ -4,7 +4,7 @@
 
 <spec role="editors-copy" w3c-doctype="wd" xmlns:ex="http://expath.org/ns/xmlspec" ex:w3c="true">
    <header>
-      <title>Web Applications</title>
+      <title role="webapp-framework">Web Applications</title>
       <w3c-designation>w3c-designation</w3c-designation>
       <w3c-doctype>EXPath Candidate Module</w3c-doctype>
       <pubdate>

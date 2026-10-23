@@ -4,7 +4,7 @@
 
 <spec role="editors-copy" w3c-doctype="cr" xmlns:ex="http://expath.org/ns/xmlspec">
    <header>
-      <title>ZIP Module</title>
+      <title role="zip">ZIP Module</title>
       <w3c-designation>w3c-designation</w3c-designation>
       <w3c-doctype>EXPath Candidate Module</w3c-doctype>
       <pubdate>
