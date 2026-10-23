@@ -22,6 +22,7 @@
   xmlns:spec="http://expath.org/ns/xmlspec"
   xmlns:fos="http://www.w3.org/xpath-functions/spec/namespace" 
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:f="http://function.expath.xyz"
   exclude-result-prefixes="#all">
 
   <xsl:output method="xhtml" html-version="5" media-type="text/html" include-content-type="no" encoding="UTF-8" omit-xml-declaration="no" indent="yes"/>
@@ -29,72 +30,80 @@
   <xsl:param name="spec-directory" as="xs:string"></xsl:param>
 
 
-  <xsl:variable name="spec-collections" as="xs:string*"
-    select="uri-collection('file://' || $spec-directory || '?recurse=yes;select=*.xhtml')" />
-
-
-  <!-- get the unique spec names eg: archive, binary, crypto, facet, file, http, http-client, http-client-2, http-model, mongo, pkg, webapp, zip -->
-  <xsl:variable name="spec-modules" as="xs:string*"
-    select="sort(distinct-values($spec-collections ! substring-before(substring-after(., '/specs/'), '/')))"/>
-
-  <xsl:template match="@*|node()">
-    <xsl:copy>
-      <xsl:apply-templates select="@*|node()"/>
-    </xsl:copy>
-  </xsl:template>
+  <xsl:variable name="spec-docs" as="document-node(element(xhtml:html))*"
+    select="collection('file://' || $spec-directory || '?recurse=yes;select=*.xhtml')" />
 
   <xsl:template match="nav/ul">
-    <xsl:for-each select="$spec-modules">
-      <xsl:variable name="spec-doc" select="document('file://' || $spec-directory || '/' || current() || '/' || current() || '.xhtml')"/>
-
-      <li><a href="#{.}"><xsl:value-of select="$spec-doc//xhtml:title"/></a></li>
-    </xsl:for-each>
+    <ul>
+      <xsl:for-each-group select="$spec-docs"  group-by="//xhtml:meta[@name eq 'spec-family']/@content">
+        <xsl:sort select="current-grouping-key()"/>
+        <xsl:variable name="spec-family" select="current-group()"/>
+        <li><a href="#{current-grouping-key()}"><xsl:value-of select="$spec-family[1]//xhtml:title"/></a></li>
+      </xsl:for-each-group>
+    </ul>
   </xsl:template>
 
-  <xsl:template match="main">
+
+    <xsl:template match="main">
     <h2>Specifications</h2>
-    <xsl:for-each select="$spec-modules">
-      <xsl:variable name="spec-doc" select="document('file://' || $spec-directory || '/' || current() || '/' || current() || '.xhtml')"/>
-      <article id="{.}">
+      <div>
+        <xsl:value-of select="document-uri(root($spec-docs[1]/*))"/>
+      </div>
+      <xsl:for-each-group select="$spec-docs"  group-by="//xhtml:meta[@name eq 'spec-family']/@content">
+       <xsl:sort select="current-grouping-key()"/>
+       <xsl:variable name="spec-family" select="current-group()"/>
+        <xsl:variable name="latest-version" select="f:latest-spec($spec-family)"/>
+        <article id="{current-grouping-key()}">
         <div class="spec-main">
-          <!-- we need to pull the main module file -->
-          <h3><a href="specs/{.}/{.}.xhtml"><xsl:value-of select="$spec-doc//xhtml:title"/></a></h3>
-          <blockquote>
-            <!-- get the abstract from the  main module file-->
-            <xsl:value-of select="$spec-doc//xhtml:section[@id='abstract']/xhtml:p"/>
-          </blockquote>
+          <xsl:choose>
+            <xsl:when test="exists($latest-version)">
+              <p class="latest"><a href="specs"><b>Latest version</b></a></p>
+              <h3><a href="specs/{document-uri(root($latest-version))}"><xsl:value-of select="$latest-version//xhtml:title"/></a></h3>
+              <blockquote>
+                <!-- get the abstract from the  main module file-->
+                <xsl:value-of select="$latest-version//xhtml:section[@id='abstract']/xhtml:p"/>
+              </blockquote>
+            </xsl:when>
+            <xsl:otherwise>
+              <h3>TODO later</h3>
+            </xsl:otherwise>
+          </xsl:choose>
+          
         </div>
         <div class="spec-meta">
-          <!-- Get all the versions of the doc -->
-          <xsl:variable name="current-spec" select="current()"/>
-          <xsl:variable name="spec-versions" as="xs:string*">
-            <xsl:perform-sort select="distinct-values($spec-collections ! substring-before(substring-after(., '/' || $current-spec || '/'), '/'))[. ne '']">
-              <!-- Folder names can be dates or labels such as 1.0. -->
-              <xsl:sort select="document('file://' || $spec-directory || '/' || $current-spec || '/' || . || '/' || $current-spec || '.xhtml')/xhtml:html/xhtml:head/xhtml:meta[@name='date']/@content" order="descending"/>
-            </xsl:perform-sort>
-          </xsl:variable>
-          
-          <!-- Use the newest version, or the main document when no versions exist. -->
-          <p class="latest"><a href="specs/{string-join(($current-spec, $spec-versions[1], $current-spec || '.xhtml'), '/')}"><b>Latest version</b></a></p>
-          <!-- get the editor's draft version of the spec and put it in the link-->
-          <!--  this is an issue for me -->
-          <p class="draft"><a href="specs/{.}/{.}.xhtml">Editor's draft</a></p>
-
+          <p class="draft"><a href="specs">Editor's draft</a></p>
           <ul>
-            <xsl:for-each select="$spec-versions">
-              <xsl:if test="string-length(.) gt 0">
-                <xsl:variable name="candidate-doc" select="document('file://' || $spec-directory || '/' || $current-spec || '/' || . || '/' || $current-spec || '.xhtml')"/>
-                <li><a href="specs/{$current-spec}/{.}/{$current-spec}.xhtml">Candidate Module</a> — <xsl:value-of select="$candidate-doc//xhtml:head/xhtml:meta[@name='date']/@content"/></li>
-              </xsl:if>
+            <xsl:variable name="crs" select="$spec-family[.//xhtml:meta[@name eq 'spec-w3c-doctype']/@content eq 'cr']"/>
+            <xsl:for-each select="$crs">
+                <xsl:sort order="descending" select=".//xhtml:head/xhtml:meta[@name='date']/@content"/>
+                
+                <li><a href="specs">Candidate Module</a> — <xsl:value-of select=".//xhtml:head/xhtml:meta[@name='date']/@content"/></li>
             </xsl:for-each>
           </ul>
           
         </div>
       </article>
       <hr/>
-    </xsl:for-each>
+      </xsl:for-each-group>
 
    
   </xsl:template>
+  
+  <xsl:template match="@*|node()">
+    <xsl:copy>
+      <xsl:apply-templates select="@*|node()"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:function name="f:latest-spec" as="document-node(element(xhtml:html))?">
+    <xsl:param name="specs" as="document-node(element(xhtml:html))+"/>
+    <xsl:variable name="crs" as="document-node(element(xhtml:html))*" select="$specs[.//xhtml:meta[@name eq 'spec-w3c-doctype']/@content=('cr','pr')]"/>
+    
+    <!-- <xsl:variable name="sorted-crs" select="for $cr in $crs order by $cr//xhtml:meta[@name eq 'date']/xs:date(@content) decending return $cr"/> -->
+    
+    <xsl:variable name="sorted-crs" select="sort($crs,(),function($cr) { $cr//xhtml:meta[@name eq 'date']/xs:date(@content) })"/>
+    <xsl:sequence select="$sorted-crs[1]"/>
+  </xsl:function>
+
 
 </xsl:stylesheet>
