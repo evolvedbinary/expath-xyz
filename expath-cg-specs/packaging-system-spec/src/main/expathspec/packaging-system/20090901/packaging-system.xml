@@ -4,7 +4,7 @@
 
 <spec role="editors-copy" w3c-doctype="cr">
    <header>
-      <title>Packaging System</title>
+      <title role="packaging">Packaging System</title>
       <w3c-designation>w3c-designation</w3c-designation>
       <w3c-doctype>EXPath Candidate Module</w3c-doctype>
       <pubdate>

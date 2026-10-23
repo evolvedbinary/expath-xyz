@@ -1,6 +1,6 @@
 <spec w3c-doctype="wd">
  <header>
-  <title>Facet Module</title>
+  <title role="facet">Facet Module</title>
   <w3c-designation>w3c-designation</w3c-designation>
   <w3c-doctype>EXPath Proposed Module</w3c-doctype>
   <pubdate>

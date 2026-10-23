@@ -2,7 +2,7 @@
 
 <spec role="editors-copy" w3c-doctype="wd" xmlns:ex="http://expath.org/ns/xmlspec" ex:w3c="true">
   <header>
-    <title>Binary Module 1.0</title>
+    <title role="binary">Binary Module 1.0</title>
     <w3c-designation>w3c-designation</w3c-designation>
     <w3c-doctype>EXPath Module</w3c-doctype>
     <pubdate>
