@@ -71,15 +71,10 @@
           </meta>
         </xsl:if>
 
-        <meta name="specStatus">
-          <xsl:attribute name="content">
-            <xsl:choose>
-              <xsl:when test="@w3c-doctype='wd'">CG-FINAL</xsl:when>
-              <xsl:when test="@w3c-doctype='cr'">CG-DRAFT</xsl:when>
-            </xsl:choose>
-          </xsl:attribute>
-        </meta>
+        <meta name="spec-w3c-doctype" content="{@w3c-doctype}"/>
+        <meta name="spec-family" content="{header/title/@role}"/>
         <title><xsl:value-of select="header/title"/></title>
+          
         
         <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer="defer"></script>
         
