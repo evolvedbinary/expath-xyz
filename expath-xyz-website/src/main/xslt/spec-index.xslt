@@ -31,7 +31,7 @@
 
 
   <xsl:variable name="spec-docs" as="document-node(element(xhtml:html))*"
-    select="collection('file://' || $spec-directory || '?recurse=yes;select=*.xhtml')" />
+    select="collection('file://' || $spec-directory || '?recurse=yes;stable=yes;select=*.xhtml')" />
 
   <xsl:template match="nav/ul">
     <ul>
@@ -54,7 +54,7 @@
         <div class="spec-main">
           <xsl:choose>
             <xsl:when test="exists($latest-version)">
-              <h3><a href="specs/{document-uri(root($latest-version))}"><xsl:value-of select="$latest-version//xhtml:title"/></a></h3>
+              <h3><a href="{f:format-spec-path($latest-version)}"><xsl:value-of select="$latest-version//xhtml:title"/></a></h3>
               <blockquote>
                 <!-- get the abstract from the  main module file-->
                 <xsl:value-of select="$latest-version//xhtml:section[@id='abstract']/xhtml:p"/>
@@ -62,7 +62,7 @@
             </xsl:when>
             <xsl:otherwise>
               <xsl:variable name="latest-draft" select="f:latest-draft($spec-family)"/>
-              <h3><a href="specs/{document-uri(root($latest-draft))}"><xsl:value-of select="$latest-draft//xhtml:title"/></a></h3>
+              <h3><a href="{f:format-spec-path($latest-draft)}"><xsl:value-of select="$latest-draft//xhtml:title"/></a></h3>
               <blockquote>
                 <xsl:value-of select="$latest-draft//xhtml:section[@id='abstract']/xhtml:p"/>
               </blockquote>
@@ -72,15 +72,23 @@
           
         </div>
         <div class="spec-meta">
-          <p class="latest"><a href="specs"><b>Latest version</b></a></p>
-          <p class="draft"><a href="specs">Editor's draft</a></p>
+          <xsl:choose>
+            <xsl:when test="exists($latest-version)">
+              <p class="latest"><a href="{f:format-spec-path($latest-version)}"><b>Latest version</b></a></p>
+            </xsl:when>
+          </xsl:choose>
+          <xsl:variable name="latest-draft" select="f:latest-draft($spec-family)"/>
+          <xsl:choose>
+            <xsl:when test="exists($latest-draft)">
+              <p class="draft"><a href="{f:format-spec-path($latest-draft)}">Editor's draft</a></p>
+            </xsl:when>
+          </xsl:choose>
+          
 
           <ul>
-            <xsl:variable name="crs" select="$spec-family[.//xhtml:meta[@name eq 'spec-w3c-doctype']/@content=('cr','pr')]"/>
-            <xsl:for-each select="$crs">
-                <xsl:sort order="descending" select=".//xhtml:head/xhtml:meta[@name='date']/@content"/>
-                
-                <li><a href="specs">Candidate Module</a> — <xsl:value-of select=".//xhtml:head/xhtml:meta[@name='date']/@content"/></li>
+            
+            <xsl:for-each select="f:previous-spec-list($spec-family)">
+              <li><a href="{f:format-spec-path(.)}">Candidate Module</a> — <xsl:value-of select=".//xhtml:head/xhtml:meta[@name='date']/@content"/></li>
             </xsl:for-each>
           </ul>
           
@@ -103,14 +111,28 @@
     <xsl:variable name="crs" as="document-node(element(xhtml:html))*" select="$specs[.//xhtml:meta[@name eq 'spec-w3c-doctype']/@content=('cr','pr')]"/>
         
     <xsl:variable name="sorted-crs" select="sort($crs,(),function($cr) { $cr//xhtml:meta[@name eq 'date']/xs:date(@content) })"/>
-    <xsl:sequence select="$sorted-crs[1]"/>
+    <xsl:sequence select="reverse($sorted-crs)[1]"/>
   </xsl:function>
 
     <xsl:function name="f:latest-draft" as="document-node(element(xhtml:html))?">
     <xsl:param name="specs" as="document-node(element(xhtml:html))+"/>
     <xsl:variable name="drs" as="document-node(element(xhtml:html))*" select="$specs[.//xhtml:meta[@name eq 'spec-w3c-doctype']/@content=('wd')]"/>
     <xsl:variable name="sorted-drs" select="sort($drs,(),function($dr) { $dr//xhtml:meta[@name eq 'date']/xs:date(@content) })"/>
-    <xsl:sequence select="$sorted-drs[1]"/>
+      <xsl:sequence select="reverse($sorted-drs)[1]"/>
+  </xsl:function>
+  
+  <xsl:function name="f:previous-spec-list">
+    <xsl:param name="specs" as="document-node(element(xhtml:html))+"/>
+    <xsl:variable name="crs" select="$specs[.//xhtml:meta[@name eq 'spec-w3c-doctype']/@content=('cr','pr')]"/>
+    <xsl:variable name="sorted-crs" select="sort($crs,(),function($cr) { $cr//xhtml:meta[@name eq 'date']/xs:date(@content) })"/>
+    <xsl:sequence select="reverse($sorted-crs)"/>
+  </xsl:function>
+  
+  <xsl:function name="f:format-spec-path">
+    <xsl:param name="node" as="document-node(element(xhtml:html))"></xsl:param>
+    <xsl:variable name="document-uri" select="document-uri($node)"/>
+    <xsl:variable name="formated-path" select="substring-after($document-uri, $spec-directory)"/>
+    <xsl:sequence select="'spec' || $formated-path"/>
   </xsl:function>
 
 
