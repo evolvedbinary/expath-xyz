@@ -8,7 +8,7 @@
 
 
     <xsl:param name="original-site" as="xs:string" select="'http://expath.org'"/>
-    <xsl:param name="updated-site" as="xs:string" select="'http://expath.xyz'"/>
+    <xsl:param name="updated-site" as="xs:string" select="'https://www.expath.xyz'"/>
 
     <xsl:output method="xhtml" html-version="5" media-type="text/html" include-content-type="no" encoding="UTF-8" omit-xml-declaration="no" indent="yes"/>
 
