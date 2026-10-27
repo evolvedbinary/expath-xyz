@@ -413,9 +413,7 @@
   </xsl:template>
 
   <xsl:template match="rfc2119">
-    <span xmlns="http://www.w3.org/1999/xhtml" class="rfc2119">
-      <xsl:apply-templates select="node()|@*"/>
-    </span>
+      <xsl:value-of select="upper-case(.)"/>
   </xsl:template>
   
   <xsl:template match="olist">
