@@ -2,7 +2,7 @@
 
 <spec role="editors-copy" w3c-doctype="wd" xmlns:ex="http://expath.org/ns/xmlspec" ex:w3c="true">
   <header>
-    <title>MongoDB Module</title>
+    <title role="mongodb-api">MongoDB Module</title>
     <w3c-designation>w3c-designation</w3c-designation>
     <w3c-doctype>EXPath Working Draft</w3c-doctype>
     <pubdate>

@@ -4,7 +4,7 @@
 
 <spec xmlns:spec="http://expath.org/ns/xmlspec" role="editors-copy" w3c-doctype="cr" spec:w3c="true">
    <header>
-      <title>Cryptographic Module</title>
+      <title role="cryptographic">Cryptographic Module</title>
       <w3c-designation>w3c-designation</w3c-designation>
       <w3c-doctype>EXPath Candidate Module</w3c-doctype>
       <pubdate>

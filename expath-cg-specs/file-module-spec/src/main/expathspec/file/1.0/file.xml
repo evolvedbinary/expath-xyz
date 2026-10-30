@@ -4,7 +4,7 @@
 
 <spec role="editors-copy" w3c-doctype="rec" xmlns:ex="http://expath.org/ns/xmlspec" ex:w3c="true">
    <header>
-      <title>File Module 1.0</title>
+      <title role="file">File Module 1.0</title>
       <w3c-designation>w3c-designation</w3c-designation>
       <w3c-doctype>EXPath Module</w3c-doctype>
       <pubdate>
