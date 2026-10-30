@@ -112,7 +112,7 @@
   
   <xsl:function name="f:latest-spec" as="document-node(element(xhtml:html))?">
     <xsl:param name="specs" as="document-node(element(xhtml:html))+"/>
-    <xsl:variable name="crs" as="document-node(element(xhtml:html))*" select="$specs[.//xhtml:meta[@name eq 'spec-w3c-doctype']/@content=('cr','pr')]"/>
+    <xsl:variable name="crs" as="document-node(element(xhtml:html))*" select="$specs[.//xhtml:meta[@name eq 'spec-w3c-doctype']/@content=('cr','pr','rec')]"/>
         
     <xsl:variable name="sorted-crs" select="sort($crs,(),function($cr) { f:parse-pubdate($cr) })"/>
     <xsl:sequence select="reverse($sorted-crs)[1]"/>
@@ -127,7 +127,7 @@
   
   <xsl:function name="f:previous-spec-list">
     <xsl:param name="specs" as="document-node(element(xhtml:html))+"/>
-    <xsl:variable name="crs" select="$specs[.//xhtml:meta[@name eq 'spec-w3c-doctype']/@content=('cr','pr')]"/>
+    <xsl:variable name="crs" select="$specs[.//xhtml:meta[@name eq 'spec-w3c-doctype']/@content=('cr','pr','rec')]"/>
     <xsl:variable name="sorted-crs" select="sort($crs,(),function($cr) { f:parse-pubdate($cr) })"/>
     <xsl:sequence select="reverse($sorted-crs)"/>
   </xsl:function>
