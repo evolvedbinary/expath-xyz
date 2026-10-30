@@ -3,7 +3,8 @@
   version="2.0"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:spec="http://expath.org/ns/xmlspec"
-  xmlns:fos="http://www.w3.org/xpath-functions/spec/namespace" 
+  xmlns:fos="http://www.w3.org/xpath-functions/spec/namespace"
+  xmlns:f="http://function.expath.xyz"
   exclude-result-prefixes="#all">
 
 
@@ -35,7 +36,7 @@
   
 <!-- 
   <xsl:template match="loc/@href">
-    <xsl:attribute name="href" select="spec:replace-url(., $original-site, $updated-site)"/>
+    <xsl:attribute name="href" select="f:replace-url(., $original-site, $updated-site)"/>
   </xsl:template> -->
 
   
@@ -43,7 +44,11 @@
     <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
       <head>
         <meta charset="utf-8" />
+
+        <meta name="spec-w3c-doctype" content="{@w3c-doctype}"/>
+        <meta name="spec-family" content="{header/title/@role}"/>
         <title><xsl:value-of select="header/title"/></title>
+          
         
         <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer="defer"></script>
         
@@ -86,36 +91,22 @@
             </xsl:if>
 
             <xsl:if test="header/pubdate">
-            publishDate: "<xsl:value-of select="normalize-space(header/pubdate/year)"/>-<xsl:choose>
-              <xsl:when test="header/pubdate/month='January'">01</xsl:when>
-              <xsl:when test="header/pubdate/month='February'">02</xsl:when>
-              <xsl:when test="header/pubdate/month='March'">03</xsl:when>
-              <xsl:when test="header/pubdate/month='April'">04</xsl:when>
-              <xsl:when test="header/pubdate/month='May'">05</xsl:when>
-              <xsl:when test="header/pubdate/month='June'">06</xsl:when>
-              <xsl:when test="header/pubdate/month='July'">07</xsl:when>
-              <xsl:when test="header/pubdate/month='August'">08</xsl:when>
-              <xsl:when test="header/pubdate/month='September'">09</xsl:when>
-              <xsl:when test="header/pubdate/month='October'">10</xsl:when>
-              <xsl:when test="header/pubdate/month='November'">11</xsl:when>
-              <xsl:when test="header/pubdate/month='December'">12</xsl:when>
-              <xsl:otherwise><xsl:value-of select="normalize-space(header/pubdate/month)"/></xsl:otherwise>
-            </xsl:choose>-<xsl:value-of select="format-number(number(header/pubdate/day), '00')"/>",
+            publishDate: "<xsl:value-of select="f:parse-xmlspec-pubdate(header/pubdate)" />",
             </xsl:if>
 
             <xsl:if test="header/latestloc/loc">
-            edDraftURI: "<xsl:value-of select="spec:replace-url(normalize-space(header/latestloc/loc[1]/@href), $original-site, $updated-site)"/>",
+            edDraftURI: "<xsl:value-of select="f:replace-url(normalize-space(header/latestloc/loc[1]/@href), $original-site, $updated-site)"/>",
             </xsl:if>
 
             <xsl:if test="header/prevlocs/loc">
-            prevED: "<xsl:value-of select="spec:replace-url(normalize-space(header/prevlocs/loc[1]/@href), $original-site, $updated-site)"/>",
+            prevED: "<xsl:value-of select="f:replace-url(normalize-space(header/prevlocs/loc[1]/@href), $original-site, $updated-site)"/>",
             </xsl:if>
 
             <xsl:if test="header/altlocs/loc">
             alternateFormats: [
               <xsl:for-each select="header/altlocs/loc">
               {
-                uri: "<xsl:value-of select="spec:replace-url(@href, $original-site, $updated-site)"/>",
+                uri: "<xsl:value-of select="f:replace-url(@href, $original-site, $updated-site)"/>",
                 label: "<xsl:value-of select="normalize-space(.)"/>"
               }<xsl:if test="position() != last()">,</xsl:if>
               </xsl:for-each>
@@ -539,11 +530,20 @@
 		<xsl:sequence select="$fspec"/>
 	</xsl:function>
 
-  <xsl:function name="spec:replace-url" as="xs:string">
+  <xsl:function name="f:replace-url" as="xs:string">
     <xsl:param name="url" as="xs:string"/>
     <xsl:param name="old-site" as="xs:string"/>
     <xsl:param name="new-site" as="xs:string"/>
     <xsl:sequence select="replace($url, $old-site, $new-site)"/>
+  </xsl:function>
+
+  <xsl:function name="f:parse-xmlspec-pubdate" as="xs:date">
+    <xsl:param name="pubdate" as="element(pubdate)"/>
+    <xsl:variable name="months" select="('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')"/>
+    <xsl:variable name="day" as="xs:string" select="format-number($pubdate/day, '00')"/>
+    <xsl:variable name="month" as="xs:string" select="format-number(index-of($months, $pubdate/month), '00')"/>
+    <xsl:variable name="year" as="xs:string" select="$pubdate/year"/>
+    <xsl:sequence select="xs:date($year || '-' || $month || '-' || $day)"/>
   </xsl:function>
 
   
