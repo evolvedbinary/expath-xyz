@@ -45,6 +45,10 @@
                 <directory>src/main/xslt</directory>
                 <filtering>false</filtering>
             </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
         </resources>
 
         <plugins>
@@ -57,6 +61,7 @@
                             <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
                             <excludes>
                                 <exclude>src/main/xslt/**</exclude>
+                                <exclude>src/main/resources/**</exclude>
                             </excludes>
                         </licenseSet>
                     </licenseSets>
