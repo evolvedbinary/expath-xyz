@@ -48,6 +48,13 @@
         </dependency>
     </dependencies>
 
+    <properties>
+        <xml.input.dir>${project.basedir}/src/main/xhtml</xml.input.dir>
+        <css.input.dir>${project.basedir}/src/main/css</css.input.dir>
+        <website.output.dir>${project.build.directory}/website</website.output.dir>
+        <website.specs.output.dir>${website.output.dir}/specs</website.specs.output.dir>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -65,10 +72,10 @@
                         <configuration>
                             <resources>
                                 <resource>
-                                    <directory>${project.basedir}/src/main/css</directory>
+                                    <directory>${css.input.dir}</directory>
                                 </resource>
                             </resources>
-                            <outputDirectory>${project.build.directory}/website</outputDirectory>
+                            <outputDirectory>${website.output.dir}</outputDirectory>
                         </configuration>
                     </execution>
 
@@ -85,7 +92,44 @@
                                     <directory>${project.basedir}/../expath-cg-distribution/target/expath-cg-distribution-${project.version}</directory>
                                 </resource>
                             </resources>
-                            <outputDirectory>${project.build.directory}/website/specs</outputDirectory>
+                            <outputDirectory>${website.specs.output.dir}</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>nu.validator</groupId>
+                <artifactId>vnu-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>validate-input</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>validate</goal>
+                        </goals>
+                        <configuration>
+                            <filesets>
+                                <fileset>
+                                    <directory>${xml.input.dir}</directory>
+                                    <glob>spec-index.xhtml</glob>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>validate-output</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>validate</goal>
+                        </goals>
+                        <configuration>
+                            <filesets>
+                                <fileset>
+                                    <directory>${website.output.dir}</directory>
+                                    <glob>spec-index.xhtml</glob>
+                                </fileset>
+                            </filesets>
                         </configuration>
                     </execution>
                 </executions>
@@ -103,7 +147,7 @@
                         <configuration>
                             <transformationSets>
                                 <transformationSet>
-                                    <dir>${project.basedir}/src/main/xhtml</dir>
+                                    <dir>${xml.input.dir}</dir>
                                     <includes>
                                         <include>spec-index.xhtml</include>
                                     </includes>
@@ -111,10 +155,10 @@
                                     <parameters>
                                         <parameter>
                                             <name>spec-directory</name>
-                                            <value>${project.build.directory}/website/specs</value>
+                                            <value>${website.specs.output.dir}</value>
                                         </parameter>
                                     </parameters>
-                                    <outputDir>${project.build.directory}/website</outputDir>
+                                    <outputDir>${website.output.dir}</outputDir>
                                     <fileMappers>
                                         <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
                                             <targetExtension>.xhtml</targetExtension>
@@ -148,6 +192,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
+
         </plugins>
     </build>
 </project>
