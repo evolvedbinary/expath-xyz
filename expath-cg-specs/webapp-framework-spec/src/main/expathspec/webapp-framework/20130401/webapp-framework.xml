@@ -878,7 +878,7 @@ declare function app:echo($input as item()+) as element()+
          <head>Webapp descriptor</head>
          <p>This section defines the webapp descriptor <code>expath-web.xml</code>. Only the overall
             structure of the descriptor is given, referencing to elements defined in the previous
-            section, <specref ref="webapps"/>. See the section <specref ref="expath-pkg.xsd"/> for a
+            section, <specref ref="webapps"/>. See the section <specref ref="webapp-framework.xsd"/> for a
             formal schema of the entire descriptor format.</p>
          <p>The root element of the descriptor is <code>webapp</code>:</p>
          <eg>
