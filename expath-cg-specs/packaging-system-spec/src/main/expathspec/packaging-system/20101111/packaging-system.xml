@@ -104,7 +104,7 @@
             Alongside this descriptor, the root of the ZIP file contains a directory named after the
             module abbrev, which contains the components and any other file the package
             needs. All the relative URIs used to identify components are relative to the package
-            directory.  See <specref ref="expath-pkg.xsd"/> for a normative schema.</p>
+            directory.  See <specref ref="expath-packaging-system.xsd"/> for a normative schema.</p>
          <note>
             <p>Because this package format is designed to be extensible and used as a building block
                by other specifications, the ZIP file can contain another entries at top-level. They

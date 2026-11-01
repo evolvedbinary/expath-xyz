@@ -4,7 +4,7 @@
            targetNamespace="http://expath.org/ns/pkg/exist"
            elementFormDefault="qualified">
 
-   <xs:import namespace="http://expath.org/ns/pkg" schemaLocation="expath-pkg.xsd"/>
+   <xs:import namespace="http://expath.org/ns/pkg" schemaLocation="expath-packaging-system.xsd"/>
 
    <xs:element name="package">
       <xs:complexType>
