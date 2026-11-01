@@ -59,7 +59,7 @@
         <xhtml:div class="spec-main">
           <xsl:choose>
             <xsl:when test="exists($latest-version)">
-              <xhtml:h3><a href="{f:format-spec-path($latest-version)}"><xsl:value-of select="$latest-version//xhtml:title"/></xhtml:a></xhtml:h3>
+              <xhtml:h3><xhtml:a href="{f:format-spec-path($latest-version)}"><xsl:value-of select="$latest-version//xhtml:title"/></xhtml:a></xhtml:h3>
               <xhtml:blockquote>
                 <!-- get the abstract from the  main module file-->
                 <xsl:value-of select="$latest-version//xhtml:section[@id='abstract']/xhtml:p"/>

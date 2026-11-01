@@ -169,28 +169,6 @@
                         </configuration>
                     </execution>
                 </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>${project.groupId}</groupId>
-                        <artifactId>expath-cg-catalog</artifactId>
-                        <version>${project.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>${project.groupId}</groupId>
-                        <artifactId>w3c-xpath-functions-schema</artifactId>
-                        <version>${project.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>${project.groupId}</groupId>
-                        <artifactId>w3c-xml-schema</artifactId>
-                        <version>${project.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>${project.groupId}</groupId>
-                        <artifactId>expath-expathspec-schema</artifactId>
-                        <version>${project.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
         </plugins>
