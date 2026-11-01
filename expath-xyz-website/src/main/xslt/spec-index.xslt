@@ -34,68 +34,68 @@
   <xsl:variable name="spec-docs" as="document-node(element(xhtml:html))*"
     select="collection('file://' || $spec-directory || '?recurse=yes;stable=yes;select=*.xhtml')" />
 
-  <xsl:template match="nav[@id eq 'specification-index']">
+  <xsl:template match="xhtml:nav[@id eq 'specification-index']">
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>
-      <ul>
+      <xhtml:ul>
         <xsl:for-each-group select="$spec-docs"  group-by="//xhtml:meta[@name eq 'spec-family']/@content">
           <xsl:sort select="current-grouping-key()"/>
           <xsl:variable name="spec-family" select="current-group()"/>
-          <li><a href="#{current-grouping-key()}"><xsl:value-of select="$spec-family[1]//xhtml:title"/></a></li>
+          <xhtml:li><xhtml:a href="#{current-grouping-key()}"><xsl:value-of select="$spec-family[1]//xhtml:title"/></xhtml:a></xhtml:li>
         </xsl:for-each-group>
-      </ul>
-    </xsl:copy>      
+      </xhtml:ul>
+    </xsl:copy>
   </xsl:template>
 
 
-  <xsl:template match="main">
+  <xsl:template match="xhtml:main">
     <xsl:copy>
-      <h2>Specifications</h2>
+      <xhtml:h2>Specifications</xhtml:h2>
       <xsl:for-each-group select="$spec-docs"  group-by="//xhtml:meta[@name eq 'spec-family']/@content">
        <xsl:sort select="current-grouping-key()"/>
        <xsl:variable name="spec-family" select="current-group()"/>
         <xsl:variable name="latest-version" select="f:latest-spec($spec-family)"/>
-        <article id="{current-grouping-key()}">
-        <div class="spec-main">
+        <xhtml:article id="{current-grouping-key()}">
+        <xhtml:div class="spec-main">
           <xsl:choose>
             <xsl:when test="exists($latest-version)">
-              <h3><a href="{f:format-spec-path($latest-version)}"><xsl:value-of select="$latest-version//xhtml:title"/></a></h3>
-              <blockquote>
+              <xhtml:h3><a href="{f:format-spec-path($latest-version)}"><xsl:value-of select="$latest-version//xhtml:title"/></xhtml:a></xhtml:h3>
+              <xhtml:blockquote>
                 <!-- get the abstract from the  main module file-->
                 <xsl:value-of select="$latest-version//xhtml:section[@id='abstract']/xhtml:p"/>
-              </blockquote>
+              </xhtml:blockquote>
             </xsl:when>
             <xsl:otherwise>
               <xsl:variable name="latest-draft" select="f:latest-editors-draft($spec-family)"/>
-              <h3><a href="{f:format-spec-path($latest-draft)}"><xsl:value-of select="$latest-draft//xhtml:title"/></a></h3>
-              <blockquote>
+              <xhtml:h3><xhtml:a href="{f:format-spec-path($latest-draft)}"><xsl:value-of select="$latest-draft//xhtml:title"/></xhtml:a></xhtml:h3>
+              <xhtml:blockquote>
                 <xsl:value-of select="$latest-draft//xhtml:section[@id='abstract']/xhtml:p"/>
-              </blockquote>
+              </xhtml:blockquote>
               
             </xsl:otherwise>
           </xsl:choose>
           
-        </div>
-        <div class="spec-meta">
+        </xhtml:div>
+        <xhtml:div class="spec-meta">
           <xsl:choose>
             <xsl:when test="exists($latest-version)">
-              <p class="latest"><a href="{f:format-spec-path($latest-version)}"><b>Latest version</b></a></p>
+              <xhtml:p class="latest"><xhtml:a href="{f:format-spec-path($latest-version)}"><xhtml:b>Latest version</xhtml:b></xhtml:a></xhtml:p>
             </xsl:when>
           </xsl:choose>
           <xsl:variable name="latest-draft" select="f:latest-editors-draft($spec-family)"/>
           <xsl:choose>
             <xsl:when test="exists($latest-draft)">
-              <p class="draft"><a href="{f:format-spec-path($latest-draft)}">Editor's draft</a></p>
+              <xhtml:p class="draft"><xhtml:a href="{f:format-spec-path($latest-draft)}">Editor's draft</xhtml:a></xhtml:p>
             </xsl:when>
           </xsl:choose>
-          <ul>
+          <xhtml:ul>
             <xsl:for-each select="f:previous-spec-list($spec-family)">
-              <li><a href="{f:format-spec-path(.)}"><xsl:copy-of select="f:doc-status(.)"/></a> — <xsl:value-of select="f:parse-pubdate(.)"/></li>
+              <xhtml:li><xhtml:a href="{f:format-spec-path(.)}"><xsl:copy-of select="f:doc-status(.)"/></xhtml:a> — <xsl:value-of select="f:parse-pubdate(.)"/></xhtml:li>
             </xsl:for-each>
-          </ul>
-        </div>
-      </article>
-      <hr/>
+          </xhtml:ul>
+        </xhtml:div>
+      </xhtml:article>
+      <xhtml:hr/>
       </xsl:for-each-group>
     </xsl:copy>
   </xsl:template>
