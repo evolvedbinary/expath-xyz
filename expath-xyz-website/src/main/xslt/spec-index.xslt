@@ -48,8 +48,9 @@
   </xsl:template>
 
 
-    <xsl:template match="main">
-    <h2>Specifications</h2>
+  <xsl:template match="main">
+    <xsl:copy>
+      <h2>Specifications</h2>
       <xsl:for-each-group select="$spec-docs"  group-by="//xhtml:meta[@name eq 'spec-family']/@content">
        <xsl:sort select="current-grouping-key()"/>
        <xsl:variable name="spec-family" select="current-group()"/>
@@ -87,21 +88,16 @@
               <p class="draft"><a href="{f:format-spec-path($latest-draft)}">Editor's draft</a></p>
             </xsl:when>
           </xsl:choose>
-          
-
           <ul>
-            
             <xsl:for-each select="f:previous-spec-list($spec-family)">
-              <li><a href="{f:format-spec-path(.)}">Candidate Module</a> — <xsl:value-of select="f:parse-pubdate(.)"/></li>
+              <li><a href="{f:format-spec-path(.)}"><xsl:copy-of select="f:doc-status(.)"/></a> — <xsl:value-of select="f:parse-pubdate(.)"/></li>
             </xsl:for-each>
           </ul>
-          
         </div>
       </article>
       <hr/>
       </xsl:for-each-group>
-
-   
+    </xsl:copy>
   </xsl:template>
   
   <xsl:template match="@*|node()">
@@ -182,6 +178,36 @@
     <xsl:variable name="document-uri" select="document-uri($node)"/>
     <xsl:variable name="formatted-path" select="substring-after($document-uri, $spec-directory)"/>
     <xsl:sequence select="'specs' || $formatted-path"/>
+  </xsl:function>
+
+  <!--
+    Get a human readable description of the status of a ReSpec spec.
+    Cnomputed from the spec-w3c-doctype metadata.
+    
+    @param spec - The ReSpec document.
+    
+    @return The human readable document status.
+  -->
+  <xsl:function name="f:doc-status" as="text()">
+    <xsl:param name="spec" as="document-node(element(xhtml:html))"/>
+    <xsl:variable name="doctype" as="xs:string" select="$spec//xhtml:meta[@name eq 'spec-w3c-doctype']/@content"/>
+    <xsl:choose>
+      <xsl:when test="$doctype eq 'cr'">
+        <xsl:text>Candidate Recommendation</xsl:text>
+      </xsl:when>
+      <xsl:when test="$doctype eq 'pr'">
+        <xsl:text>Proposed Recommendation</xsl:text>
+      </xsl:when>
+      <xsl:when test="$doctype eq 'rec'">
+        <xsl:text>Recommendation</xsl:text>
+      </xsl:when>
+      <xsl:when test="$doctype eq 'wd'">
+        <xsl:text>Working Draft</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:message terminate="yes">Unknown doctype: <xsl:value-of select="$doctype"/></xsl:message>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:function>
 
 </xsl:stylesheet>
