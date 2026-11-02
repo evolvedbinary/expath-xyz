@@ -61,33 +61,9 @@
             shortName: "<xsl:value-of select="normalize-space(header/title)"/>",
             group: "expath",
             
-            editors: [
-              <xsl:for-each select="header/authlist/author[@role='editor']">
-              {
-                name: "<xsl:value-of select="normalize-space(name)"/>",
-                <xsl:if test="affiliation">
-                company: "<xsl:value-of select="normalize-space(affiliation)"/>",
-                </xsl:if>
-                <xsl:if test="email">
-                mailto: "<xsl:value-of select="normalize-space(email)"/>",
-                </xsl:if>
-              }<xsl:if test="position() != last()">,</xsl:if>
-              </xsl:for-each>
-            ],
-            <xsl:if test="header/authlist/author[@role='contrib']">
-            authors: [
-              <xsl:for-each select="header/authlist/author[@role='contrib']">
-              {
-                name: "<xsl:value-of select="normalize-space(name)"/>",
-                <xsl:if test="affiliation">
-                company: "<xsl:value-of select="normalize-space(affiliation)"/>",
-                </xsl:if>
-                <xsl:if test="email">
-                mailto: "<xsl:value-of select="normalize-space(email)"/>",
-                </xsl:if>
-              }<xsl:if test="position() != last()">,</xsl:if>
-              </xsl:for-each>
-            ],
+            editors: <xsl:copy-of select="f:authors-to-json(header/authlist/author[@role eq 'editor'])"/>,
+            <xsl:if test="header/authlist/author[@role ne 'editor']">
+              authors: <xsl:copy-of select="f:authors-to-json(header/authlist/author[@role ne 'editor'])"/>,
             </xsl:if>
 
             <xsl:if test="header/pubdate">
@@ -544,6 +520,41 @@
     <xsl:sequence select="xs:date($year || '-' || $month || '-' || $day)"/>
   </xsl:function>
 
-  
+  <!--
+    Create JSON objects of the authors details.
+    
+    @param authors - the authors.
+    
+    @return The authors JSON (as text nodes).
+  -->
+  <xsl:function name="f:authors-to-json" as="text()+">
+    <xsl:param name="authors" as="element(author)+"/>
+    [
+      <xsl:for-each select="$authors">
+        <xsl:copy-of select="f:author-to-json(.)"/>
+        <xsl:if test="position() ne last()">,</xsl:if>
+      </xsl:for-each>
+    ]
+  </xsl:function>
+
+  <!--
+    Create a JSON object of the authors details.
+    
+    @param author - the author.
+    
+    @return The author JSON (as text nodes).
+  -->
+  <xsl:function name="f:author-to-json" as="text()+">
+    <xsl:param name="author" as="element(author)"/>
+    {
+    name: "<xsl:value-of select="normalize-space($author/name)"/>"<xsl:if test="exists($author/(affiliation|email))">,</xsl:if>
+      <xsl:if test="$author/affiliation">
+        company: "<xsl:value-of select="normalize-space($author/affiliation)"/>",
+      </xsl:if>
+      <xsl:if test="$author/email">
+        mailto: "<xsl:value-of select="normalize-space($author/email)"/>"
+      </xsl:if>
+    }
+  </xsl:function>
 
 </xsl:stylesheet>
