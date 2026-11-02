@@ -55,8 +55,8 @@
         <script class="remove">
           var respecConfig = {
             specStatus: "<xsl:choose>
-              <xsl:when test="@w3c-doctype='wd'">CG-FINAL</xsl:when>
-              <xsl:when test="@w3c-doctype='cr'">CG-DRAFT</xsl:when>
+              <xsl:when test="@w3c-doctype eq 'rec'">CG-FINAL</xsl:when>
+              <xsl:otherwise>CG-DRAFT</xsl:otherwise>
             </xsl:choose>",
             shortName: "<xsl:value-of select="normalize-space(header/title)"/>",
             group: "expath",
