@@ -25,7 +25,7 @@
          <loc href="http://expath.org/spec/geo/yyyymmdd"/>
       </prevlocs-->
       <authlist>
-         <author>
+         <author role="editor">
             <name>Peter Rushforth</name>
             <affiliation>geofunctions.org</affiliation>
          </author>

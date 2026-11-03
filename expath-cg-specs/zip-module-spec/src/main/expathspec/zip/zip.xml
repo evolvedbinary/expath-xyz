@@ -22,11 +22,11 @@
          <loc href="http://expath.org/spec/zip"/>
       </latestloc>
       <authlist>
-         <author>
+         <author role="editor">
             <name>Phil Fearon</name>
             <affiliation>Qutoric Limited</affiliation>
          </author>        
-         <author>
+         <author role="contrib">
             <name>Florent Georges</name>
             <affiliation>H2O Consulting</affiliation>
          </author>
