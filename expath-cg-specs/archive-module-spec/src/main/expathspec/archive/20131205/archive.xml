@@ -406,7 +406,7 @@ for $e in arch:entries(file:read-binary("lib/saxon9-sql.jar"))[ends-with(.,'.cla
         <note>
           <p>Functions using such maps for arguments and results could either have separate names
             (e.g. <code>arch:entries-as-map()</code>) or be defined in a separate namespace
-              (<code>archM:entries()</code>) – in this current draft the second is used. Details are
+              (<code>arch:entries()</code>) – in this current draft the second is used. Details are
             discussed in <specref ref="maps"/></p>
         </note>
 
@@ -537,7 +537,7 @@ for $e in arch:entries(file:read-binary("lib/saxon9-sql.jar"))[ends-with(.,'.cla
           <item>
             <p><code>content</code>: the value of the entry read from the archive, as
                 <code>xs:base64Binary</code>. This will only be set if <code>$return-content</code>
-              is requested in the call to <code>archM:entries()</code>.</p>
+              is requested in the call to <code>arch:entries()</code>.</p>
           </item>
         </ulist>
         <p>When used to extract an entry from an archive, this map may have the following optional
@@ -575,31 +575,31 @@ for $e in arch:entries(file:read-binary("lib/saxon9-sql.jar"))[ends-with(.,'.cla
         </ulist>
       </div2>
       <div2 id="fn.options.map">
-        <head><?function archM:options?></head>
+        <head><?function arch:options?></head>
       </div2>
       <div2 id="fn.entries.map">
-        <head><?function archM:entries?></head>
+        <head><?function arch:entries?></head>
       </div2>
       <div2 id="fn.entry.names.map">
-        <head><?function archM:entry-names?></head>
+        <head><?function arch:entry-names?></head>
       </div2>
       <div2 id="fn.extractmap">
-        <head><?function archM:extract?></head>
+        <head><?function arch:extract-map?></head>
       </div2>
       <div2 id="fn.extract.binary.map">
-        <head><?function archM:extract-binary?></head>
+        <head><?function arch:extract-binary?></head>
       </div2>
       <div2 id="fn.extract.text.map">
-        <head><?function archM:extract-text?></head>
+        <head><?function arch:extract-text?></head>
       </div2>
       <div2 id="fn.create.map">
-        <head><?function archM:create?></head>
+        <head><?function arch:create?></head>
       </div2>
       <div2 id="fn.update.map">
-        <head><?function archM:update?></head>
+        <head><?function arch:update?></head>
       </div2>
       <div2 id="fn.delete.map">
-        <head><?function archM:delete?></head>
+        <head><?function arch:delete?></head>
       </div2>
     </div1>
 
