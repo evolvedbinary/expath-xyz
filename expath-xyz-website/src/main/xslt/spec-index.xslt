@@ -65,7 +65,7 @@
               </blockquote>
             </xsl:when>
             <xsl:otherwise>
-              <xsl:variable name="latest-draft" select="f:latest-draft($spec-family)"/>
+              <xsl:variable name="latest-draft" select="f:latest-editors-draft($spec-family)"/>
               <h3><a href="{f:format-spec-path($latest-draft)}"><xsl:value-of select="$latest-draft//xhtml:title"/></a></h3>
               <blockquote>
                 <xsl:value-of select="$latest-draft//xhtml:section[@id='abstract']/xhtml:p"/>
@@ -81,7 +81,7 @@
               <p class="latest"><a href="{f:format-spec-path($latest-version)}"><b>Latest version</b></a></p>
             </xsl:when>
           </xsl:choose>
-          <xsl:variable name="latest-draft" select="f:latest-draft($spec-family)"/>
+          <xsl:variable name="latest-draft" select="f:latest-editors-draft($spec-family)"/>
           <xsl:choose>
             <xsl:when test="exists($latest-draft)">
               <p class="draft"><a href="{f:format-spec-path($latest-draft)}">Editor's draft</a></p>
@@ -109,27 +109,72 @@
       <xsl:apply-templates select="@*|node()"/>
     </xsl:copy>
   </xsl:template>
+
+
+  <!--
+    Get the latest Editors Draft.
+    
+    @param specs - the specs to consider for the list.
+    
+    @return the latest Editor's Draft, or an empty sequence if there are no non-editor's drafts.
+  -->
+  <xsl:function name="f:latest-editors-draft" as="document-node(element(xhtml:html))?">
+    <xsl:param name="specs" as="document-node(element(xhtml:html))+"/>
+    <xsl:sequence select="head(f:spec-list($specs, 'wd'))"/>
+  </xsl:function>
   
+  <!--
+    Get the latest spec (that is not an Editors Draft).
+    
+    @param specs - the specs to consider for the list.
+    
+    @return the latest spec, or an empty sequence if there are no non-editor's drafts.
+  -->
   <xsl:function name="f:latest-spec" as="document-node(element(xhtml:html))?">
     <xsl:param name="specs" as="document-node(element(xhtml:html))+"/>
-    <xsl:variable name="crs" as="document-node(element(xhtml:html))*" select="$specs[.//xhtml:meta[@name eq 'spec-w3c-doctype']/@content=('cr','pr','rec')]"/>
-        
-    <xsl:variable name="sorted-crs" select="sort($crs,(),function($cr) { f:parse-pubdate($cr) })"/>
-    <xsl:sequence select="reverse($sorted-crs)[1]"/>
-  </xsl:function>
-
-    <xsl:function name="f:latest-draft" as="document-node(element(xhtml:html))?">
-    <xsl:param name="specs" as="document-node(element(xhtml:html))+"/>
-    <xsl:variable name="drs" as="document-node(element(xhtml:html))*" select="$specs[.//xhtml:meta[@name eq 'spec-w3c-doctype']/@content=('wd')]"/>
-    <xsl:variable name="sorted-drs" select="sort($drs,(),function($dr) { f:parse-pubdate($dr) })"/>
-      <xsl:sequence select="reverse($sorted-drs)[1]"/>
+    <xsl:sequence select="head(f:spec-list($specs, ('cr','pr','rec')))"/>
   </xsl:function>
   
-  <xsl:function name="f:previous-spec-list">
+  <!--
+    Get a list of all but the latest specs (that are not Editors Drafts) in descending date order.
+    
+    @param specs - the specs to consider for the list.
+    
+    @return a list of matching specs.
+  -->
+  <xsl:function name="f:previous-spec-list"> 
     <xsl:param name="specs" as="document-node(element(xhtml:html))+"/>
-    <xsl:variable name="crs" select="$specs[.//xhtml:meta[@name eq 'spec-w3c-doctype']/@content=('cr','pr','rec')]"/>
-    <xsl:variable name="sorted-crs" select="sort($crs,(),function($cr) { f:parse-pubdate($cr) })"/>
-    <xsl:sequence select="reverse($sorted-crs)"/>
+    <xsl:sequence select="tail(f:spec-list($specs, ('cr','pr','rec')))"/>
+  </xsl:function>
+  
+  <!--
+    Get a list of matching specs in descending date order.
+    
+    @param specs - the specs to consider for the list.
+    @param spec-w3c-doctypes - the w3c-doctypes to consider for the list (e.g. cr, pr, etc...).
+    
+    @return a list of matching specs.
+  -->
+  <xsl:function name="f:spec-list">
+    <xsl:param name="specs" as="document-node(element(xhtml:html))+"/>
+    <xsl:param name="spec-w3c-doctypes" as="xs:string+"/>
+    <xsl:variable name="matching-specs" select="$specs[.//xhtml:meta[@name eq 'spec-w3c-doctype']/@content = $spec-w3c-doctypes]"/>
+    <xsl:variable name="sorted-matching-specs" select="sort($matching-specs, (),  function($matching-spec) { f:parse-pubdate($matching-spec) })"/>
+    <xsl:sequence select="reverse($sorted-matching-specs)"/>
+  </xsl:function>
+
+  <!--
+    Parses the publictaion date from the ReSpec input.
+    
+    @param doc - The ReSpec document.
+    
+    @return an xs:date of the publication date.
+  -->
+  <xsl:function name="f:parse-pubdate" as="xs:date">
+    <xsl:param name="doc" as="document-node(element(xhtml:html))"/>
+    <xsl:variable name="script" as="xs:string" select="$doc//xhtml:script[@class eq 'remove'][contains(., 'respecConfig')]"/>
+    <xsl:variable name="publish-date" as="xs:date" select="xs:date(analyze-string($script, 'publishDate:\s*&quot;(.+)&quot;')//fn:group[@nr eq '1'])"/>
+    <xsl:sequence select="$publish-date"/>
   </xsl:function>
   
   <xsl:function name="f:format-spec-path">
@@ -137,14 +182,6 @@
     <xsl:variable name="document-uri" select="document-uri($node)"/>
     <xsl:variable name="formatted-path" select="substring-after($document-uri, $spec-directory)"/>
     <xsl:sequence select="'specs' || $formatted-path"/>
-  </xsl:function>
-
-
-  <xsl:function name="f:parse-pubdate" as="xs:date">
-    <xsl:param name="doc" as="document-node(element(xhtml:html))"/>
-    <xsl:variable name="script" as="xs:string" select="$doc//xhtml:script[@class eq 'remove'][contains(., 'respecConfig')]"/>
-    <xsl:variable name="publish-date" as="xs:date" select="xs:date(analyze-string($script, 'publishDate:\s*&quot;(.+)&quot;')//fn:group[@nr eq '1'])"/>
-    <xsl:sequence select="$publish-date"/>
   </xsl:function>
 
 </xsl:stylesheet>
