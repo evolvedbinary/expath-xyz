@@ -89,20 +89,34 @@ main h2 {
   margin: 0 0 2rem;
 }
 
+/* Two shared columns for every article: the second column is sized to the
+   widest .spec-meta across all articles, so the lists never wrap and all
+   share the same width. */
+main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  column-gap: 2rem;
+}
+
+main > h2,
+main > hr {
+  grid-column: 1 / -1;
+}
+
 article {
-  display: flex;
-  gap: 2rem;
-  align-items: flex-start;
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  align-items: start;
   padding: 0;
 }
 
 .spec-main {
-  flex: 1;
   min-width: 0;
 }
 
 .spec-meta {
-  flex: 0 0 270px;
+  white-space: nowrap;
 }
 
 hr {
