@@ -8,15 +8,24 @@
   exclude-result-prefixes="#all">
 
 
+    <xsl:param name="specref-map" as="xs:string" select="'specref-map.xml'"/>
+    <xsl:param name="function-catalog" as="xs:string" select="'function-catalog.xml'"/>
     <xsl:param name="original-site" as="xs:string" select="'http://expath.org'"/>
     <xsl:param name="updated-site" as="xs:string" select="'https://www.expath.xyz'"/>
 
     <xsl:output method="xhtml" html-version="5" media-type="text/html" include-content-type="no" encoding="UTF-8" omit-xml-declaration="no" indent="yes"/>
-
-    <xsl:variable name="fosdoc" select="document('function-catalog.xml', /)"/>
+    
+    <xsl:variable name="specref-mappings" as="document-node(element(mappings))" select="doc($specref-map)"/>
+    <xsl:variable name="localbibl-entries" as="element(mapping)*" select="$specref-mappings/mappings/mapping[title]"/>
     <xsl:variable name="isFO" select="contains(/spec/header/title, 'Functions and Operators')" as="xs:boolean"/>
-
-    <xsl:template match="processing-instruction(oxygen)"/>
+    <xsl:variable name="func-catalog-uri" as="xs:anyURI" select="resolve-uri($function-catalog, base-uri())"/>
+    <xsl:variable name="fos-functions" as="element(fos:function)*">
+      <xsl:if test="doc-available($func-catalog-uri)">
+        <xsl:sequence select="doc($func-catalog-uri)/fos:functions/fos:function"/>
+      </xsl:if>
+    </xsl:variable>
+  
+  <xsl:template match="processing-instruction(oxygen)"/>
 
 	<xsl:template name="make-property-termref">
 		<xsl:choose>
@@ -32,13 +41,13 @@
 		
 	</xsl:template>
   
-    <xsl:template match="@xml:space"/>
+  <xsl:template match="@xml:space"/>
   
-<!-- 
+  <!-- 
   <xsl:template match="loc/@href">
     <xsl:attribute name="href" select="f:replace-url(., $original-site, $updated-site)"/>
-  </xsl:template> -->
-
+  </xsl:template>
+  -->
   
   <xsl:template match="spec">
     <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -84,19 +93,25 @@
               {
                 uri: "<xsl:value-of select="f:replace-url(@href, $original-site, $updated-site)"/>",
                 label: "<xsl:value-of select="normalize-space(.)"/>"
-              }<xsl:if test="position() != last()">,</xsl:if>
+              }<xsl:if test="position() ne last()">,</xsl:if>
               </xsl:for-each>
             ],
             </xsl:if>
 
             xref: "web-platform",
+            
+            <xsl:variable name="used-bibrefs" as="xs:string*" select="distinct-values(//bibref/@ref)"/>
+            <xsl:variable name="used-localbibl-entries" as="element(mapping)*" select="$localbibl-entries[@xmlspec = $used-bibrefs]"/>
+            <xsl:if test="exists($used-localbibl-entries)">
+            localBiblio: <xsl:sequence select="f:localbibls-to-json($used-localbibl-entries)"/>
+            </xsl:if>
           };
         </script>
 
       </head>
       <body>
         <xsl:apply-templates select="header"/>
-        
+
         <xsl:apply-templates select="body/node()"/>
         <section id="conformance"></section>
         <xsl:apply-templates select="back/node()"/>
@@ -135,9 +150,9 @@
   </xsl:template>
   
   <xsl:template match="head[processing-instruction('function')]" priority="2">
-		<xsl:variable name="lexname" select="processing-instruction('function')/normalize-space(.)"/>
-		<xsl:variable name="fspec"
-			select="fos:get-function(substring-before($lexname, ':'), substring-after($lexname,':'))"/>
+    <xsl:variable name="lexname" select="tokenize(normalize-space(processing-instruction('function')), ':')"/>
+		<xsl:variable name="fspec" select="fos:get-function($fos-functions, $lexname[1], $lexname[2])"/>
+
     <!-- TODO replace h3 with a conditional or get it to use the other template		-->
     <h3 xmlns="http://www.w3.org/1999/xhtml">
 			<xsl:value-of select="$lexname"/>
@@ -172,7 +187,7 @@
 						<xsl:for-each select="$fspec/fos:properties">
 							<p>
 								<xsl:choose>
-									<xsl:when test="last() = 1">
+									<xsl:when test="last() eq 1">
 										<xsl:text>This function is </xsl:text>
 									</xsl:when>
 									<xsl:otherwise> <xsl:text>The </xsl:text>
@@ -184,8 +199,8 @@
 									<xsl:call-template name="make-property-termref"/>
 									
 									
-									<xsl:if test="position() != last()">, </xsl:if>
-									<xsl:if test="position() = last() - 1"> and </xsl:if>
+									<xsl:if test="position() ne last()">, </xsl:if>
+									<xsl:if test="position() eq last() - 1"> and </xsl:if>
 								</xsl:for-each>
 								<xsl:text>. </xsl:text>
 								<xsl:apply-templates select="fos:property/@dependency"/>
@@ -284,11 +299,9 @@
   </xsl:template>
 
   <xsl:template match="bibref">
-    <a xmlns="http://www.w3.org/1999/xhtml" href="#{@ref}">
-      <xsl:text>[</xsl:text>
-      <xsl:value-of select="@ref"/>
-      <xsl:text>]</xsl:text>
-    </a>
+        <xsl:text>[[</xsl:text>
+        <xsl:value-of select="spec:to-specref-key(@ref)"/>
+        <xsl:text>]]</xsl:text>
   </xsl:template>
 
   <xsl:template match="specref">
@@ -313,24 +326,8 @@
     </dd>
   </xsl:template>
 
-  <xsl:template name="get-prefix">
-    <!-- overridden in F+O specification -->
-    <xsl:choose>
-      <xsl:when test="@class = 'op'">op:</xsl:when>
-      <xsl:when test="@class = 'schema'">xs:</xsl:when>
-      <xsl:when test="@class = 'func'">fn:</xsl:when>
-      <xsl:when test="@class = 'dm'"><span xmlns="http://www.w3.org/1999/xhtml" class="prefix">dm:</span></xsl:when>
-      <xsl:when test="ancestor-or-self::*[@prefix][1]/@prefix = 'bin'">bin:</xsl:when>
-      <xsl:when test="ancestor-or-self::*[@prefix][1]/@prefix = 'xp'">xp:</xsl:when>
-      <xsl:otherwise>??:</xsl:otherwise>
-    </xsl:choose>
-</xsl:template>                
-
-
   <xsl:template match="fos:proto">
-    <xsl:variable name="prefix">
-      <xsl:call-template name="get-prefix"/>
-    </xsl:variable>
+    <xsl:variable name="prefix" select="f:get-prefix(.)"/>
   <pre xmlns="http://www.w3.org/1999/xhtml">
     <code>
         <xsl:copy-of select="$prefix"/>
@@ -345,7 +342,7 @@
             <xsl:text> as </xsl:text>
             <xsl:value-of select="@type"/>
 
-            <xsl:if test="position() != last()">
+            <xsl:if test="position() ne last()">
                 <xsl:text>, </xsl:text>
             </xsl:if>
         </xsl:for-each>
@@ -390,7 +387,7 @@
               <xsl:attribute name="class" select="@role"/>
           </xsl:when>
       </xsl:choose>
-      <xsl:apply-templates select="node()|@*[not(name() = ('role'))]"/>
+      <xsl:apply-templates select="node()|@*[name() ne 'role']"/>
     </ol>
   </xsl:template>
 
@@ -461,7 +458,7 @@
   </xsl:template>
   <xsl:template match="termdef">
     <xsl:variable name="term" select="(@term, term)[1]"/>
-    <dt xmlns="http://www.w3.org/1999/xhtml"><xsl:apply-templates select="@*[not(local-name(.) = ('term'))]"/><xsl:value-of select="$term"/></dt>
+    <dt xmlns="http://www.w3.org/1999/xhtml"><xsl:apply-templates select="@*[local-name(.) ne 'term']"/><xsl:value-of select="$term"/></dt>
     <dd xmlns="http://www.w3.org/1999/xhtml"><xsl:apply-templates select="node()"/></dd>
   </xsl:template>
   <xsl:template match="term[parent::termdef]">
@@ -473,7 +470,7 @@
   <!-- transform <termref def="term-id">...</termref> to <a href="#term-id">...</a> -->
   <xsl:template match="termref">
     <a xmlns="http://www.w3.org/1999/xhtml" href="{@def}">
-      <xsl:apply-templates select="node()|@*[not(local-name() = ('def'))]"/>
+      <xsl:apply-templates select="node()|@*[local-name() ne 'def']"/>
     </a>
   </xsl:template>
 
@@ -487,21 +484,37 @@
     </xsl:element>
   </xsl:template>
 
-  <xsl:function name="fos:get-function" as="element(fos:function)?">
+  <xsl:function name="f:get-prefix" as="text()">
+    <xsl:param name="node" as="element(fos:proto)"/>
+    <xsl:variable name="prefix" as="attribute(prefix)" select="$node/ancestor-or-self::*[@prefix][1]/@prefix"/>
+    <xsl:choose>
+      <xsl:when test="exists($prefix)"><xsl:value-of select="concat($prefix, ':')"/></xsl:when>
+      <xsl:otherwise>
+        <xsl:message terminate="yes">Unknown prefix for function: <xsl:copy-of select="$node"/> at: <xsl:sequence select="document-uri(root($node))"/></xsl:message>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>                
+
+  <!--
+    Get a function by its prefix and local name.
+    
+    @param prefix - the namespace prefix for the function.
+    @param local-name - the local-name of the function.
+    
+    @return The function definition, or terminates with an error.
+  -->
+  <xsl:function name="fos:get-function" as="element(fos:function)">
+    <xsl:param name="fos-functions" as="element(fos:function)*"/>
 		<xsl:param name="prefix" as="xs:string"/>
-		<xsl:param name="local" as="xs:string"/>
-		<xsl:variable name="fspec"
-			select="$fosdoc/fos:functions/fos:function
-		[@name=$local][(@prefix, 'fn')[1]=$prefix]"/>
-		<xsl:if test="empty($fspec)">
-			<xsl:message>Function not found in catalog: <xsl:value-of select="$prefix, $local"
-					separator=":"/></xsl:message>
-		</xsl:if>
-		<xsl:if test="exists($fspec[2])">
-			<xsl:message>Duplicate function found in catalog: <xsl:value-of select="$prefix, $local"
-				separator=":"/></xsl:message>
-		</xsl:if>
-		<xsl:sequence select="$fspec"/>
+		<xsl:param name="local-name" as="xs:string"/>
+      <xsl:variable name="fspec" select="$fos-functions[@name eq $local-name][@prefix eq $prefix]"/>
+      <xsl:if test="empty($fspec)">
+        <xsl:message terminate="yes">Function not found in catalog: <xsl:value-of select="$prefix, $local-name" separator=":"/></xsl:message>
+      </xsl:if>
+      <xsl:if test="count($fspec) gt 1">
+        <xsl:message terminate="yes">Duplicate function found in catalog: <xsl:value-of select="$prefix, $local-name" separator=":"/></xsl:message>
+      </xsl:if>
+      <xsl:sequence select="$fspec"/>
 	</xsl:function>
 
   <xsl:function name="f:replace-url" as="xs:string">
@@ -518,6 +531,57 @@
     <xsl:variable name="month" as="xs:string" select="format-number(index-of($months, $pubdate/month), '00')"/>
     <xsl:variable name="year" as="xs:string" select="$pubdate/year"/>
     <xsl:sequence select="xs:date($year || '-' || $month || '-' || $day)"/>
+  </xsl:function>
+
+  <xsl:function name="spec:to-specref-key" as="xs:string">
+    <xsl:param name="bibref" as="xs:string"/>
+    <xsl:choose>
+     <xsl:when test="$specref-mappings//mapping[@xmlspec eq $bibref][empty(title)]">
+        <xsl:sequence select="$specref-mappings//mapping[@xmlspec eq $bibref]/@specref"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="$bibref"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
+  
+  
+  <!--
+    Create JSON object entries of the local bibiographic entries.
+    
+    @param localbibl-entries - the local bibiographic entries.
+    
+    @return The localbiblio JSON entries (as text nodes).
+  -->
+  <xsl:function name="f:localbibls-to-json" as="text()+">
+    <xsl:param name="localbibl-entries" as="element(mapping)+"/>
+    {
+      <xsl:variable name="entries" as="xs:string+">
+        <xsl:for-each select="$localbibl-entries">
+          <xsl:value-of select="concat('&quot;', current()/@xmlspec, '&quot;', ': ', '&#xa;', string-join(f:localbibl-to-json(current()), ''))"/>
+        </xsl:for-each>
+      </xsl:variable>
+      <xsl:value-of select="string-join($entries, ',&#xa;      ')"/>
+    }
+  </xsl:function>
+  
+  <!--
+    Create a JSON object of the local bibiographic entry.
+    
+    @param localbibl-entry - the local bibiographic entry.
+    
+    @return The localbiblio JSON (as text nodes).
+  -->
+  <xsl:function name="f:localbibl-to-json" as="text()+">
+    <xsl:param name="localbibl-entry" as="element(mapping)"/>
+    {
+      <xsl:variable name="fields" as="xs:string+">
+        <xsl:for-each select="$localbibl-entry/child::element()">
+          <xsl:sequence select="concat(local-name(current()), ': ', '&quot;', current(), '&quot;')"/>
+        </xsl:for-each>
+      </xsl:variable>
+      <xsl:value-of select="string-join($fields, ',&#xa;      ')"/>
+    }
   </xsl:function>
 
   <!--
@@ -547,7 +611,7 @@
   <xsl:function name="f:author-to-json" as="text()+">
     <xsl:param name="author" as="element(author)"/>
     {
-    name: "<xsl:value-of select="normalize-space($author/name)"/>"<xsl:if test="exists($author/(affiliation|email))">,</xsl:if>
+      name: "<xsl:value-of select="normalize-space($author/name)"/>"<xsl:if test="exists($author/(affiliation|email))">,</xsl:if>
       <xsl:if test="$author/affiliation">
         company: "<xsl:value-of select="normalize-space($author/affiliation)"/>",
       </xsl:if>

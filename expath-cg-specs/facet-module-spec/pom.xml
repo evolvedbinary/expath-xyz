@@ -133,6 +133,12 @@
                                         <include>**/facet.xml</include>
                                     </includes>
                                     <stylesheet>resource:xmlspec-respec.xslt</stylesheet>
+                                    <parameters>
+                                        <parameter>
+                                            <name>specref-map</name>
+                                            <value>specref-map.xml</value>
+                                        </parameter>
+                                    </parameters>
                                     <fileMappers>
                                         <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
                                             <targetExtension>.xhtml</targetExtension>

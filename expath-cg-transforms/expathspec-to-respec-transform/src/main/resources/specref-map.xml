@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mappings>
+  <mapping xmlspec="zip" specref="ZIP"/>
+  <mapping xmlspec="gzip" specref="rfc1952"/>
+  <mapping xmlspec="fo30" specref="xpath-functions-30"/>
+  <mapping xmlspec="schema10-2" specref="xmlschema-2"/>
+  <mapping xmlspec="ser30" specref="xslt-xquery-serialization-30"/>
+  <mapping xmlspec="xml-dig-sig-core" specref="xmldsig-core"/>
+  <mapping xmlspec="xml-dig-sig-xpath-filer20" specref="xmldsig-filter2"/>
+  <mapping xmlspec="xmlschema1.1" specref="xmlschema11"/>
+  <mapping xmlspec="xquery30" specref="xquery-30"/>
+  <mapping xmlspec="xquery31" specref="xquery-31"/>
+  <mapping xmlspec="xml" specref="xml"/>
+  <mapping xmlspec="xml-exc-c14n" specref="xml-exc-c14n"/>
+  <mapping xmlspec="xml-schema-part-2" specref="xmlschema-2"/>
+  <mapping xmlspec="xmlschema2" specref="xmlschema-2"/>
+  <mapping xmlspec="xpath-30" specref="xpath-30"/>
+  <mapping xmlspec="xpath-datamodel-30" specref="xpath-datamodel-30"/>
+  <mapping xmlspec="xpath-functions-30" specref="xpath-functions-30"/>
+  <mapping xmlspec="xquery-30" specref="xquery-30"/>
+  <mapping xmlspec="xquery31fo" specref="xpath-functions-31"/>
+  <mapping xmlspec="xserial" specref="xslt-xquery-serialization"/>
+  <mapping xmlspec="rfc2104" specref="rfc2104"/>
+  <mapping xmlspec="rfc2617" specref="rfc2617"/>
+  <mapping xmlspec="rfc3023" specref="rfc3023"/>
+  <mapping xmlspec="rfc3987" specref="rfc3987"/>
+  <mapping xmlspec="rfc7159" specref="rfc7159"/>
+  <mapping xmlspec="xslt-30" specref="xslt-30"/>
+  <mapping xmlspec="ieee754" specref="IEEE-754-1985"/>
+  <mapping xmlspec="asn1" specref="X690"/>
+  <mapping xmlspec="fo11" specref="xpath-functions-11-20091215"/>
+  <!-- A PR was sent to add these to specref.org https://github.com/specinfra/specref/pull/980 -->
+  <!-- These mappings are not active at the moment and we will use local entries instead -->
+  <!-- <mapping xmlspec="epub" specref="epub-30"/>
+  <mapping xmlspec="odf" specref="iso-26300-2006"/>
+  <mapping xmlspec="catalog" specref="xml-catalog-11"/>
+  <mapping xmlspec="jsoniq" specref="jsoniq"/>
+  <mapping xmlspec="openxml" specref="iso-29500-1"/>
+  <mapping xmlspec="semver" specref="semver200"/>
+  <mapping xmlspec="expath-binary" specref="expath-binary"/>
+  <mapping xmlspec="expath-file" specref="expath-file"/>
+  <mapping xmlspec="functx-xquery" specref="functx-xquery"/>
+  <mapping xmlspec="pkg" specref="expath-packaging-system"/> -->
+
+  <!-- Alt local entries until PR is merged -->
+  <mapping xmlspec="expathbinary">
+      <title>Binary Module</title>
+      <href>http://expath.xyz/spec/binary</href>
+      <editor>Jirka Kosek</editor>
+      <editor>John Lumley</editor>
+      <publisher>EXPath</publisher>
+      <status>EXPath Module</status>
+      <date>3 December 2013</date>
+  </mapping>
+  <mapping xmlspec="expathfile">
+    <title>File Module</title>
+    <href>http://expath.xyz/spec/file</href>
+    <editor>Christian Grün</editor>
+    <editor>Matthias Brantner</editor>
+    <publisher>EXPath</publisher>
+    <status>EXPath Candidate Module</status>
+    <date>14 June 2012</date>
+  </mapping>
+  <mapping xmlspec="epub">
+    <title>EPUB 3 Overview</title>
+    <href>http://www.idpf.org/epub/30/spec/epub30-overview.html</href>
+    <publisher>International Digital Publishing Forum</publisher>
+    <status>Recommended Specification</status>
+    <date>11 October 2011</date>
+  </mapping>
+  <mapping xmlspec="odf">
+    <title>OpenDocument Format (ODF)</title>
+    <href>http://en.wikipedia.org/wiki/OpenDocument</href>
+    <publisher>OASIS</publisher>
+  </mapping>
+  <mapping xmlspec="openxml">
+    <title>Office Open XML</title>
+    <href>http://en.wikipedia.org/wiki/Office_Open_XML</href>
+    <publisher>Microsoft Corporation</publisher>
+  </mapping>
+  <mapping xmlspec="jsoniq">
+    <title>JSONiq – The JSON Query Language</title>
+    <href>http://www.jsoniq.org/</href>
+    <publisher>FLWOR Foundation</publisher>
+    <date>2013</date>
+  </mapping>
+  <mapping xmlspec="semver">
+    <title>Semantic Versioning</title>
+    <href>http://semver.org/</href>
+    <editor>Tom Preston-Werner</editor>
+  </mapping>
+  <mapping xmlspec="pkg">
+    <title>Packaging System</title>
+    <href>http://expath.xyz/spec/pkg</href>
+    <editor>Florent Georges</editor>
+    <publisher>EXPath</publisher>
+    <date>9 May 2012</date>
+  </mapping>
+  <mapping xmlspec="functx">
+    <title>FunctX library of functions for XQuery and XSLT 2.0</title>
+    <href>http://www.functx.com/</href>
+    <publisher>Datypic</publisher>
+  </mapping>
+  <mapping xmlspec="catalogs">
+    <title>XML Catalogs</title>
+    <href>http://www.oasis-open.org/committees/documents.php?wg_abbrev=entity</href>
+    <publisher>OASIS</publisher>
+    <status>OASIS Standard V1.1</status>
+    <date>7 October 2005</date>
+  </mapping>
+
+  <!-- Local Bibliography -->
+  <mapping xmlspec="drivers">
+    <title>MongoDB Drivers</title>
+    <href>http://docs.mongodb.org/ecosystem/drivers</href>
+  </mapping>
+  <mapping xmlspec="qt3">
+    <title>XML Query Test Suite</title>
+    <href>http://dev.w3.org/2011/QT3-test-suite/</href>
+    <publisher>W3C</publisher>
+    <date>21 June 2013</date>
+  </mapping>
+  <mapping xmlspec="tagsoup">
+    <title>TagSoup - Just Keep On Truckin'</title>
+    <href>http://ccil.org/~cowan/XML/tagsoup/</href>
+    <editor>John Cowan</editor>
+  </mapping>
+  <mapping xmlspec="meta-driver">
+    <title>MongoDB Meta Driver</title>
+    <href>http://docs.mongodb.org/meta-driver/latest</href>
+  </mapping>
+  <mapping xmlspec="mongo-command">
+    <title>MongoDB Database Commands</title>
+    <href>http://docs.mongodb.org/manual/reference/command/</href>
+  </mapping>
+  <mapping xmlspec="mongrel">
+    <title>Mongrel, the eXist-db MongoDB extension</title>
+    <href>https://github.com/dizzzz/Mongrel</href>
+  </mapping>
+  <mapping xmlspec="tidy">
+    <title>HTML Tidy Library Project</title>
+    <href>http://tidy.sf.net/</href>
+  </mapping>
+  <mapping xmlspec="test-suite">
+    <title>MongoDB Test Suite, directory tests/qt3/mongo/</title>
+    <href>http://github.com/expath/expath-cg/tree/master/tests/qt3/mongo</href>
+    <publisher>EXPath</publisher>
+  </mapping>
+  <mapping xmlspec="tests.binary">
+    <title>Binary Module Test Suite (QT3 format), directory tests/qt3/binary/</title>
+    <href>http://github.com/expath/expath-cg/tree/master/tests/qt3/binary</href>
+    <publisher>EXPath</publisher>
+  </mapping>
+</mappings>
