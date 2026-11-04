@@ -29,85 +29,15 @@
   <mapping xmlspec="ieee754" specref="IEEE-754-1985"/>
   <mapping xmlspec="asn1" specref="X690"/>
   <mapping xmlspec="fo11" specref="xpath-functions-11-20091215"/>
-  <!-- A PR was sent to add these to specref.org https://github.com/specinfra/specref/pull/980 -->
-  <!-- These mappings are not active at the moment and we will use local entries instead -->
-  <!-- <mapping xmlspec="epub" specref="epub-30"/>
+  <mapping xmlspec="epub" specref="epub-30"/>
   <mapping xmlspec="odf" specref="iso-26300-2006"/>
-  <mapping xmlspec="catalog" specref="xml-catalog-11"/>
-  <mapping xmlspec="jsoniq" specref="jsoniq"/>
+  <mapping xmlspec="catalogs" specref="xml-catalog-11"/>
   <mapping xmlspec="openxml" specref="iso-29500-1"/>
-  <mapping xmlspec="semver" specref="semver200"/>
-  <mapping xmlspec="expath-binary" specref="expath-binary"/>
-  <mapping xmlspec="expath-file" specref="expath-file"/>
-  <mapping xmlspec="functx-xquery" specref="functx-xquery"/>
-  <mapping xmlspec="pkg" specref="expath-packaging-system"/> -->
-
-  <!-- Alt local entries until PR is merged -->
-  <mapping xmlspec="expathbinary">
-      <title>Binary Module</title>
-      <href>http://expath.xyz/spec/binary</href>
-      <editor>Jirka Kosek</editor>
-      <editor>John Lumley</editor>
-      <publisher>EXPath</publisher>
-      <status>EXPath Module</status>
-      <date>3 December 2013</date>
-  </mapping>
-  <mapping xmlspec="expathfile">
-    <title>File Module</title>
-    <href>http://expath.xyz/spec/file</href>
-    <editor>Christian Grün</editor>
-    <editor>Matthias Brantner</editor>
-    <publisher>EXPath</publisher>
-    <status>EXPath Candidate Module</status>
-    <date>14 June 2012</date>
-  </mapping>
-  <mapping xmlspec="epub">
-    <title>EPUB 3 Overview</title>
-    <href>http://www.idpf.org/epub/30/spec/epub30-overview.html</href>
-    <publisher>International Digital Publishing Forum</publisher>
-    <status>Recommended Specification</status>
-    <date>11 October 2011</date>
-  </mapping>
-  <mapping xmlspec="odf">
-    <title>OpenDocument Format (ODF)</title>
-    <href>http://en.wikipedia.org/wiki/OpenDocument</href>
-    <publisher>OASIS</publisher>
-  </mapping>
-  <mapping xmlspec="openxml">
-    <title>Office Open XML</title>
-    <href>http://en.wikipedia.org/wiki/Office_Open_XML</href>
-    <publisher>Microsoft Corporation</publisher>
-  </mapping>
-  <mapping xmlspec="jsoniq">
-    <title>JSONiq – The JSON Query Language</title>
-    <href>http://www.jsoniq.org/</href>
-    <publisher>FLWOR Foundation</publisher>
-    <date>2013</date>
-  </mapping>
-  <mapping xmlspec="semver">
-    <title>Semantic Versioning</title>
-    <href>http://semver.org/</href>
-    <editor>Tom Preston-Werner</editor>
-  </mapping>
-  <mapping xmlspec="pkg">
-    <title>Packaging System</title>
-    <href>http://expath.xyz/spec/pkg</href>
-    <editor>Florent Georges</editor>
-    <publisher>EXPath</publisher>
-    <date>9 May 2012</date>
-  </mapping>
-  <mapping xmlspec="functx">
-    <title>FunctX library of functions for XQuery and XSLT 2.0</title>
-    <href>http://www.functx.com/</href>
-    <publisher>Datypic</publisher>
-  </mapping>
-  <mapping xmlspec="catalogs">
-    <title>XML Catalogs</title>
-    <href>http://www.oasis-open.org/committees/documents.php?wg_abbrev=entity</href>
-    <publisher>OASIS</publisher>
-    <status>OASIS Standard V1.1</status>
-    <date>7 October 2005</date>
-  </mapping>
+  <mapping xmlspec="semver" specref="semver-200"/>
+  <mapping xmlspec="expathbinary" specref="expath-binary"/>
+  <mapping xmlspec="expathfile" specref="expath-file"/>
+  <mapping xmlspec="functx" specref="functx-xquery"/>
+  <mapping xmlspec="pkg" specref="expath-packaging-system"/>
 
   <!-- Local Bibliography -->
   <mapping xmlspec="drivers">
