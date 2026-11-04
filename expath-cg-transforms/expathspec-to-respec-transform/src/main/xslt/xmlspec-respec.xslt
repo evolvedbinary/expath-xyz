@@ -148,6 +148,9 @@
     </section>
   </xsl:template>
 
+  <!-- Don't transform the references backmatter section from xmlspec, as ReSpec will build its own -->
+  <xsl:template match="div1[@id eq 'references']" mode="back"/>
+
   <xsl:template match="div1" mode="back">
     <section xmlns="http://www.w3.org/1999/xhtml" class="appendix">
       <xsl:call-template name="div-children"/>
