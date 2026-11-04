@@ -297,7 +297,7 @@ dir/
       </div1>
    </body>
    <back>
-      <div1>
+      <div1 id="references">
          <head>References</head>
          <blist>
             <bibl id="tagsoup" key="TagSoup">

@@ -1279,7 +1279,7 @@ return file:read-text($path)</eg>
    </body>
 
    <back>
-      <div1 id="refs">
+      <div1 id="references">
          <head>References</head>
          <blist>
             <bibl id="ser30" key="XSLT and XQuery Serialization 3.0">

@@ -377,7 +377,7 @@
       </div1>
    </body>
    <back>
-      <div1>
+      <div1 id="references">
          <head>References</head>
          <blist>
             <bibl id="OGC-SF" key="OGC Simple Feature Access">
@@ -396,7 +396,7 @@
                Wilson, Editor</bibl>
          </blist>
       </div1>
-      <!--div1>
+      <!--div1 id="errors">
          <head>Summary of Error Conditions</head>
          <blist>
             <bibl id="errGEO001" key="err:GEO001"/>

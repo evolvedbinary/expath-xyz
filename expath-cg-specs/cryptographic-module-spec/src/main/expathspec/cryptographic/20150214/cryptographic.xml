@@ -824,7 +824,7 @@ map {
       </div1>     
    </body>
    <back>
-      <div1>
+      <div1 id="references">
          <head>References</head>
          <blist>
             <bibl id="xpath-30" key="XPath 3.0">
@@ -882,7 +882,7 @@ map {
               		Lawrence, P. Leach, A. Luotonen, L. Stewart. June, 1999.</bibl>
          </blist>
       </div1>
-      <div1>
+      <div1 id="errors">
          <head>Summary of Error Conditions</head>
          <blist id="summary-of-error-conditions">
             <bibl id="error.unknownAlgorithm" key="crypto:unknown-algorithm">The specified algorithm is not supported.</bibl>

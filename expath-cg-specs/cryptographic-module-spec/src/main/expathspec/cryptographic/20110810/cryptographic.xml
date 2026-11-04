@@ -342,7 +342,7 @@
       </div1>
    </body>
    <back>
-      <div1>
+      <div1 id="references">
          <head>References</head>
          <blist>
             <bibl id="rfc2104" key="RFC 2104">
@@ -370,7 +370,7 @@
                November 2002. </bibl>
          </blist>
       </div1>
-      <div1>
+      <div1 id="errors">
          <head>Summary of Error Conditions</head>
          <blist>
             <bibl id="errCX01" key="err:CX01">The canonicalization algorithm is not

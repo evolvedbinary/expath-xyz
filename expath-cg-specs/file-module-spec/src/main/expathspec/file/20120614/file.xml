@@ -650,7 +650,7 @@
       </div1>
    </body>
    <back>
-      <div1>
+      <div1 id="references">
          <head>References</head>
          <blist>
             <bibl id="ser30" key="XSLT and XQuery Serialization 3.0">
@@ -661,7 +661,7 @@
                   Operators 3.0</loc>. Michael Kay. W3C Working Draft 14 December 2010.</bibl>
          </blist>
       </div1>
-      <div1>
+      <div1 id="errors">
          <head>Summary of Error Conditions</head>
          <blist>
             <bibl id="errFILE0001" key="err:FILE0001">The specified path does not exist.</bibl>
