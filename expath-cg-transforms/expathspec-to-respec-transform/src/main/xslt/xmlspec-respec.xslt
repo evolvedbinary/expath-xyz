@@ -111,10 +111,9 @@
       </head>
       <body>
         <xsl:apply-templates select="header"/>
-
-        <xsl:apply-templates select="body/node()"/>
-        <section id="conformance"></section>
-        <xsl:apply-templates select="back/node()"/>
+        <xsl:apply-templates select="body"/>
+        <section id="conformance"/>
+        <xsl:apply-templates select="back"/>
       </body>
     </html>
   </xsl:template>
@@ -135,20 +134,44 @@
   <!-- Config from the xmlspec that should be inthe respecConfig object -->
   <xsl:template match="title|w3c-designation|w3c-doctype|pubdate|publoc|altlocs|latestloc|prevlocs|authlist|copyright|status|langusage|revisiondesc|version|subtitle"/>
   
-  <xsl:template match="div1|div2|div3">
+  <xsl:template match="body">
+    <xsl:apply-templates mode="body"/>
+  </xsl:template>
+
+  <xsl:template match="back">
+    <xsl:apply-templates mode="back"/>
+  </xsl:template>
+
+  <xsl:template match="div1" mode="body">
     <section xmlns="http://www.w3.org/1999/xhtml">
-    <xsl:choose>
-        <xsl:when test="@id">
-          <xsl:attribute name="id" select="@id"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:attribute name="id" select="generate-id()"/>
-        </xsl:otherwise>
-      </xsl:choose>
-      <xsl:apply-templates select="node()|@*"/>
+      <xsl:call-template name="div-children"/>
     </section>
   </xsl:template>
-  
+
+  <xsl:template match="div1" mode="back">
+    <section xmlns="http://www.w3.org/1999/xhtml" class="appendix">
+      <xsl:call-template name="div-children"/>
+    </section>
+  </xsl:template>
+
+  <xsl:template match="div2|div3">
+    <section xmlns="http://www.w3.org/1999/xhtml">
+      <xsl:call-template name="div-children"/>
+    </section>
+  </xsl:template>
+
+  <xsl:template name="div-children">
+    <xsl:choose>
+      <xsl:when test="@id">
+        <xsl:attribute name="id" select="@id"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:attribute name="id" select="generate-id()"/>
+      </xsl:otherwise>
+    </xsl:choose>
+    <xsl:apply-templates select="node()|@*[local-name() ne 'class']"/>
+  </xsl:template>
+
   <xsl:template match="head[processing-instruction('function')]" priority="2">
     <xsl:variable name="lexname" select="tokenize(normalize-space(processing-instruction('function')), ':')"/>
 		<xsl:variable name="fspec" select="fos:get-function($fos-functions, $lexname[1], $lexname[2])"/>
