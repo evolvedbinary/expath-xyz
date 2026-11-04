@@ -7,14 +7,24 @@
   xmlns:f="http://function.expath.xyz"
   exclude-result-prefixes="#all">
 
-
     <xsl:param name="specref-map" as="xs:string" select="'specref-map.xml'"/>
     <xsl:param name="function-catalog" as="xs:string" select="'function-catalog.xml'"/>
     <xsl:param name="original-site" as="xs:string" select="'http://expath.org'"/>
     <xsl:param name="updated-site" as="xs:string" select="'https://www.expath.xyz'"/>
 
     <xsl:output method="xhtml" html-version="5" media-type="text/html" include-content-type="no" encoding="UTF-8" omit-xml-declaration="no" indent="yes"/>
-    
+
+
+
+    <!-- NOTE: used in calls to 'f:bibl-id-to-key' to resolve bibl/@key from bibl/@id for non-bibliograpgic references; useful when encountering bibref/@ref -->
+    <xsl:variable name="non-ref-bibl-id-key-mappings" as="element(bibl-mapping)*">
+      <xsl:for-each select="/spec/back/div1[@id ne 'references']//bibl">
+        <xsl:element name="bibl-mapping">
+          <xsl:copy-of select="@id|@key"/>
+        </xsl:element>
+      </xsl:for-each>
+    </xsl:variable>
+
     <xsl:variable name="specref-mappings" as="document-node(element(mappings))" select="doc($specref-map)"/>
     <xsl:variable name="localbibl-entries" as="element(mapping)*" select="$specref-mappings/mappings/mapping[title]"/>
     <xsl:variable name="isFO" select="contains(/spec/header/title, 'Functions and Operators')" as="xs:boolean"/>
@@ -325,9 +335,19 @@
   </xsl:template>
 
   <xsl:template match="bibref">
+    <xsl:variable name="non-ref-bibl-key" as="xs:string?" select="f:bibl-id-to-key($non-ref-bibl-id-key-mappings, @ref)"/>
+    <xsl:choose>
+      <xsl:when test="exists($non-ref-bibl-key)">
+        <xsl:text>[=</xsl:text>
+        <xsl:value-of select="$non-ref-bibl-key"/>
+        <xsl:text>=]</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
         <xsl:text>[[</xsl:text>
         <xsl:value-of select="spec:to-specref-key(@ref)"/>
         <xsl:text>]]</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <xsl:template match="specref">
@@ -344,8 +364,8 @@
   </xsl:template>
 
   <xsl:template match="bibl">
-    <dt xmlns="http://www.w3.org/1999/xhtml" id="{@id}">
-      <xsl:value-of select="@key"/>
+    <dt xmlns="http://www.w3.org/1999/xhtml">
+      <dfn xmlns="http://www.w3.org/1999/xhtml"><xsl:value-of select="@key"/></dfn>
     </dt>
     <dd xmlns="http://www.w3.org/1999/xhtml">
       <xsl:apply-templates select="node()"/>
@@ -519,7 +539,20 @@
         <xsl:message terminate="yes">Unknown prefix for function: <xsl:copy-of select="$node"/> at: <xsl:sequence select="document-uri(root($node))"/></xsl:message>
       </xsl:otherwise>
     </xsl:choose>
-  </xsl:function>                
+  </xsl:function>
+
+  <!--
+    Get a bibl key from a bibl id.
+
+    @param bibl-id-key-mappings - the bibl id to key mappings.
+
+    @return the bibl key if it exists, otherwise the empty sequence.
+  -->
+  <xsl:function name="f:bibl-id-to-key" as="xs:string?">
+    <xsl:param name="bibl-id-key-mappings" as="element(bibl-mapping)*"/>
+    <xsl:param name="bibl-id" as="xs:string"/>
+    <xsl:sequence select="$bibl-id-key-mappings[@id eq $bibl-id]/@key/string()"/>
+  </xsl:function>
 
   <!--
     Get a function by its prefix and local name.
