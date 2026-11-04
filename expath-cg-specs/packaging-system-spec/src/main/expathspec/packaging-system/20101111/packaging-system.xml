@@ -588,7 +588,7 @@ import module namespace fx = "http://www.functx.com";</eg>
          <head>Package list schema</head>
          <eg><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../../../schema/packaging-system/packages.xsd" parse="text"/></eg>
       </div1>
-      <div1>
+      <div1 id="references">
          <head>References</head>
          <blist>
             <!--bibl id="catalogs" key="Catalogs"><loc

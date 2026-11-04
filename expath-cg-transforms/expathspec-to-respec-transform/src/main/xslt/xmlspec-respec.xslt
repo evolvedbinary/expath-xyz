@@ -448,9 +448,9 @@
   </xsl:template>
 
   <xsl:template match="label" mode="gitem">
-    <dt xmlns="http://www.w3.org/1999/xhtml"><dfn>
-        <xsl:apply-templates select="node()|@*" mode="#default"/>
-    </dfn></dt>
+    <dt xmlns="http://www.w3.org/1999/xhtml">
+      <xsl:apply-templates select="node()|@*" mode="#default"/>
+    </dt>
   </xsl:template>
 
   <xsl:template match="def" mode="gitem">

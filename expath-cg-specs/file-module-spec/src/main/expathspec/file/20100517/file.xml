@@ -269,7 +269,7 @@ sequential <ex:function>file:write</ex:function>($file as <ex:type>xs:string</ex
     </div1>
   </body>
   <back>
-    <div1>
+    <div1 id="references">
       <head>References</head>
       <blist>
         <bibl xlink:actuate="onRequest" xlink:show="replace" id="xserial" key="Serialization">
@@ -284,7 +284,7 @@ sequential <ex:function>file:write</ex:function>($file as <ex:type>xs:string</ex
           Michael Kay, editor. W3C Recommendation. 23 January 2007. </bibl>
       </blist>
     </div1>
-    <div1>
+    <div1 id="errors">
       <head>Summary of Error Conditions</head>
       <blist>
         <bibl id="errFS001" key="err:FS001">A file system error occurred.</bibl>

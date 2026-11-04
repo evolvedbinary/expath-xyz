@@ -7,7 +7,7 @@
   <mapping xmlspec="ser30" specref="xslt-xquery-serialization-30"/>
   <mapping xmlspec="xml-dig-sig-core" specref="xmldsig-core"/>
   <mapping xmlspec="xml-dig-sig-xpath-filer20" specref="xmldsig-filter2"/>
-  <mapping xmlspec="xmlschema1.1" specref="xmlschema11"/>
+  <mapping xmlspec="xmlschema1.1" specref="xmlschema11-2"/>
   <mapping xmlspec="xquery30" specref="xquery-30"/>
   <mapping xmlspec="xquery31" specref="xquery-31"/>
   <mapping xmlspec="xml" specref="xml"/>
