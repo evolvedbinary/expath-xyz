@@ -152,6 +152,9 @@
     <xsl:apply-templates mode="back"/>
   </xsl:template>
 
+  <!-- Ignore the status of this doc as ReSpec will add its own -->
+  <xsl:template match="div1[@id eq 'status']" mode="body"/>
+
   <xsl:template match="div1" mode="body">
     <section xmlns="http://www.w3.org/1999/xhtml">
       <xsl:call-template name="div-children"/>
