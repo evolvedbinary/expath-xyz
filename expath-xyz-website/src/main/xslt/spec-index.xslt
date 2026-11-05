@@ -62,14 +62,14 @@
               <xhtml:h3><xhtml:a href="{f:format-spec-path($latest-version)}"><xsl:value-of select="$latest-version//xhtml:title"/></xhtml:a></xhtml:h3>
               <xhtml:blockquote>
                 <!-- get the abstract from the  main module file-->
-                <xsl:value-of select="$latest-version//xhtml:section[@id='abstract']/xhtml:p"/>
+                <xsl:sequence select="f:abstract($latest-version)"/>
               </xhtml:blockquote>
             </xsl:when>
             <xsl:otherwise>
               <xsl:variable name="latest-draft" select="f:latest-editors-draft($spec-family)"/>
               <xhtml:h3><xhtml:a href="{f:format-spec-path($latest-draft)}"><xsl:value-of select="$latest-draft//xhtml:title"/></xhtml:a></xhtml:h3>
               <xhtml:blockquote>
-                <xsl:value-of select="$latest-draft//xhtml:section[@id='abstract']/xhtml:p"/>
+                <xsl:sequence select="f:abstract($latest-draft)"/>
               </xhtml:blockquote>
               
             </xsl:otherwise>
@@ -173,6 +173,48 @@
     <xsl:sequence select="$publish-date"/>
   </xsl:function>
   
+  <!--
+    Gets the abstract text of a spec, turning any ReSpec citations
+    (e.g. [[xpath-30]] or [[!XPATH20]]) into links.
+
+    @param spec - The ReSpec document.
+
+    @return the abstract text, with citations replaced by links.
+  -->
+  <xsl:function name="f:abstract">
+    <xsl:param name="spec" as="document-node(element(xhtml:html))"/>
+    <xsl:variable name="spec-path" select="f:format-spec-path($spec)"/>
+    <xsl:variable name="abstract" select="$spec//xhtml:section[@id eq 'abstract']/xhtml:p"/>
+    <!-- replace the bibref with a link -->
+    <xsl:variable name="abstract-with-links">
+      <xsl:for-each select="$abstract">
+          <!-- Match `[[FOOBAR]]` `[[!FOOBAR]]` or `[=FOOBAR=]` -->
+          <xsl:analyze-string select="." regex="\[\[!?([^\]]+)\]\]|\[=([^=]+)=\]">
+            <xsl:matching-substring>
+              <xsl:choose>
+                <xsl:when test="regex-group(1)">
+                  <xhtml:a href="{$spec-path}#bib-{regex-group(1)}">
+                    <xsl:value-of select="regex-group(1)"/>
+                  </xhtml:a>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:variable name="specid" select="lower-case(replace(regex-group(2), ' ', '-'))"/>
+                  <xhtml:a href="{$spec-path}#dfn-{$specid}">
+                    <xsl:value-of select="$specid"/>
+                  </xhtml:a>   
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:matching-substring>
+            <xsl:non-matching-substring>
+              <xsl:copy-of select="."/>
+            </xsl:non-matching-substring>   
+          </xsl:analyze-string>
+      </xsl:for-each>
+    </xsl:variable>
+
+    <xsl:sequence select="$abstract-with-links"/>
+  </xsl:function>
+
   <xsl:function name="f:format-spec-path">
     <xsl:param name="node" as="document-node(element(xhtml:html))"></xsl:param>
     <xsl:variable name="document-uri" select="document-uri($node)"/>
