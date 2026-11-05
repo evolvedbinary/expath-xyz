@@ -189,8 +189,8 @@
   </xsl:template>
 
   <xsl:template match="head[processing-instruction('function')]" priority="2">
-    <xsl:variable name="lexname" select="tokenize(normalize-space(processing-instruction('function')), ':')"/>
-		<xsl:variable name="fspec" select="fos:get-function($fos-functions, $lexname[1], $lexname[2])"/>
+    <xsl:variable name="lexname" select="normalize-space(processing-instruction('function'))"/>
+		<xsl:variable name="fspec" select="fos:get-function($fos-functions, $lexname)"/>
 
     <!-- TODO replace h3 with a conditional or get it to use the other template		-->
     <h3 xmlns="http://www.w3.org/1999/xhtml">
@@ -567,8 +567,9 @@
   -->
   <xsl:function name="fos:get-function" as="element(fos:function)">
     <xsl:param name="fos-functions" as="element(fos:function)*"/>
-		<xsl:param name="prefix" as="xs:string"/>
-		<xsl:param name="local-name" as="xs:string"/>
+    <xsl:param name="lexname" as="xs:string"/>
+		<xsl:variable name="prefix" select="tokenize($lexname, ':')[1]"/>
+		<xsl:variable name="local-name" select="tokenize($lexname, ':')[2]"/>
       <xsl:variable name="fspec" select="$fos-functions[@name eq $local-name][@prefix eq $prefix]"/>
       <xsl:if test="empty($fspec)">
         <xsl:message terminate="yes">Function not found in catalog: <xsl:value-of select="$prefix, $local-name" separator=":"/></xsl:message>
