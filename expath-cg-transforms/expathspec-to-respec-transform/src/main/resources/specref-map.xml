@@ -41,15 +41,15 @@
   <!-- Local Bibliography -->
   <mapping xmlspec="drivers">
     <title>MongoDB Drivers</title>
-    <href>http://docs.mongodb.org/ecosystem/drivers</href>
+    <href>https://docs.mongodb.org/ecosystem/drivers</href>
   </mapping>
   <mapping xmlspec="meta-driver">
     <title>MongoDB Meta Driver</title>
-    <href>http://docs.mongodb.org/meta-driver/latest</href>
+    <href>https://docs.mongodb.org/meta-driver/latest</href>
   </mapping>
   <mapping xmlspec="mongo-command">
     <title>MongoDB Database Commands</title>
-    <href>http://docs.mongodb.org/manual/reference/command/</href>
+    <href>https://docs.mongodb.org/manual/reference/command/</href>
   </mapping>
   <mapping xmlspec="mongrel">
     <title>Mongrel, the eXist-db MongoDB extension</title>
@@ -57,7 +57,7 @@
   </mapping>
   <mapping xmlspec="qt3">
     <title>XML Query Test Suite</title>
-    <href>http://dev.w3.org/2011/QT3-test-suite/</href>
+    <href>https://dev.w3.org/2011/QT3-test-suite/</href>
     <publisher>W3C</publisher>
     <date>21 June 2013</date>
   </mapping>
@@ -68,12 +68,12 @@
   </mapping>
   <mapping xmlspec="test-suite">
     <title>MongoDB Test Suite, directory tests/qt3/mongo/</title>
-    <href>http://github.com/expath/expath-cg/tree/master/tests/qt3/mongo</href>
+    <href>https://github.com/expath/expath-cg/tree/master/tests/qt3/mongo</href>
     <publisher>EXPath</publisher>
   </mapping>
   <mapping xmlspec="tests.binary">
     <title>Binary Module Test Suite (QT3 format), directory tests/qt3/binary/</title>
-    <href>http://github.com/expath/expath-cg/tree/master/tests/qt3/binary</href>
+    <href>https://github.com/expath/expath-cg/tree/master/tests/qt3/binary</href>
     <publisher>EXPath</publisher>
   </mapping>
   <mapping xmlspec="tests.xparse">
@@ -83,6 +83,6 @@
   </mapping>
   <mapping xmlspec="tidy">
     <title>HTML Tidy Library Project</title>
-    <href>http://tidy.sf.net/</href>
+    <href>https://tidy.sf.net/</href>
   </mapping>
 </mappings>
