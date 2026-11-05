@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<spec role="editors-copy" xmlns:ex="http://expath.org/ns/xmlspec" ex:w3c="true">
+<spec role="editors-copy" w3c-doctype="wd" xmlns:ex="http://expath.org/ns/xmlspec" ex:w3c="true">
   <header>
-    <title>XParse Module</title>
+    <title role="xparse">XParse Module</title>
     <w3c-designation>w3c-designation</w3c-designation>
     <w3c-doctype>EXPath Candidate Module</w3c-doctype>
     <pubdate>
