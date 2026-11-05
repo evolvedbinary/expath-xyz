@@ -1,58 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mappings>
-  <mapping xmlspec="zip" specref="ZIP"/>
-  <mapping xmlspec="gzip" specref="rfc1952"/>
+  <mapping xmlspec="asn1" specref="X690"/>
+  <mapping xmlspec="catalogs" specref="xml-catalog-11"/>
+  <mapping xmlspec="epub" specref="epub-30"/>
+  <mapping xmlspec="expathbinary" specref="expath-binary"/>
+  <mapping xmlspec="expathfile" specref="expath-file"/>
+  <mapping xmlspec="fo11" specref="xpath-functions-11-20091215"/>
   <mapping xmlspec="fo30" specref="xpath-functions-30"/>
-  <mapping xmlspec="schema10-2" specref="xmlschema-2"/>
-  <mapping xmlspec="ser30" specref="xslt-xquery-serialization-30"/>
-  <mapping xmlspec="xml-dig-sig-core" specref="xmldsig-core"/>
-  <mapping xmlspec="xml-dig-sig-xpath-filer20" specref="xmldsig-filter2"/>
-  <mapping xmlspec="xmlschema1.1" specref="xmlschema11-2"/>
-  <mapping xmlspec="xquery10" specref="xquery-10"/>
-  <mapping xmlspec="xquery30" specref="xquery-30"/>
-  <mapping xmlspec="xquery31" specref="xquery-31"/>
-  <mapping xmlspec="xquery31fo" specref="xpath-functions-31"/>
-  <mapping xmlspec="xml" specref="xml"/>
-  <mapping xmlspec="xml-exc-c14n" specref="xml-exc-c14n"/>
-  <mapping xmlspec="xml-schema-part-2" specref="xmlschema-2"/>
-  <mapping xmlspec="xmlschema2" specref="xmlschema-2"/>
-  <mapping xmlspec="xpath10" specref="xpath-10"/>
-  <mapping xmlspec="xpath30" specref="xpath-30"/>
-  <mapping xmlspec="xserial" specref="xslt-xquery-serialization"/>
+  <mapping xmlspec="functx" specref="functx-xquery"/>
+  <mapping xmlspec="gzip" specref="rfc1952"/>
+  <mapping xmlspec="ieee754" specref="IEEE-754-1985"/>
+  <mapping xmlspec="odf" specref="iso-26300-2006"/>
+  <mapping xmlspec="openxml" specref="iso-29500-1"/>
+  <mapping xmlspec="pkg" specref="expath-packaging-system"/>
   <mapping xmlspec="rfc2104" specref="rfc2104"/>
   <mapping xmlspec="rfc2617" specref="rfc2617"/>
   <mapping xmlspec="rfc3023" specref="rfc3023"/>
   <mapping xmlspec="rfc3987" specref="rfc3987"/>
   <mapping xmlspec="rfc7159" specref="rfc7159"/>
-  <mapping xmlspec="xslt-30" specref="xslt-30"/>
-  <mapping xmlspec="ieee754" specref="IEEE-754-1985"/>
-  <mapping xmlspec="asn1" specref="X690"/>
-  <mapping xmlspec="fo11" specref="xpath-functions-11-20091215"/>
-  <mapping xmlspec="epub" specref="epub-30"/>
-  <mapping xmlspec="odf" specref="iso-26300-2006"/>
-  <mapping xmlspec="catalogs" specref="xml-catalog-11"/>
-  <mapping xmlspec="openxml" specref="iso-29500-1"/>
+  <mapping xmlspec="schema10-2" specref="xmlschema-2"/>
   <mapping xmlspec="semver" specref="semver-200"/>
-  <mapping xmlspec="expathbinary" specref="expath-binary"/>
-  <mapping xmlspec="expathfile" specref="expath-file"/>
-  <mapping xmlspec="functx" specref="functx-xquery"/>
-  <mapping xmlspec="pkg" specref="expath-packaging-system"/>
+  <mapping xmlspec="ser30" specref="xslt-xquery-serialization-30"/>
+  <mapping xmlspec="xml" specref="xml"/>
+  <mapping xmlspec="xml-dig-sig-core" specref="xmldsig-core"/>
+  <mapping xmlspec="xml-dig-sig-xpath-filer20" specref="xmldsig-filter2"/>
+  <mapping xmlspec="xml-exc-c14n" specref="xml-exc-c14n"/>
+  <mapping xmlspec="xml-schema-part-2" specref="xmlschema-2"/>
+  <mapping xmlspec="xmlschema1.1" specref="xmlschema11-2"/>
+  <mapping xmlspec="xmlschema2" specref="xmlschema-2"/>
+  <mapping xmlspec="xpath10" specref="xpath-10"/>
+  <mapping xmlspec="xpath30" specref="xpath-30"/>
+  <mapping xmlspec="xquery10" specref="xquery-10"/>
+  <mapping xmlspec="xquery30" specref="xquery-30"/>
+  <mapping xmlspec="xquery31" specref="xquery-31"/>
+  <mapping xmlspec="xquery31fo" specref="xpath-functions-31"/>
+  <mapping xmlspec="xserial" specref="xslt-xquery-serialization"/>
+  <mapping xmlspec="xslt-30" specref="xslt-30"/>
+  <mapping xmlspec="zip" specref="ZIP"/>
 
   <!-- Local Bibliography -->
   <mapping xmlspec="drivers">
     <title>MongoDB Drivers</title>
     <href>http://docs.mongodb.org/ecosystem/drivers</href>
-  </mapping>
-  <mapping xmlspec="qt3">
-    <title>XML Query Test Suite</title>
-    <href>http://dev.w3.org/2011/QT3-test-suite/</href>
-    <publisher>W3C</publisher>
-    <date>21 June 2013</date>
-  </mapping>
-  <mapping xmlspec="tagsoup">
-    <title>TagSoup - Just Keep On Truckin'</title>
-    <href>http://ccil.org/~cowan/XML/tagsoup/</href>
-    <editor>John Cowan</editor>
   </mapping>
   <mapping xmlspec="meta-driver">
     <title>MongoDB Meta Driver</title>
@@ -66,9 +55,16 @@
     <title>Mongrel, the eXist-db MongoDB extension</title>
     <href>https://github.com/dizzzz/Mongrel</href>
   </mapping>
-  <mapping xmlspec="tidy">
-    <title>HTML Tidy Library Project</title>
-    <href>http://tidy.sf.net/</href>
+  <mapping xmlspec="qt3">
+    <title>XML Query Test Suite</title>
+    <href>http://dev.w3.org/2011/QT3-test-suite/</href>
+    <publisher>W3C</publisher>
+    <date>21 June 2013</date>
+  </mapping>
+  <mapping xmlspec="tagsoup">
+    <title>TagSoup - Just Keep On Truckin'</title>
+    <href>http://ccil.org/~cowan/XML/tagsoup/</href>
+    <editor>John Cowan</editor>
   </mapping>
   <mapping xmlspec="test-suite">
     <title>MongoDB Test Suite, directory tests/qt3/mongo/</title>
@@ -84,5 +80,9 @@
     <title>XParse Module Test Suite (QT3 format), directory tests/qt3/xparse/</title>
     <href>https://github.com/expath/expath-cg/tree/master/tests/qt3/xparse</href>
     <publisher>EXPath</publisher>
+  </mapping>
+  <mapping xmlspec="tidy">
+    <title>HTML Tidy Library Project</title>
+    <href>http://tidy.sf.net/</href>
   </mapping>
 </mappings>
