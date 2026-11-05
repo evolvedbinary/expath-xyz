@@ -51,6 +51,7 @@
         <module>mongodb-api-module-spec</module>
         <module>packaging-system-spec</module>
         <module>webapp-framework-spec</module>
+        <module>xparse-module-spec</module>
         <module>zip-module-spec</module>
     </modules>
 

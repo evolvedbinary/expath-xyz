@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright © 2026 EXPath Community Group (public-expath@w3.org)
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>xyz.expath.cg</groupId>
+        <artifactId>expath-cg-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../../expath-cg-parent</relativePath>
+    </parent>
+
+    <artifactId>expath-xparse-module-spec</artifactId>
+    <packaging>jar</packaging>
+
+    <name>EXPath Specification - XParse Module</name>
+    <description>EXPath specification for a module of XPath/XQuery parsing functions</description>
+
+    <contributors>
+        <contributor>
+            <name>John Lumley</name>
+            <email>john@saxonica.com</email>
+            <organization>Saxonica Ltd</organization>
+            <roles>
+                <role>Editor</role>
+            </roles>
+        </contributor>
+    </contributors>
+
+    <scm>
+        <connection>scm:git:https://github.com/evolvedbinary/expath-xyz.git</connection>
+        <developerConnection>scm:git:https://github.com/evolvedbinary/expath-xyz.git</developerConnection>
+        <url>scm:git:https://github.com/evolvedbinary/expath-xyz.git</url>
+    </scm>
+
+    <properties>
+        <xml.input.dir>${project.basedir}/src/main/expathspec</xml.input.dir>
+        <xml.output.dir>${project.build.directory}/generated-resources/respec</xml.output.dir>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <configuration>
+                    <licenseSets>
+                        <licenseSet>
+                            <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
+                            <excludes>
+                                <exclude>src/main/expathspec/**</exclude>
+                            </excludes>
+                        </licenseSet>
+                    </licenseSets>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.evolvedbinary.maven.mojohaus</groupId>
+                <artifactId>xml-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>validate-input</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>validate</goal>
+                        </goals>
+                        <configuration>
+                            <catalogs>
+                                <catalog>resource:catalog.xml</catalog>
+                            </catalogs>
+                            <validationSets>
+                                <validationSet>
+                                    <dir>${xml.input.dir}</dir>
+                                    <includes>
+                                        <include>**/function-catalog.xml</include>
+                                    </includes>
+                                    <systemId>resource:fos/fos.xsd</systemId>
+                                    <schemaLanguage>http://www.w3.org/2001/XMLSchema</schemaLanguage>
+                                </validationSet>
+                                <validationSet>
+                                    <dir>${xml.input.dir}</dir>
+                                    <includes>
+                                        <include>**/xparse.xml</include>
+                                    </includes>
+                                    <systemId>resource:expathspec/xmlspec.rnc</systemId>
+                                    <schemaLanguage>http://www.iana.org/assignments/media-types/application/relax-ng-compact-syntax</schemaLanguage>
+                                    <schemaFactory>com.thaiopensource.relaxng.jaxp.CompactSyntaxSchemaFactory</schemaFactory>
+                                </validationSet>
+                            </validationSets>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>transform</goal>
+                        </goals>
+                        <configuration>
+                            <transformationSets>
+                                <transformationSet>
+                                    <dir>${xml.input.dir}</dir>
+                                    <includes>
+                                        <include>**/xparse.xml</include>
+                                    </includes>
+                                    <stylesheet>resource:xmlspec-respec.xslt</stylesheet>
+                                    <parameters>
+                                        <parameter>
+                                            <name>specref-map</name>
+                                            <value>specref-map.xml</value>
+                                        </parameter>
+                                    </parameters>
+                                    <fileMappers>
+                                        <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+                                            <targetExtension>.xhtml</targetExtension>
+                                        </fileMapper>
+                                    </fileMappers>
+                                    <outputDir>${xml.output.dir}</outputDir>
+                                    <addedToClasspath>true</addedToClasspath>
+                                </transformationSet>
+                            </transformationSets>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>${project.groupId}</groupId>
+                        <artifactId>expath-cg-catalog</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>${project.groupId}</groupId>
+                        <artifactId>w3c-xpath-functions-schema</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>${project.groupId}</groupId>
+                        <artifactId>w3c-xml-schema</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>${project.groupId}</groupId>
+                        <artifactId>expath-expathspec-schema</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>${project.groupId}</groupId>
+                        <artifactId>w3c-xmlspec-schema</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>${project.groupId}</groupId>
+                        <artifactId>expathspec-to-respec-transform</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>nu.validator</groupId>
+                <artifactId>vnu-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>validate-output</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>validate</goal>
+                        </goals>
+                        <configuration>
+                            <filesets>
+                                <fileset>
+                                    <directory>${xml.output.dir}</directory>
+                                    <glob>**/xparse.xhtml</glob>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

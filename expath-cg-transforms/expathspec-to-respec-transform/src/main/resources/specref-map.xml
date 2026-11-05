@@ -8,17 +8,16 @@
   <mapping xmlspec="xml-dig-sig-core" specref="xmldsig-core"/>
   <mapping xmlspec="xml-dig-sig-xpath-filer20" specref="xmldsig-filter2"/>
   <mapping xmlspec="xmlschema1.1" specref="xmlschema11-2"/>
+  <mapping xmlspec="xquery10" specref="xquery-10"/>
   <mapping xmlspec="xquery30" specref="xquery-30"/>
   <mapping xmlspec="xquery31" specref="xquery-31"/>
+  <mapping xmlspec="xquery31fo" specref="xpath-functions-31"/>
   <mapping xmlspec="xml" specref="xml"/>
   <mapping xmlspec="xml-exc-c14n" specref="xml-exc-c14n"/>
   <mapping xmlspec="xml-schema-part-2" specref="xmlschema-2"/>
   <mapping xmlspec="xmlschema2" specref="xmlschema-2"/>
-  <mapping xmlspec="xpath-30" specref="xpath-30"/>
-  <mapping xmlspec="xpath-datamodel-30" specref="xpath-datamodel-30"/>
-  <mapping xmlspec="xpath-functions-30" specref="xpath-functions-30"/>
-  <mapping xmlspec="xquery-30" specref="xquery-30"/>
-  <mapping xmlspec="xquery31fo" specref="xpath-functions-31"/>
+  <mapping xmlspec="xpath10" specref="xpath-10"/>
+  <mapping xmlspec="xpath30" specref="xpath-30"/>
   <mapping xmlspec="xserial" specref="xslt-xquery-serialization"/>
   <mapping xmlspec="rfc2104" specref="rfc2104"/>
   <mapping xmlspec="rfc2617" specref="rfc2617"/>
@@ -79,6 +78,11 @@
   <mapping xmlspec="tests.binary">
     <title>Binary Module Test Suite (QT3 format), directory tests/qt3/binary/</title>
     <href>http://github.com/expath/expath-cg/tree/master/tests/qt3/binary</href>
+    <publisher>EXPath</publisher>
+  </mapping>
+  <mapping xmlspec="tests.xparse">
+    <title>XParse Module Test Suite (QT3 format), directory tests/qt3/xparse/</title>
+    <href>https://github.com/expath/expath-cg/tree/master/tests/qt3/xparse</href>
     <publisher>EXPath</publisher>
   </mapping>
 </mappings>
