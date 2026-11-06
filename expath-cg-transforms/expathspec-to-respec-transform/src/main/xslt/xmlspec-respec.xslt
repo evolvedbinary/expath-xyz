@@ -348,7 +348,7 @@
       </xsl:when>
       <xsl:otherwise>
         <xsl:text>[[</xsl:text>
-        <xsl:value-of select="ex:to-specref-key(@ref)"/>
+        <xsl:value-of select="f:to-specref-key(@ref)"/>
         <xsl:text>]]</xsl:text>
       </xsl:otherwise>
     </xsl:choose>
@@ -597,7 +597,7 @@
     <xsl:sequence select="xs:date($year || '-' || $month || '-' || $day)"/>
   </xsl:function>
 
-  <xsl:function name="ex:to-specref-key" as="xs:string">
+  <xsl:function name="f:to-specref-key" as="xs:string">
     <xsl:param name="bibref" as="xs:string"/>
     <xsl:choose>
      <xsl:when test="$specref-mappings//mapping[@xmlspec eq $bibref][empty(title)]">
