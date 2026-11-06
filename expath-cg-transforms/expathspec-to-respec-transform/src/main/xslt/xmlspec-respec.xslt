@@ -77,7 +77,7 @@
               <xsl:when test="@w3c-doctype eq 'rec'">CG-FINAL</xsl:when>
               <xsl:otherwise>CG-DRAFT</xsl:otherwise>
             </xsl:choose>",
-            shortName: "<xsl:value-of select="normalize-space(header/title)"/>",
+            shortName: "expath-<xsl:value-of select="header/title/@role"/>",
             group: "cg/expath",
             
             editors: <xsl:copy-of select="f:authors-to-json(header/authlist/author[@role eq 'editor'])"/>,
