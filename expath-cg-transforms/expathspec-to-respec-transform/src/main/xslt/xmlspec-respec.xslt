@@ -79,6 +79,7 @@
             </xsl:choose>",
             shortName: "expath-<xsl:value-of select="header/title/@role"/>",
             group: "cg/expath",
+            wgPublicList: "public-expath",
             
             editors: <xsl:copy-of select="f:authors-to-json(header/authlist/author[@role eq 'editor'])"/>,
             <xsl:if test="header/authlist/author[@role ne 'editor']">
