@@ -78,7 +78,7 @@
               <xsl:otherwise>CG-DRAFT</xsl:otherwise>
             </xsl:choose>",
             shortName: "<xsl:value-of select="normalize-space(header/title)"/>",
-            group: "expath",
+            group: "cg/expath",
             
             editors: <xsl:copy-of select="f:authors-to-json(header/authlist/author[@role eq 'editor'])"/>,
             <xsl:if test="header/authlist/author[@role ne 'editor']">
