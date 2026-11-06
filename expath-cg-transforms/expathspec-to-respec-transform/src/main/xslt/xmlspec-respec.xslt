@@ -535,13 +535,20 @@
     </xsl:element>
   </xsl:template>
 
+  <!--
+    Get the prefix of a function prototype.
+
+    @param fp - the function prototype.
+
+    @return The prefix.
+  -->
   <xsl:function name="f:get-prefix" as="text()">
-    <xsl:param name="node" as="element(fos:proto)"/>
-    <xsl:variable name="prefix" as="attribute(prefix)" select="$node/ancestor-or-self::*[@prefix][1]/@prefix"/>
+    <xsl:param name="fp" as="element(fos:proto)"/>
+    <xsl:variable name="prefix" as="attribute(prefix)" select="$fp/ancestor-or-self::*[@prefix][1]/@prefix"/>
     <xsl:choose>
       <xsl:when test="exists($prefix)"><xsl:value-of select="concat($prefix, ':')"/></xsl:when>
       <xsl:otherwise>
-        <xsl:message terminate="yes">Unknown prefix for function: <xsl:copy-of select="$node"/> at: <xsl:sequence select="document-uri(root($node))"/></xsl:message>
+        <xsl:message terminate="yes">Unknown prefix for function: <xsl:copy-of select="$fp"/> at: <xsl:sequence select="document-uri(root($fp))"/></xsl:message>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
@@ -582,6 +589,15 @@
       <xsl:sequence select="$fspec"/>
 	</xsl:function>
 
+  <!--
+    Replace the old expath site prefix.
+
+    @param url - the URL.
+    @param old-site - the old site.
+    @param new-site - the new site.
+
+    @return The URL with the new site prefix.
+  -->
   <xsl:function name="f:replace-url" as="xs:string">
     <xsl:param name="url" as="xs:string"/>
     <xsl:param name="old-site" as="xs:string"/>
@@ -589,6 +605,13 @@
     <xsl:sequence select="replace($url, $old-site, $new-site)"/>
   </xsl:function>
 
+  <!--
+    Parse an xmlspec publication date into an valid ReSpec pubDate value.
+
+    @param pubdate - the pubdate.
+
+    @return The publication date.
+  -->
   <xsl:function name="f:parse-xmlspec-pubdate" as="xs:date">
     <xsl:param name="pubdate" as="element(pubdate)"/>
     <xsl:variable name="months" select="('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')"/>
@@ -598,6 +621,13 @@
     <xsl:sequence select="xs:date($year || '-' || $month || '-' || $day)"/>
   </xsl:function>
 
+  <!--
+    Get the SpecRef key for an xmlspec bibref.
+
+    @param bibref - the xmlspec bibref.
+
+    @return The SpecRef key if there is a none local mapping, otherwise the bibref unchanged.
+  -->
   <xsl:function name="f:to-specref-key" as="xs:string">
     <xsl:param name="bibref" as="xs:string"/>
     <xsl:choose>
