@@ -59,10 +59,6 @@
                     <licenseSets>
                         <licenseSet>
                             <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
-                            <excludes>
-                                <exclude>src/main/xslt/**</exclude>
-                                <exclude>src/main/resources/**</exclude>
-                            </excludes>
                         </licenseSet>
                     </licenseSets>
                 </configuration>
