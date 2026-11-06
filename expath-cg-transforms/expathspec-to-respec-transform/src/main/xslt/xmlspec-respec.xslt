@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   version="2.0"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:spec="http://expath.org/ns/xmlspec"
+  xmlns:ex="http://expath.org/ns/xmlspec"
   xmlns:fos="http://www.w3.org/xpath-functions/spec/namespace"
   xmlns:f="http://function.expath.xyz"
   exclude-result-prefixes="#all">
@@ -306,13 +306,13 @@
     </a>
   </xsl:template>
 
-  <xsl:template match="spec:type">
+  <xsl:template match="ex:type">
     <code xmlns="http://www.w3.org/1999/xhtml">
       <xsl:apply-templates select="text()"/>
     </code>
   </xsl:template>
 
-  <xsl:template match="spec:function">
+  <xsl:template match="ex:function">
     <code xmlns="http://www.w3.org/1999/xhtml" class="function">
       <xsl:apply-templates select="node()"/>
     </code>
@@ -348,7 +348,7 @@
       </xsl:when>
       <xsl:otherwise>
         <xsl:text>[[</xsl:text>
-        <xsl:value-of select="spec:to-specref-key(@ref)"/>
+        <xsl:value-of select="ex:to-specref-key(@ref)"/>
         <xsl:text>]]</xsl:text>
       </xsl:otherwise>
     </xsl:choose>
@@ -597,7 +597,7 @@
     <xsl:sequence select="xs:date($year || '-' || $month || '-' || $day)"/>
   </xsl:function>
 
-  <xsl:function name="spec:to-specref-key" as="xs:string">
+  <xsl:function name="ex:to-specref-key" as="xs:string">
     <xsl:param name="bibref" as="xs:string"/>
     <xsl:choose>
      <xsl:when test="$specref-mappings//mapping[@xmlspec eq $bibref][empty(title)]">

@@ -2,7 +2,7 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
    xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://www.w3.org/1999/xhtml"
-   xmlns:spec="http://expath.org/ns/xmlspec" xmlns:pkg="http://expath.org/ns/pkg"
+   xmlns:ex="http://expath.org/ns/xmlspec" xmlns:pkg="http://expath.org/ns/pkg"
    exclude-result-prefixes="#all" version="2.0">
 
    <xsl:import href="../../xmlspec/src/diffspec.xsl"/>

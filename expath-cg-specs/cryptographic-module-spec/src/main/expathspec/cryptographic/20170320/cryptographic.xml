@@ -2,7 +2,7 @@
 
 <?oxygen RNGSchema="http://expath.org/ns/xmlspec/xmlspec.rnc" type="compact"?>
 
-<spec xmlns:spec="http://expath.org/ns/xmlspec" role="editors-copy" w3c-doctype="cr" spec:w3c="true">
+<spec xmlns:ex="http://expath.org/ns/xmlspec" role="editors-copy" w3c-doctype="cr" ex:w3c="true">
    <header>
       <title role="cryptographic">Cryptographic Module</title>
       <w3c-designation>w3c-designation</w3c-designation>
@@ -171,15 +171,15 @@
          <head>Integrity and Authentication of Data</head>
          <div2 id="hash-function">
             <head>The <code>crypto:hash</code> function</head>
-            <p>This function generates a "message digest" of the input data, by using a cryptographic algorithm. It returns the hash value as <spec:type>xs:string</spec:type>.</p>
+            <p>This function generates a "message digest" of the input data, by using a cryptographic algorithm. It returns the hash value as <ex:type>xs:string</ex:type>.</p>
             <eg>
-<spec:function>crypto:hash</spec:function>($data     as <spec:type>xs:anyAtomicType</spec:type>,
-	     $algorithm as <spec:type>xs:string</spec:type>) as <spec:type>xs:string</spec:type>
+<ex:function>crypto:hash</ex:function>($data     as <ex:type>xs:anyAtomicType</ex:type>,
+	     $algorithm as <ex:type>xs:string</ex:type>) as <ex:type>xs:string</ex:type>
 </eg>
             <eg>
-<spec:function>crypto:hash</spec:function>($data     as <spec:type>xs:anyAtomicType</spec:type>,
-	     $algorithm as <spec:type>xs:string</spec:type>,
-	     $encoding as <spec:type>xs:string</spec:type>) as <spec:type>xs:string</spec:type>
+<ex:function>crypto:hash</ex:function>($data     as <ex:type>xs:anyAtomicType</ex:type>,
+	     $algorithm as <ex:type>xs:string</ex:type>,
+	     $encoding as <ex:type>xs:string</ex:type>) as <ex:type>xs:string</ex:type>
 </eg>
             <ulist>
                <item>
@@ -200,18 +200,18 @@
             cryptographic hash functions. HMAC can be used with any iterative cryptographic hash function in combination with a secret shared key. Typically, message authentication
             codes are used between two parties that share a secret key in order to validate information transmitted between these parties.</p>            
             <p>This function generates a message authentication code, based on the input message, by using a cryptographic algorithm and a secret key. It has two
-            signatures; the first one outputs the result as <spec:type>xs:byte*</spec:type>, while the second one outputs the result as
-            encoded <spec:type>xs:string</spec:type>.</p>
+            signatures; the first one outputs the result as <ex:type>xs:byte*</ex:type>, while the second one outputs the result as
+            encoded <ex:type>xs:string</ex:type>.</p>
             <eg>
-<spec:function>crypto:hmac</spec:function>($data     as <spec:type>xs:anyAtomicType</spec:type>,
-            $key        as <spec:type>xs:anyAtomicType</spec:type>,
-            $algorithm  as <spec:type>xs:string</spec:type>) as <spec:type>xs:byte*</spec:type>
+<ex:function>crypto:hmac</ex:function>($data     as <ex:type>xs:anyAtomicType</ex:type>,
+            $key        as <ex:type>xs:anyAtomicType</ex:type>,
+            $algorithm  as <ex:type>xs:string</ex:type>) as <ex:type>xs:byte*</ex:type>
 </eg>
             <eg>
-<spec:function>crypto:hmac</spec:function>($data     as <spec:type>xs:anyAtomicType</spec:type>,
-            $key        as <spec:type>xs:anyAtomicType</spec:type>,
-            $algorithm  as <spec:type>xs:string</spec:type>,
-            $encoding  as <spec:type>xs:string</spec:type>) as <spec:type>xs:string</spec:type>
+<ex:function>crypto:hmac</ex:function>($data     as <ex:type>xs:anyAtomicType</ex:type>,
+            $key        as <ex:type>xs:anyAtomicType</ex:type>,
+            $algorithm  as <ex:type>xs:string</ex:type>,
+            $encoding  as <ex:type>xs:string</ex:type>) as <ex:type>xs:string</ex:type>
 </eg>
             <ulist>
                <item>
@@ -268,10 +268,10 @@
          parameter <code>$resources</code>.</p>
          <div2>
             <head>The <code>crypto:generate-signature</code> function</head>
-            <p>The function has its parameters passed as a <spec:type>map(xs:string, item())</spec:type>. After the function's signature, an example of parameters is given.</p>
+            <p>The function has its parameters passed as a <ex:type>map(xs:string, item())</ex:type>. After the function's signature, an example of parameters is given.</p>
             <eg>
-<spec:function>crypto:generate-signature</spec:function>($data     as <spec:type>document()?</spec:type>,
-    			    $parameters as <spec:type>map(xs:string, item()+)?</spec:type>) as <spec:type>document()*</spec:type> 
+<ex:function>crypto:generate-signature</ex:function>($data     as <ex:type>document()?</ex:type>,
+    			    $parameters as <ex:type>map(xs:string, item()+)?</ex:type>) as <ex:type>document()*</ex:type> 
 </eg>
             <ulist>
                <item>
@@ -467,7 +467,7 @@
             <head>The <code>crypto:validate-signature</code> function</head>
             <p>This function validates an XML Digital Signature.</p>
             <eg>
-<spec:function>crypto:validate-signature</spec:function>($data as <spec:type>document()</spec:type>) as <spec:type>xs:boolean</spec:type></eg>
+<ex:function>crypto:validate-signature</ex:function>($data as <ex:type>document()</ex:type>) as <ex:type>xs:boolean</ex:type></eg>
             <ulist>
                <item>
                   <p><code>$data</code> is the enveloped, enveloping, or detached signature. If
@@ -488,9 +488,9 @@
             <head>The <code>crypto:encrypt</code> function</head>
             <p>This function encrypts data.</p>
             <eg>
-<spec:function>crypto:encrypt</spec:function>($data     as <spec:type>xs:anyAtomicType</spec:type>,
-               $type       as <spec:type>xs:string</spec:type>,
-               $parameters as <spec:type>map(xs:string, item())?</spec:type>) as <spec:type>xs:base64Binary</spec:type></eg>
+<ex:function>crypto:encrypt</ex:function>($data     as <ex:type>xs:anyAtomicType</ex:type>,
+               $type       as <ex:type>xs:string</ex:type>,
+               $parameters as <ex:type>map(xs:string, item())?</ex:type>) as <ex:type>xs:base64Binary</ex:type></eg>
             <ulist>
                <item>
                   <p><code>$data</code> is the data to be encrypted. This parameter can be of type xs:string, xs:base64Binary, or xs:hexBinary. When a particular padding mechanism
@@ -551,9 +551,9 @@
             <head>The <code>crypto:decrypt</code> function</head>
             <p>This function decrypts data.</p>
             <eg>
-<spec:function>crypto:decrypt</spec:function>($data     as <spec:type>xs:anyAtomicType</spec:type>,
-               $type       as <spec:type>xs:string</spec:type>,
-               $parameters as <spec:type>map(xs:string, item())?</spec:type>) as <spec:type>xs:string</spec:type></eg>
+<ex:function>crypto:decrypt</ex:function>($data     as <ex:type>xs:anyAtomicType</ex:type>,
+               $type       as <ex:type>xs:string</ex:type>,
+               $parameters as <ex:type>map(xs:string, item())?</ex:type>) as <ex:type>xs:string</ex:type></eg>
             <ulist>
                <item>
                   <p><code>$data</code> is the data to be encrypted. This parameter can be of type xs:string, xs:base64Binary, or xs:hexBinary. When a particular padding mechanism
