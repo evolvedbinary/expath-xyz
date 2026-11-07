@@ -368,7 +368,12 @@
 
   <xsl:template match="bibl">
     <dt xmlns="http://www.w3.org/1999/xhtml">
-      <dfn xmlns="http://www.w3.org/1999/xhtml"><xsl:value-of select="@key"/></dfn>
+      <dfn xmlns="http://www.w3.org/1999/xhtml">
+        <xsl:if test="matches(@key, '^[a-z]+[:.][A-Za-z][A-Za-z0-9-]*$')">
+          <xsl:attribute name="class">export</xsl:attribute>
+        </xsl:if>
+        <xsl:value-of select="@key"/>
+      </dfn>
     </dt>
     <dd xmlns="http://www.w3.org/1999/xhtml">
       <xsl:apply-templates select="node()"/>
