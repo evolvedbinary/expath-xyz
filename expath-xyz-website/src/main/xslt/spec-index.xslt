@@ -19,7 +19,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   version="3.0"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:spec="http://expath.org/ns/xmlspec"
+  xmlns:ex="http://expath.org/ns/xmlspec"
   xmlns:fos="http://www.w3.org/xpath-functions/spec/namespace" 
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:fn="http://www.w3.org/2005/xpath-functions"

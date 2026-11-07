@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Copyright © 2026 EXPath Community Group (public-expath@w3.org)
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   version="2.0"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:spec="http://expath.org/ns/xmlspec"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:ex="http://expath.org/ns/xmlspec"
   xmlns:fos="http://www.w3.org/xpath-functions/spec/namespace"
   xmlns:f="http://function.expath.xyz"
   exclude-result-prefixes="#all">
@@ -60,25 +78,26 @@
   -->
   
   <xsl:template match="spec">
-    <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-      <head>
-        <meta charset="utf-8" />
+    <xhtml:html lang="en">
+      <xhtml:head>
+        <xhtml:meta charset="utf-8" />
 
-        <meta name="spec-w3c-doctype" content="{@w3c-doctype}"/>
-        <meta name="spec-family" content="{header/title/@role}"/>
-        <title><xsl:value-of select="header/title"/></title>
+        <xhtml:meta name="spec-w3c-doctype" content="{@w3c-doctype}"/>
+        <xhtml:meta name="spec-family" content="{header/title/@role}"/>
+        <xhtml:title><xsl:value-of select="header/title"/></xhtml:title>
           
         
-        <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer="defer"></script>
+        <xhtml:script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer="defer"></xhtml:script>
         
-        <script class="remove">
+        <xhtml:script class="remove">
           var respecConfig = {
             specStatus: "<xsl:choose>
               <xsl:when test="@w3c-doctype eq 'rec'">CG-FINAL</xsl:when>
               <xsl:otherwise>CG-DRAFT</xsl:otherwise>
             </xsl:choose>",
-            shortName: "<xsl:value-of select="normalize-space(header/title)"/>",
-            group: "expath",
+            shortName: "expath-<xsl:value-of select="header/title/@role"/>",
+            group: "cg/expath",
+            wgPublicList: "public-expath",
             
             editors: <xsl:copy-of select="f:authors-to-json(header/authlist/author[@role eq 'editor'])"/>,
             <xsl:if test="header/authlist/author[@role ne 'editor']">
@@ -116,29 +135,29 @@
             localBiblio: <xsl:sequence select="f:localbibls-to-json($used-localbibl-entries)"/>
             </xsl:if>
           };
-        </script>
+        </xhtml:script>
 
-      </head>
-      <body>
+      </xhtml:head>
+      <xhtml:body>
         <xsl:apply-templates select="header"/>
         <xsl:apply-templates select="body"/>
-        <section id="conformance"/>
+        <xhtml:section id="conformance"/>
         <xsl:apply-templates select="back"/>
-      </body>
-    </html>
+      </xhtml:body>
+    </xhtml:html>
   </xsl:template>
   
   <xsl:template match="header">
     <xsl:apply-templates select="abstract"/>
-    <section xmlns="http://www.w3.org/1999/xhtml" id="sotd">
+    <xhtml:section id="sotd">
       <xsl:apply-templates select="node()[not(self::abstract)]|@*"/>
-    </section>
+    </xhtml:section>
   </xsl:template>
 
   <xsl:template match="abstract">
-    <section xmlns="http://www.w3.org/1999/xhtml" id="abstract">
+    <xhtml:section id="abstract">
       <xsl:apply-templates select="@*|node()"/>
-    </section>
+    </xhtml:section>
   </xsl:template>
   
   <!-- Config from the xmlspec that should be inthe respecConfig object -->
@@ -156,24 +175,24 @@
   <xsl:template match="div1[@id eq 'status']" mode="body"/>
 
   <xsl:template match="div1" mode="body">
-    <section xmlns="http://www.w3.org/1999/xhtml">
+    <xhtml:section>
       <xsl:call-template name="div-children"/>
-    </section>
+    </xhtml:section>
   </xsl:template>
 
   <!-- Don't transform the references backmatter section from xmlspec, as ReSpec will build its own -->
   <xsl:template match="div1[@id eq 'references']" mode="back"/>
 
   <xsl:template match="div1" mode="back">
-    <section xmlns="http://www.w3.org/1999/xhtml" class="appendix">
+    <xhtml:section class="appendix">
       <xsl:call-template name="div-children"/>
-    </section>
+    </xhtml:section>
   </xsl:template>
 
   <xsl:template match="div2|div3">
-    <section xmlns="http://www.w3.org/1999/xhtml">
+    <xhtml:section>
       <xsl:call-template name="div-children"/>
-    </section>
+    </xhtml:section>
   </xsl:template>
 
   <xsl:template name="div-children">
@@ -193,38 +212,36 @@
 		<xsl:variable name="fspec" select="fos:get-function($fos-functions, $lexname)"/>
 
     <!-- TODO replace h3 with a conditional or get it to use the other template		-->
-    <h3 xmlns="http://www.w3.org/1999/xhtml">
-			<xsl:value-of select="$lexname"/>
-		</h3>
-		<dl xmlns="http://www.w3.org/1999/xhtml">
-			<div>
-        <dt>Summary</dt>
-        <dd>
+    <xhtml:h3><xhtml:dfn class="export"><xsl:value-of select="$lexname"/></xhtml:dfn></xhtml:h3>
+		<xhtml:dl>
+			<xhtml:div>
+        <xhtml:dt>Summary</xhtml:dt>
+        <xhtml:dd>
           <xsl:apply-templates select="$fspec/fos:summary/node()"/>
-        </dd>
-      </div>
+        </xhtml:dd>
+      </xhtml:div>
 			<xsl:if test="$fspec/fos:opermap">
-				<div>
-					<dt>Operator Mapping</dt>
-					<dd>
-						<p>
+				<xhtml:div>
+					<xhtml:dt>Operator Mapping</xhtml:dt>
+					<xhtml:dd>
+						<xhtml:p>
 							<xsl:copy-of select="$fspec/fos:opermap/node()" copy-namespaces="no"/>
-						</p>
-					</dd>
-				</div>
+						</xhtml:p>
+					</xhtml:dd>
+				</xhtml:div>
 			</xsl:if>
-			<div>
-        <dt>Signature<xsl:value-of select="'s'[$fspec/fos:signatures/fos:proto[2]]" /></dt>
-        <dd>
+			<xhtml:div>
+        <xhtml:dt>Signature<xsl:value-of select="'s'[$fspec/fos:signatures/fos:proto[2]]" /></xhtml:dt>
+        <xhtml:dd>
           <xsl:apply-templates select="$fspec/fos:signatures/fos:proto"/>
-        </dd>
-      </div>
+        </xhtml:dd>
+      </xhtml:div>
 			<xsl:if test="$fspec/fos:properties">
-				<div>
-					<dt>Properties</dt>
-					<dd>
+				<xhtml:div>
+					<xhtml:dt>Properties</xhtml:dt>
+					<xhtml:dd>
 						<xsl:for-each select="$fspec/fos:properties">
-							<p>
+							<xhtml:p>
 								<xsl:choose>
 									<xsl:when test="last() eq 1">
 										<xsl:text>This function is </xsl:text>
@@ -243,98 +260,98 @@
 								</xsl:for-each>
 								<xsl:text>. </xsl:text>
 								<xsl:apply-templates select="fos:property/@dependency"/>
-							</p>
+							</xhtml:p>
 						</xsl:for-each>
-					</dd>
-				</div>
+					</xhtml:dd>
+				</xhtml:div>
 			</xsl:if>
-			<div>
-        <dt>Rules</dt>
-        <dd>
+			<xhtml:div>
+        <xhtml:dt>Rules</xhtml:dt>
+        <xhtml:dd>
           <xsl:apply-templates select="$fspec/fos:rules/node()"/>
-        </dd>
-      </div>
+        </xhtml:dd>
+      </xhtml:div>
       <xsl:if test="$fspec/fos:errors">
-        <div>
-          <dt>Error Conditions</dt>
-          <dd>
+        <xhtml:div>
+          <xhtml:dt>Error Conditions</xhtml:dt>
+          <xhtml:dd>
             <xsl:apply-templates select="$fspec/fos:errors/node()"/>
-          </dd>
-        </div>
+          </xhtml:dd>
+        </xhtml:div>
       </xsl:if>
       <xsl:if test="$fspec/fos:notes">
-        <div>
-          <dt>Notes</dt>
-          <dd>
+        <xhtml:div>
+          <xhtml:dt>Notes</xhtml:dt>
+          <xhtml:dd>
             <xsl:apply-templates select="$fspec/fos:notes/node()"/>
-          </dd>
-        </div>
+          </xhtml:dd>
+        </xhtml:div>
       </xsl:if>
 			<xsl:if test="$fspec/fos:examples">
-				<div>
-					<dt>Examples</dt>
-					<dd>
+				<xhtml:div>
+					<xhtml:dt>Examples</xhtml:dt>
+					<xhtml:dd>
 						<xsl:apply-templates select="$fspec/fos:examples/node()"/>
-					</dd>
-				</div>
+					</xhtml:dd>
+				</xhtml:div>
 			</xsl:if>
-		</dl>
+		</xhtml:dl>
 	</xsl:template>
 
   <xsl:template match="head[parent::div1]">
-    <h2 xmlns="http://www.w3.org/1999/xhtml">
+    <xhtml:h2>
       <xsl:apply-templates select="node()"/>
-    </h2>
+    </xhtml:h2>
   </xsl:template>
   
   <xsl:template match="head[parent::div2]">
-    <h3 xmlns="http://www.w3.org/1999/xhtml">
+    <xhtml:h3>
       <xsl:apply-templates select="node()"/>
-    </h3>
+    </xhtml:h3>
   </xsl:template>
 
   <xsl:template match="head[parent::div3]">
-    <h4 xmlns="http://www.w3.org/1999/xhtml">
+    <xhtml:h4>
       <xsl:apply-templates select="node()"/>
-    </h4>
+    </xhtml:h4>
   </xsl:template>
 
   <xsl:template match="loc|xtermref">
-    <a xmlns="http://www.w3.org/1999/xhtml" href="{@href}">
+    <xhtml:a href="{@href}">
       <xsl:apply-templates select="text()"/>
-    </a>
+    </xhtml:a>
   </xsl:template>
 
-  <xsl:template match="spec:type">
-    <code xmlns="http://www.w3.org/1999/xhtml">
+  <xsl:template match="ex:type">
+    <xhtml:code>
       <xsl:apply-templates select="text()"/>
-    </code>
+    </xhtml:code>
   </xsl:template>
 
-  <xsl:template match="spec:function">
-    <code xmlns="http://www.w3.org/1999/xhtml" class="function">
+  <xsl:template match="ex:function">
+    <xhtml:code class="function">
       <xsl:apply-templates select="node()"/>
-    </code>
+    </xhtml:code>
   </xsl:template>
 
   <xsl:template match="eg">
-    <aside xmlns="http://www.w3.org/1999/xhtml" class="example">
-      <pre>
+    <xhtml:aside class="example">
+      <xhtml:pre>
         <xsl:apply-templates select="@*|node()"/>
-      </pre>
-    </aside>
+      </xhtml:pre>
+    </xhtml:aside>
   </xsl:template>
 
   <xsl:template match="ulist">
-    <ul xmlns="http://www.w3.org/1999/xhtml">
+    <xhtml:ul>
       <xsl:apply-templates select="node()|@*"/>
-    </ul>
+    </xhtml:ul>
   </xsl:template>
 
   <xsl:template match="item">
-    <li xmlns="http://www.w3.org/1999/xhtml">
+    <xhtml:li>
       <xsl:apply-templates select="node()|@*"/>
-    </li>
+    </xhtml:li>
   </xsl:template>
 
   <xsl:template match="bibref">
@@ -347,38 +364,38 @@
       </xsl:when>
       <xsl:otherwise>
         <xsl:text>[[</xsl:text>
-        <xsl:value-of select="spec:to-specref-key(@ref)"/>
+        <xsl:value-of select="f:to-specref-key(@ref)"/>
         <xsl:text>]]</xsl:text>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
 
   <xsl:template match="specref">
-    <a xmlns="http://www.w3.org/1999/xhtml" href="#{@ref}"></a>
+    <xhtml:a href="#{@ref}"></xhtml:a>
   </xsl:template>
 
 <xsl:template match="blist">
-    <dl xmlns="http://www.w3.org/1999/xhtml" class="bibliography">
+    <xhtml:dl class="bibliography">
       <xsl:if test="@id">
         <xsl:attribute name="id" select="@id"/>
       </xsl:if>
       <xsl:apply-templates select="node()"/>
-    </dl>
+    </xhtml:dl>
   </xsl:template>
 
   <xsl:template match="bibl">
-    <dt xmlns="http://www.w3.org/1999/xhtml">
-      <dfn xmlns="http://www.w3.org/1999/xhtml"><xsl:value-of select="@key"/></dfn>
-    </dt>
-    <dd xmlns="http://www.w3.org/1999/xhtml">
+    <xhtml:dt>
+      <xhtml:dfn class="export"><xsl:value-of select="@key"/></xhtml:dfn>
+    </xhtml:dt>
+    <xhtml:dd>
       <xsl:apply-templates select="node()"/>
-    </dd>
+    </xhtml:dd>
   </xsl:template>
 
   <xsl:template match="fos:proto">
     <xsl:variable name="prefix" select="f:get-prefix(.)"/>
-  <pre xmlns="http://www.w3.org/1999/xhtml">
-    <code>
+  <xhtml:pre>
+    <xhtml:code>
         <xsl:copy-of select="$prefix"/>
         <xsl:value-of select="@name"/>
 
@@ -399,8 +416,8 @@
         <xsl:text>) as </xsl:text>
         <xsl:value-of select="@return-type"/>
 
-    </code>
-    </pre>
+    </xhtml:code>
+    </xhtml:pre>
 </xsl:template>
 
   <xsl:template match="fos:example">
@@ -408,21 +425,21 @@
   </xsl:template>
   
   <xsl:template match="note">
-    <div xmlns="http://www.w3.org/1999/xhtml" class="note">
+    <xhtml:div class="note">
       <xsl:apply-templates select="node()|@*"/>
-    </div>
+    </xhtml:div>
   </xsl:template>
 
   <xsl:template match="emph">
-    <em xmlns="http://www.w3.org/1999/xhtml">
+    <xhtml:em>
       <xsl:apply-templates select="node()|@*"/>
-    </em>
+    </xhtml:em>
   </xsl:template>
 
   <xsl:template match="kw">
-    <code xmlns="http://www.w3.org/1999/xhtml">
+    <xhtml:code>
       <xsl:apply-templates select="node()|@*"/>
-    </code>
+    </xhtml:code>
   </xsl:template>
 
   <xsl:template match="rfc2119">
@@ -430,20 +447,20 @@
   </xsl:template>
   
   <xsl:template match="olist">
-    <ol xmlns="http://www.w3.org/1999/xhtml">
+    <xhtml:ol>
       <xsl:choose>
           <xsl:when test="@role">
               <xsl:attribute name="class" select="@role"/>
           </xsl:when>
       </xsl:choose>
       <xsl:apply-templates select="node()|@*[name() ne 'role']"/>
-    </ol>
+    </xhtml:ol>
   </xsl:template>
 
   <xsl:template match="glist">
-      <dl xmlns="http://www.w3.org/1999/xhtml">
+      <xhtml:dl>
           <xsl:apply-templates select="node()|@*"/>
-      </dl>
+      </xhtml:dl>
   </xsl:template>
 
   <xsl:template match="gitem">
@@ -451,27 +468,27 @@
   </xsl:template>
 
   <xsl:template match="label" mode="gitem">
-    <dt xmlns="http://www.w3.org/1999/xhtml">
+    <xhtml:dt>
       <xsl:apply-templates select="node()|@*" mode="#default"/>
-    </dt>
+    </xhtml:dt>
   </xsl:template>
 
   <xsl:template match="def" mode="gitem">
-    <dd xmlns="http://www.w3.org/1999/xhtml">
+    <xhtml:dd>
       <xsl:apply-templates select="node()|@*" mode="#default"/>
-    </dd>
+    </xhtml:dd>
   </xsl:template>
 
     <xsl:template match="table">
-        <table xmlns="http://www.w3.org/1999/xhtml">
+        <xhtml:table>
             <xsl:apply-templates select="node()|@*[not(local-name(.) = ('cellpadding', 'cellspacing', 'border', 'frame'))]"/>
-        </table>
+        </xhtml:table>
     </xsl:template>
 
   <xsl:template match="phrase">
-      <span xmlns="http://www.w3.org/1999/xhtml" class="phrase">
+      <xhtml:span class="phrase">
           <xsl:apply-templates select="node()|@*"/>
-      </span>
+      </xhtml:span>
   </xsl:template>
 
   <!-- transform <p>...<ulist>...</ulist>...</p> to <p>...</p><ul>...</ul><p>...</p> -->
@@ -483,7 +500,7 @@
           <xsl:when test=". instance of text()">
             <xsl:choose>
               <xsl:when test="string-length(normalize-space(.)) gt 0">
-                <p xmlns="http://www.w3.org/1999/xhtml"><xsl:copy-of select="$p-attrs"/><xsl:copy-of select="."/></p>
+                <xhtml:p><xsl:copy-of select="$p-attrs"/><xsl:copy-of select="."/></xhtml:p>
               </xsl:when>
             </xsl:choose>
           </xsl:when>
@@ -501,26 +518,26 @@
 
   <!-- transform <p><termdef id="term-id" term="term">...</termdef></p> to <dl><dt id="term-id>term</dt><dd>...</dd> -->
   <xsl:template match="p[termdef]">
-    <dl xmlns="http://www.w3.org/1999/xhtml">
+    <xhtml:dl>
       <xsl:apply-templates select="node()|@*"/>
-    </dl>
+    </xhtml:dl>
   </xsl:template>
   <xsl:template match="termdef">
     <xsl:variable name="term" select="(@term, term)[1]"/>
-    <dt xmlns="http://www.w3.org/1999/xhtml"><xsl:apply-templates select="@*[local-name(.) ne 'term']"/><xsl:value-of select="$term"/></dt>
-    <dd xmlns="http://www.w3.org/1999/xhtml"><xsl:apply-templates select="node()"/></dd>
+    <xhtml:dt><xsl:apply-templates select="@*[local-name(.) ne 'term']"/><xsl:value-of select="$term"/></xhtml:dt>
+    <xhtml:dd><xsl:apply-templates select="node()"/></xhtml:dd>
   </xsl:template>
   <xsl:template match="term[parent::termdef]">
-    <i xmlns="http://www.w3.org/1999/xhtml">
+    <xhtml:i>
       <xsl:apply-templates select="node()|@*"/>
-    </i>
+    </xhtml:i>
   </xsl:template>
 
   <!-- transform <termref def="term-id">...</termref> to <a href="#term-id">...</a> -->
   <xsl:template match="termref">
-    <a xmlns="http://www.w3.org/1999/xhtml" href="{@def}">
+    <xhtml:a href="{@def}">
       <xsl:apply-templates select="node()|@*[local-name() ne 'def']"/>
-    </a>
+    </xhtml:a>
   </xsl:template>
 
   <!-- identity transform - but moving namespaces -->
@@ -533,13 +550,20 @@
     </xsl:element>
   </xsl:template>
 
+  <!--
+    Get the prefix of a function prototype.
+
+    @param fp - the function prototype.
+
+    @return The prefix.
+  -->
   <xsl:function name="f:get-prefix" as="text()">
-    <xsl:param name="node" as="element(fos:proto)"/>
-    <xsl:variable name="prefix" as="attribute(prefix)" select="$node/ancestor-or-self::*[@prefix][1]/@prefix"/>
+    <xsl:param name="fp" as="element(fos:proto)"/>
+    <xsl:variable name="prefix" as="attribute(prefix)" select="$fp/ancestor-or-self::*[@prefix][1]/@prefix"/>
     <xsl:choose>
       <xsl:when test="exists($prefix)"><xsl:value-of select="concat($prefix, ':')"/></xsl:when>
       <xsl:otherwise>
-        <xsl:message terminate="yes">Unknown prefix for function: <xsl:copy-of select="$node"/> at: <xsl:sequence select="document-uri(root($node))"/></xsl:message>
+        <xsl:message terminate="yes">Unknown prefix for function: <xsl:copy-of select="$fp"/> at: <xsl:sequence select="document-uri(root($fp))"/></xsl:message>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
@@ -580,6 +604,15 @@
       <xsl:sequence select="$fspec"/>
 	</xsl:function>
 
+  <!--
+    Replace the old expath site prefix.
+
+    @param url - the URL.
+    @param old-site - the old site.
+    @param new-site - the new site.
+
+    @return The URL with the new site prefix.
+  -->
   <xsl:function name="f:replace-url" as="xs:string">
     <xsl:param name="url" as="xs:string"/>
     <xsl:param name="old-site" as="xs:string"/>
@@ -587,6 +620,13 @@
     <xsl:sequence select="replace($url, $old-site, $new-site)"/>
   </xsl:function>
 
+  <!--
+    Parse an xmlspec publication date into an valid ReSpec pubDate value.
+
+    @param pubdate - the pubdate.
+
+    @return The publication date.
+  -->
   <xsl:function name="f:parse-xmlspec-pubdate" as="xs:date">
     <xsl:param name="pubdate" as="element(pubdate)"/>
     <xsl:variable name="months" select="('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')"/>
@@ -596,7 +636,14 @@
     <xsl:sequence select="xs:date($year || '-' || $month || '-' || $day)"/>
   </xsl:function>
 
-  <xsl:function name="spec:to-specref-key" as="xs:string">
+  <!--
+    Get the SpecRef key for an xmlspec bibref.
+
+    @param bibref - the xmlspec bibref.
+
+    @return The SpecRef key if there is a none local mapping, otherwise the bibref unchanged.
+  -->
+  <xsl:function name="f:to-specref-key" as="xs:string">
     <xsl:param name="bibref" as="xs:string"/>
     <xsl:choose>
      <xsl:when test="$specref-mappings//mapping[@xmlspec eq $bibref][empty(title)]">

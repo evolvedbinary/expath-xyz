@@ -2,7 +2,7 @@
 
 <?oxygen RNGSchema="http://expath.org/ns/xmlspec/xmlspec.rnc" type="compact"?>
 
-<spec xmlns:spec="http://expath.org/ns/xmlspec" role="editors-copy" w3c-doctype="cr">
+<spec xmlns:ex="http://expath.org/ns/xmlspec" role="editors-copy" w3c-doctype="cr">
    <header>
       <title role="cryptographic">Cryptographic Module</title>
       <w3c-designation>w3c-designation</w3c-designation>
@@ -99,14 +99,14 @@
             <p>This function generates a message authentication code, based on the input message, by
                using a cryptographic algorithm and a secret key.</p>
             <eg>
-<spec:function>crypto:hmac</spec:function>($message as <spec:type>xs:string</spec:type>,
-            $secret-key as <spec:type>xs:string</spec:type>,
-            $algorithm as <spec:type>xs:string</spec:type>) as <spec:type>xs:string</spec:type>
+<ex:function>crypto:hmac</ex:function>($message as <ex:type>xs:string</ex:type>,
+            $secret-key as <ex:type>xs:string</ex:type>,
+            $algorithm as <ex:type>xs:string</ex:type>) as <ex:type>xs:string</ex:type>
 
-<spec:function>crypto:hmac</spec:function>($message as <spec:type>xs:string</spec:type>,
-            $secret-key as <spec:type>xs:string</spec:type>,
-            $algorithm as <spec:type>xs:string</spec:type>,
-            $encoding as <spec:type>xs:string</spec:type>) as <spec:type>xs:string</spec:type></eg>
+<ex:function>crypto:hmac</ex:function>($message as <ex:type>xs:string</ex:type>,
+            $secret-key as <ex:type>xs:string</ex:type>,
+            $algorithm as <ex:type>xs:string</ex:type>,
+            $encoding as <ex:type>xs:string</ex:type>) as <ex:type>xs:string</ex:type></eg>
             <ulist>
                <item>
                   <p><code>$message</code> is the message to be authenticated.</p>
@@ -152,37 +152,37 @@
             <p> The fourth signature considers the case of key pair generated from an digital
                certificate, and signature for a subset of the document. </p>
             <eg>
-<spec:function>crypto:generate-signature</spec:function>($input-doc as <spec:type>node()</spec:type>,
-                          $canonicalization-algorithm as <spec:type>xs:string</spec:type>,
-                          $digest-algorithm as <spec:type>xs:string</spec:type>,
-                          $signature-algorithm as <spec:type>xs:string</spec:type>,
-                          $signature-namespace-prefix as <spec:type>xs:string</spec:type>,
-                          $signature-type as <spec:type>xs:string</spec:type>) as <spec:type>node()</spec:type>
+<ex:function>crypto:generate-signature</ex:function>($input-doc as <ex:type>node()</ex:type>,
+                          $canonicalization-algorithm as <ex:type>xs:string</ex:type>,
+                          $digest-algorithm as <ex:type>xs:string</ex:type>,
+                          $signature-algorithm as <ex:type>xs:string</ex:type>,
+                          $signature-namespace-prefix as <ex:type>xs:string</ex:type>,
+                          $signature-type as <ex:type>xs:string</ex:type>) as <ex:type>node()</ex:type>
 
-<spec:function>crypto:generate-signature</spec:function>($input-doc as <spec:type>node()</spec:type>,
-                          $canonicalization-algorithm as <spec:type>xs:string</spec:type>,
-                          $digest-algorithm as <spec:type>xs:string</spec:type>,
-                          $signature-algorithm as <spec:type>xs:string</spec:type>,
-                          $signature-namespace-prefix as <spec:type>xs:string</spec:type>,
-                          $signature-type as <spec:type>xs:string</spec:type>,
-                          $xpath-expression as <spec:type>xs:string</spec:type>) as <spec:type>node()</spec:type>
+<ex:function>crypto:generate-signature</ex:function>($input-doc as <ex:type>node()</ex:type>,
+                          $canonicalization-algorithm as <ex:type>xs:string</ex:type>,
+                          $digest-algorithm as <ex:type>xs:string</ex:type>,
+                          $signature-algorithm as <ex:type>xs:string</ex:type>,
+                          $signature-namespace-prefix as <ex:type>xs:string</ex:type>,
+                          $signature-type as <ex:type>xs:string</ex:type>,
+                          $xpath-expression as <ex:type>xs:string</ex:type>) as <ex:type>node()</ex:type>
 
-<spec:function>crypto:generate-signature</spec:function>($input-doc as <spec:type>node()</spec:type>,
-                          $canonicalization-algorithm as <spec:type>xs:string</spec:type>,
-                          $digest-algorithm as <spec:type>xs:string</spec:type>,
-                          $signature-algorithm as <spec:type>xs:string</spec:type>,
-                          $signature-namespace-prefix as <spec:type>xs:string</spec:type>,
-                          $signature-type as <spec:type>xs:string</spec:type>,
-                          $digital-certificate as <spec:type>node()</spec:type>) as <spec:type>node()</spec:type>
+<ex:function>crypto:generate-signature</ex:function>($input-doc as <ex:type>node()</ex:type>,
+                          $canonicalization-algorithm as <ex:type>xs:string</ex:type>,
+                          $digest-algorithm as <ex:type>xs:string</ex:type>,
+                          $signature-algorithm as <ex:type>xs:string</ex:type>,
+                          $signature-namespace-prefix as <ex:type>xs:string</ex:type>,
+                          $signature-type as <ex:type>xs:string</ex:type>,
+                          $digital-certificate as <ex:type>node()</ex:type>) as <ex:type>node()</ex:type>
 
-<spec:function>crypto:generate-signature</spec:function>($input-doc as <spec:type>node()</spec:type>,
-                          $canonicalization-algorithm as <spec:type>xs:string</spec:type>,
-                          $digest-algorithm as <spec:type>xs:string</spec:type>,
-                          $signature-algorithm as <spec:type>xs:string</spec:type>,
-                          $signature-namespace-prefix as <spec:type>xs:string</spec:type>,
-                          $signature-type as <spec:type>xs:string</spec:type>,
-                          $xpath-expression as <spec:type>xs:string</spec:type>,
-                          $digital-certificate as <spec:type>node()</spec:type>) as <spec:type>node()</spec:type></eg>
+<ex:function>crypto:generate-signature</ex:function>($input-doc as <ex:type>node()</ex:type>,
+                          $canonicalization-algorithm as <ex:type>xs:string</ex:type>,
+                          $digest-algorithm as <ex:type>xs:string</ex:type>,
+                          $signature-algorithm as <ex:type>xs:string</ex:type>,
+                          $signature-namespace-prefix as <ex:type>xs:string</ex:type>,
+                          $signature-type as <ex:type>xs:string</ex:type>,
+                          $xpath-expression as <ex:type>xs:string</ex:type>,
+                          $digital-certificate as <ex:type>node()</ex:type>) as <ex:type>node()</ex:type></eg>
             <ulist>
                <item>
                   <p><code>$input-doc</code> is the document to be signed.</p>
@@ -245,7 +245,7 @@
             <head>The <code>crypto:validate-signature</code> function</head>
             <p>This function validates an XML Digital Signature.</p>
             <eg>
-<spec:function>crypto:validate-signature</spec:function>($input-doc as <spec:type>node()</spec:type>) as <spec:type>xs:boolean</spec:type></eg>
+<ex:function>crypto:validate-signature</ex:function>($input-doc as <ex:type>node()</ex:type>) as <ex:type>xs:boolean</ex:type></eg>
             <ulist>
                <item>
                   <p><code>$input-doc</code> is the enveloped, enveloping, or detached signature. If
@@ -275,10 +275,10 @@
             <head>The <code>crypto:encrypt</code> function</head>
             <p>This function encrypts an input string.</p>
             <eg>
-<spec:function>crypto:encrypt</spec:function>($input-string as <spec:type>xs:string</spec:type>,
-               $encryption-type as <spec:type>xs:string</spec:type>,
-               $secret-key as <spec:type>xs:string</spec:type>,
-               $cryptographic-algorithm as <spec:type>xs:string</spec:type>) as <spec:type>xs:boolean</spec:type></eg>
+<ex:function>crypto:encrypt</ex:function>($input-string as <ex:type>xs:string</ex:type>,
+               $encryption-type as <ex:type>xs:string</ex:type>,
+               $secret-key as <ex:type>xs:string</ex:type>,
+               $cryptographic-algorithm as <ex:type>xs:string</ex:type>) as <ex:type>xs:boolean</ex:type></eg>
             <ulist>
                <item>
                   <p><code>$input-string</code> is the string to be encrypted. When a particular
@@ -309,10 +309,10 @@
             <head>The <code>crypto:decrypt</code> function</head>
             <p>This function decrypts an input string.</p>
             <eg>
-<spec:function>crypto:decrypt</spec:function>($input-string as <spec:type>xs:string</spec:type>,
-               $decryption-type as <spec:type>xs:string</spec:type>,
-               $secret-key as <spec:type>xs:string</spec:type>,
-               $cryptographic-algorithm as <spec:type>xs:string</spec:type>) as <spec:type>xs:boolean</spec:type></eg>
+<ex:function>crypto:decrypt</ex:function>($input-string as <ex:type>xs:string</ex:type>,
+               $decryption-type as <ex:type>xs:string</ex:type>,
+               $secret-key as <ex:type>xs:string</ex:type>,
+               $cryptographic-algorithm as <ex:type>xs:string</ex:type>) as <ex:type>xs:boolean</ex:type></eg>
             <ulist>
                <item>
                   <p><code>$input-string</code> is the string to be decrypted. When a particular
