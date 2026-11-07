@@ -212,9 +212,7 @@
 		<xsl:variable name="fspec" select="fos:get-function($fos-functions, $lexname)"/>
 
     <!-- TODO replace h3 with a conditional or get it to use the other template		-->
-    <xhtml:h3>
-			<xsl:value-of select="$lexname"/>
-		</xhtml:h3>
+    <xhtml:h3><xhtml:dfn class="export"><xsl:value-of select="$lexname"/></xhtml:dfn></xhtml:h3>
 		<xhtml:dl>
 			<xhtml:div>
         <xhtml:dt>Summary</xhtml:dt>
@@ -387,7 +385,7 @@
 
   <xsl:template match="bibl">
     <xhtml:dt>
-      <xhtml:dfn><xsl:value-of select="@key"/></xhtml:dfn>
+      <xhtml:dfn class="export"><xsl:value-of select="@key"/></xhtml:dfn>
     </xhtml:dt>
     <xhtml:dd>
       <xsl:apply-templates select="node()"/>
