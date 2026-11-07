@@ -30,7 +30,35 @@ include "http://w3.org/2002/xmlspec/xmlspec.rnc" {
     attribute role { xsd:NMTOKEN },
     diff.att,
     local.common.att
+
+  # Override back to make /spec/back/(div1|inform-div1)/@id mandatory. We use this to identifiy billioraphic references, error codes, etc.
+  back =
+    element back {
+      attlist.back,
+      ((back.div1+, back.inform-div1*) | back.inform-div1+)
+    }
 }
+
+# Used instead of div1 in /spec/back.
+back.div1 = element div1 { attlist.back.div1, head, div.mix*, div2* }
+
+# Used instead of attlist.div1 in /spec/back/div1.
+attlist.back.div1 &=
+  attribute id { xsd:ID },
+  role.att,
+  diff.att,
+  local.common.att
+
+# Used instead of inform-div1 in /spec/back.
+back.inform-div1 =
+  element inform-div1 { attlist.back.inform-div1, head, div.mix*, div2* }
+
+# Used instead of attlist.inform-div1 in /spec/back/inform-div1.
+attlist.back.inform-div1 &=
+  attribute id { xsd:ID },
+  role.att,
+  diff.att,
+  local.common.att
 
 exfunction = element ex:function { loc | text }
 
