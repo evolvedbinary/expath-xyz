@@ -17,9 +17,8 @@
 
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  version="3.0"
+  version="2.0"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:ex="http://expath.org/ns/xmlspec"
   xmlns:fos="http://www.w3.org/xpath-functions/spec/namespace" 
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:fn="http://www.w3.org/2005/xpath-functions"
@@ -215,6 +214,13 @@
     <xsl:sequence select="$abstract-with-links"/>
   </xsl:function>
 
+  <!--
+    Gets the relative path of a spec, for use in links.
+
+    @param node - The ReSpec document.
+
+    @return the path of the spec, relative to the site root.
+  -->
   <xsl:function name="f:format-spec-path">
     <xsl:param name="node" as="document-node(element(xhtml:html))"></xsl:param>
     <xsl:variable name="document-uri" select="document-uri($node)"/>
