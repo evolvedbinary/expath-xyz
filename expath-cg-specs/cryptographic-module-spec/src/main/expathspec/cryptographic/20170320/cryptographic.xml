@@ -1162,7 +1162,7 @@ return $signature
             <bibl id="error.blockSize" key="crypto:block-size">Illegal block size.</bibl>
             <bibl id="error.decryptionType" key="crypto:decryption-type">The decryption type is not supported.</bibl>
             <bibl id="error.noProvider" key="crypto:no-provider">The provider is not set.</bibl>
-            <bibl id="error.inputResources" key="crypto.input-resources">The 'enveloped' and 'enveloping' signatures have to be applied to only one resource.</bibl>
+            <bibl id="error.inputResources" key="crypto:input-resources">The 'enveloped' and 'enveloping' signatures have to be applied to only one resource.</bibl>
             <bibl id="error.incorrectIV" key="crypto:incorrect-initialization-vector">The initialization vector is not correct.</bibl>
          </blist>
       </div1>
