@@ -1,6 +1,29 @@
 namespace ex = "http://expath.org/ns/xmlspec"
 
-include "http://w3.org/2002/xmlspec/xmlspec.rnc"
+include "http://w3.org/2002/xmlspec/xmlspec.rnc" {
+
+  # Override attlist.spec to make /spec/@w3c-doctype mandatory. We use this to infer the ReSpec specStatus.
+  attlist.spec =
+    common.att,
+    local.spec.att,
+    attribute w3c-doctype {
+      "cr"
+      | "dispcmts"
+      | "issues"
+      | "wgnote"
+      | "memsub"
+      | "teamsub"
+      | "note"
+      | "other"
+      | "pr"
+      | "per"
+      | "rec"
+      | "wd"
+      | "review"
+    },
+    attribute other-doctype { text }?,
+    attribute status { "int-review" | "ext-review" | "final" }?
+}
 
 exfunction = element ex:function { loc | text }
 
