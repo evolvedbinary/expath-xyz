@@ -23,6 +23,13 @@ include "http://w3.org/2002/xmlspec/xmlspec.rnc" {
     },
     attribute other-doctype { text }?,
     attribute status { "int-review" | "ext-review" | "final" }?
+
+  # Override attlist.title to make /spec/header/title/@role mandatory. We use this to store the short-name of the spec.
+  attlist.title =
+    attribute id { xsd:ID }?,
+    attribute role { xsd:NMTOKEN },
+    diff.att,
+    local.common.att
 }
 
 exfunction = element ex:function { loc | text }
