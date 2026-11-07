@@ -460,7 +460,7 @@ functx/
       </div1>
    </body>
    <back>
-      <div1>
+      <div1 id="expath-packaging-system.xsd">
          <head>Package descriptor schema</head>
          <p>[ ... TODO ... ]</p>
          <!--eg><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../../../schema/packaging-system/expath-packaging-system.xsd" parse="text"/></eg>
