@@ -13,12 +13,13 @@ Each specification has a sub-folder in in the `expath-cg-specs/` folder.
 ### Prerequisites
 
 * Java — JDK 8 or later
-* Maven — 3.9.0 or later
 
 ### Validate all Specifications
 
+**NOTE**: If you are on a Windows computer, you should use `.\mvnw` instead of `./mvnw`.
+
 ```bash
-$ mvn verify
+$ ./mvnw verify
 ```
 
 This validates the ReSpec and EXPath Spec source files against their schemas.
@@ -26,7 +27,7 @@ This validates the ReSpec and EXPath Spec source files against their schemas.
 ### Compile
 
 ```bash
-$ mvn package
+$ ./mvnw package
 ```
 
 Upon sucessful completion, a distribution of the compiled specifications in ReSpec format and any associated schemas will be present in the sub-folder `expath-cg-distribution/target/expath-cg-distribution-1.0.0-SNAPSHOT/`. There is also a Zip file of this generated for convenience: `expath-cg-distribution/target/expath-cg-distribution-1.0.0-SNAPSHOT.zip`
