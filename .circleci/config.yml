@@ -47,7 +47,7 @@ jobs:
 
   deploy:
     docker:
-      - image: cimg/base:2026.10
+      - image: cimg/deploy:2026.10
     steps:
       - add_ssh_keys:
           fingerprints:
