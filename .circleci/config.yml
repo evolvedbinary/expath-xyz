@@ -1,10 +1,24 @@
 version: 2.1
 
-jobs:
-  build:
+executors:
+  linux:
     docker:
       - image: cimg/openjdk:25.0
-    resource_class: small
+  windows:
+    machine:
+      image: "windows-server-2022-gui:current"
+      shell: cmd.exe
+
+jobs:
+  build:
+    parameters:
+      os:
+        type: executor
+      compute_size:
+        type: string
+        default: small
+    executor: << parameters.os >>
+    resource_class: << parameters.compute_size >>
     steps:
       - checkout
       - restore_cache:
@@ -13,9 +27,21 @@ jobs:
             - maven-repo-v1-{{ .Branch }}-{{ checksum "pom.xml" }}
             - maven-repo-v1-{{ .Branch }}-
             - maven-repo-v1-
-      - run:
-          name: Build
-          command: mvn -V -B -T2C clean verify package
+      - when:
+          condition:
+            - equal: [linux, << parameters.os >>]
+          steps:
+            - run:
+                name: Build
+                command: ./mvnw -V -B -T2C clean verify package
+      - when:
+          condition:
+            - equal: [windows, << parameters.os >>]
+          steps:
+            - run:
+                name: Build
+                command: .\mvnw -V -B -T2C clean verify package
+                shell: cmd.exe
       - save_cache:
           paths:
             - ~/.m2
@@ -24,4 +50,14 @@ jobs:
 workflows:
   ci:
     jobs:
-      - build
+      - build:
+        name: build-<< matrix.os >>
+        matrix:
+          parameters:
+            os: [linux, windows]
+            compute_size: [small, windows.medium]
+            exclude:
+              - os: linux
+                compute_size: windows.medium
+              - os: windows
+                compute_size: small
