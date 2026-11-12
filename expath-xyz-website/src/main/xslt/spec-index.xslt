@@ -27,11 +27,11 @@
 
   <xsl:output method="xhtml" html-version="5" media-type="text/html" include-content-type="no" encoding="UTF-8" omit-xml-declaration="no" indent="yes"/>
   
-  <xsl:param name="spec-directory" as="xs:string"></xsl:param>
+  <xsl:param name="spec-directory" as="xs:string"/>
 
 
   <xsl:variable name="spec-docs" as="document-node(element(xhtml:html))*"
-    select="collection('file://' || $spec-directory || '?recurse=yes;stable=yes;select=*.xhtml')" />
+    select="collection(concat(f:fs-path-to-uri($spec-directory), '?recurse=yes;stable=yes;select=*.xhtml'))" />
 
   <xsl:template match="xhtml:nav[@id eq 'specification-index']">
     <xsl:copy>
@@ -254,6 +254,31 @@
       </xsl:when>
       <xsl:otherwise>
         <xsl:message terminate="yes">Unknown doctype: <xsl:value-of select="$doctype"/></xsl:message>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
+
+  <!--
+    Converts a filesystem path into a file:// URI.
+
+    @param fs-path - The filesystem URI.
+
+    @return the URI.
+  -->
+  <xsl:function name="f:fs-path-to-uri" as="xs:string">
+    <xsl:param name="fs-path" as="xs:string"/>
+    <xsl:choose>
+      <xsl:when test="not(starts-with($fs-path, 'file:')) and contains($fs-path, ':')">
+        <!-- Windows path -->
+        <xsl:sequence select="concat('file:///', replace($fs-path, '\\', '/'))"/>
+      </xsl:when>
+      <xsl:when test="starts-with($fs-path, '/')">
+        <!-- Unix path -->
+        <xsl:sequence select="concat('file://', $fs-path)"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <!-- Relative path, or unknown path type -->
+        <xsl:sequence select="$fs-path"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
