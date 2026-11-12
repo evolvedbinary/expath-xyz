@@ -60,8 +60,7 @@ jobs:
       - run:
           # update the website and delete the old version
           name: Sync website
-          command: |
-            rsync -az --delete /tmp/workspace/website/ ubuntu@expath-xyz.evolvedbinary.com:/www-data/expath.xyz/
+          command: rsync --verbose --compress --recursive --delete /tmp/workspace/website/ ubuntu@expath-xyz.evolvedbinary.com:/www-data/expath.xyz/
 workflows:
   ci:
     jobs:
