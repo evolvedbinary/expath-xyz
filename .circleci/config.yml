@@ -20,6 +20,10 @@ jobs:
           paths:
             - ~/.m2
           key: maven-repo-v1-linux-{{ .Branch }}-{{ checksum "pom.xml" }}
+      - persist_to_workspace:
+          root: expath-xyz-website/target
+          paths:
+            - website
   build-windows:
     machine:
       image: "windows-server-2022-gui:current"
@@ -41,8 +45,31 @@ jobs:
             - ~/.m2
           key: maven-repo-v1-windows-{{ .Branch }}-{{ checksum "pom.xml" }}
 
+  deploy:
+    docker:
+      - image: cimg/base:2026.10
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:s/0/x1Y9Oy+IWA5T3ETtG+6xCvLqaUCQC/X8kzHbB0s"
+      - run:
+          name: Trust ssh keys
+          command: ssh-keyscan expath-xyz.evolvedbinary.com >> ~/.ssh/known_hosts
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          # update the website and delete the old version
+          name: Sync website
+          command: |
+            rsync -az --delete /tmp/workspace/website/ ubuntu@expath-xyz.evolvedbinary.com:/www-data/expath.xyz/
 workflows:
   ci:
     jobs:
       - build-linux
       - build-windows
+      - deploy:
+          requires:
+            - build-linux
+          filters:
+            branches:
+              only: main
